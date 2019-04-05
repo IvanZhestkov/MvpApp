@@ -1,9 +1,11 @@
 package com.itis.android.mvpapp.di
 
 import android.app.Application
+import android.app.Presentation
 import com.itis.android.mvpapp.MvpApp
-import com.itis.android.mvpapp.api.ApiModule
-import com.itis.android.mvpapp.router.RouterModule
+import com.itis.android.mvpapp.data.DataModule
+import com.itis.android.mvpapp.di.app.AppModule
+import com.itis.android.mvpapp.presentation.PresentationModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -14,10 +16,8 @@ import javax.inject.Singleton
         modules = [
             AndroidSupportInjectionModule::class,
             AppModule::class,
-            AppBuildersModule::class,
-            RouterModule::class,
-            ApiModule::class,
-            RepositoryModule::class
+            PresentationModule::class,
+            DataModule::class
         ]
 )
 @Singleton
