@@ -1,4 +1,4 @@
-package com.itis.android.mvpapp.presentation.ui
+package com.itis.android.mvpapp.router
 
 import com.itis.android.mvpapp.router.initparams.TestInitParams
 import com.itis.android.mvpapp.presentation.ui.auth.login.LoginFragment
@@ -9,6 +9,10 @@ object Screens {
 
     object LoginScreen : SupportAppScreen() {
         override fun getFragment() = LoginFragment.newInstance()
+
+        override fun getScreenKey(): String {
+            return LoginFragment::class.java.name
+        }
     }
 
     data class TestScreen(

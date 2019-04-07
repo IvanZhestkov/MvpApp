@@ -1,11 +1,11 @@
-package com.itis.android.mvpapp.presentation.ui.main
+package com.itis.android.mvpapp.presentation.ui.auth
 
-import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpView
 import com.itis.android.mvpapp.data.util.CredentialStorage
 import com.itis.android.mvpapp.router.MainRouter
 import com.itis.android.mvpapp.presentation.base.BasePresenter
+import com.itis.android.mvpapp.router.AuthRouter
 import com.itis.android.mvpapp.router.MainRouterImpl
 import com.itis.android.mvpapp.router.initparams.TestInitParams
 import ru.terrakok.cicerone.Navigator
@@ -14,35 +14,21 @@ import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState
-class MainPresenter
-@Inject constructor() : BasePresenter<MainView>() {
+class AuthPresenter
+@Inject constructor() : BasePresenter<AuthView>() {
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
     @Inject
-    lateinit var mainRouter: MainRouter
+    lateinit var authRouter: AuthRouter
 
     @Inject
     lateinit var preferences: CredentialStorage
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        checkAuth()
-    }
-
-    fun openTestScreen() {
-        mainRouter.openTestScreen(TestInitParams("test_screen"))
-    }
-
-    private fun checkAuth() {
-        unsubscribeOnDestroy(
-            preferences
-                .getSaveTokenSingle()
-                .subscribe({
-                    viewState.signedIn()
-                }, { viewState.startSignIn() })
-        )
+        authRouter.openLoginScreen()
     }
 
     fun setNavigator(navigator: Navigator) {

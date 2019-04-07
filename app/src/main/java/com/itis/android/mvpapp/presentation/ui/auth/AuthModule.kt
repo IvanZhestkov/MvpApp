@@ -1,19 +1,35 @@
 package com.itis.android.mvpapp.presentation.ui.auth
 
+import com.itis.android.mvpapp.presentation.ui.main.MainActivity
+import com.itis.android.mvpapp.router.AuthRouter
+import com.itis.android.mvpapp.router.AuthRouterImpl
+import com.itis.android.mvpapp.router.MainRouter
+import com.itis.android.mvpapp.router.MainRouterImpl
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Cicerone
+import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
+import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
 @Module(includes = [AuthBuilder::class])
 class AuthModule {
 
-    @Provides
-    @AuthQualifier
-    fun provideCicerone(@AuthQualifier router: Router): Cicerone<Router> = Cicerone.create(router)
+    private val authRouter = AuthRouterImpl()
+
+    private val cicerone = Cicerone.create(authRouter)
+
+    private val holder = cicerone.navigatorHolder
 
     @Provides
-    @AuthQualifier
-    fun provideCiceroneNavigatorHolder(@AuthQualifier cicerone: Cicerone<Router>): NavigatorHolder = cicerone.navigatorHolder
+    fun provideMainRouter(): AuthRouter = authRouter
+
+    @Provides
+    fun provideCiceroneNavigatorHolder(): NavigatorHolder = holder
+
+    @Provides
+    fun provideCiceroneNavigator(activity: AuthActivity): Navigator = SupportAppNavigator(
+        activity, activity.supportFragmentManager, activity.fragmentContainer
+    )
 }

@@ -8,4 +8,6 @@ interface CredentialStorage {
     fun getSaveTokenCompletable(token: String): Completable
 
     fun getSaveTokenSingle(): Single<String>
+
+    fun clear()
 }

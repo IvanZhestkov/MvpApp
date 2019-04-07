@@ -3,28 +3,31 @@ package com.itis.android.mvpapp.presentation.ui.auth.login
 import com.arellomobile.mvp.InjectViewState
 import com.itis.android.mvpapp.model.User
 import com.itis.android.mvpapp.data.repository.AuthRepository
-import com.itis.android.mvpapp.router.MainRouter
+import com.itis.android.mvpapp.data.util.CredentialStorage
 import com.itis.android.mvpapp.presentation.base.BasePresenter
-import com.itis.android.mvpapp.presentation.utils.validation.EmailValidator
-import com.itis.android.mvpapp.presentation.utils.validation.PasswordValidator
+import com.itis.android.mvpapp.presentation.utils.validation.Validator
+import com.itis.android.mvpapp.router.AuthRouter
 import javax.inject.Inject
 
 @InjectViewState
 class LoginPresenter
-@Inject constructor(
-        private val loginRouter: MainRouter,
-        private val emailValidator: EmailValidator,
-        private val passwordValidator: PasswordValidator,
-        private val authRepository: AuthRepository
-        //private val preferences: AppPreferences
-) : BasePresenter<LoginView>() {
+@Inject constructor() : BasePresenter<LoginView>() {
+
+    @Inject
+    lateinit var loginRouter: AuthRouter
+
+    @Inject
+    lateinit var authRepository: AuthRepository
+
+    @Inject
+    lateinit var preferences: CredentialStorage
+
 
     fun login(email: String, password: String) {
         if (!validateForm(email, password)) {
             return
         }
         val user = User(email = email, password = password)
-
     }
 
     private fun validateForm(email: String, password: String): Boolean {
@@ -32,7 +35,7 @@ class LoginPresenter
     }
 
     private fun isEmailValid(email: String): Boolean {
-        return if (!emailValidator.isValid(email)) {
+        return if (!Validator.isEmailValid(email)) {
             viewState.showEmailError(true)
             false
         } else {
@@ -42,7 +45,7 @@ class LoginPresenter
     }
 
     private fun isPasswordValid(password: String): Boolean {
-        return if (!passwordValidator.isValid(password)) {
+        return if (!Validator.isPasswordValid(password)) {
             viewState.showPasswordError(true)
             false
         } else {

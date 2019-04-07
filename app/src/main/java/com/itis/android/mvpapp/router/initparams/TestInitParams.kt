@@ -2,12 +2,13 @@ package com.itis.android.mvpapp.router.initparams
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.util.*
 
 class TestInitParams(
-        val data: String?
+    val data: String?
 ) : InitParams {
     constructor(parcel: Parcel) : this(
-            parcel.readString()
+        parcel.readString()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

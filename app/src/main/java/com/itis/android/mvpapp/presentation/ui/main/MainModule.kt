@@ -1,19 +1,31 @@
 package com.itis.android.mvpapp.presentation.ui.main
 
+import com.itis.android.mvpapp.router.MainRouter
+import com.itis.android.mvpapp.router.MainRouterImpl
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Cicerone
+import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.Router
+import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
 @Module(includes = [MainBuilder::class])
 class MainModule {
 
-    @Provides
-    @MainQualifier
-    fun provideCicerone(@MainQualifier router: Router): Cicerone<Router> = Cicerone.create(router)
+    private val mainRouter = MainRouterImpl()
+
+    private val cicerone = Cicerone.create(mainRouter)
+
+    private val holder = cicerone.navigatorHolder
 
     @Provides
-    @MainQualifier
-    fun provideCiceroneNavigatorHolder(@MainQualifier cicerone: Cicerone<Router>): NavigatorHolder = cicerone.navigatorHolder
+    fun provideMainRouter(): MainRouter = mainRouter
+
+    @Provides
+    fun provideCiceroneNavigatorHolder(): NavigatorHolder = holder
+
+    @Provides
+    fun provideCiceroneNavigator(activity: MainActivity): Navigator = SupportAppNavigator(
+        activity, activity.supportFragmentManager, activity.fragmentContainer
+    )
 }

@@ -31,4 +31,8 @@ class PreferencesCredentialStorage(
                     ?: throw IllegalArgumentException("token is null")
         }
     }
+
+    override fun clear() {
+        preferences.edit().clear().apply()
+    }
 }
