@@ -9,7 +9,7 @@ import com.itis.android.mvpapp.router.initparams.TestInitParams
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.presentation.utils.extensions.extractInitParams
 import com.itis.android.mvpapp.presentation.utils.extensions.putInitParams
-import kotlinx.android.synthetic.main.test_fragment.*
+import kotlinx.android.synthetic.main.fragment_test.*
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -30,7 +30,7 @@ class TestFragment : BaseFragment(), TestView {
     }
 
     override val mainContentLayout: Int
-        get() = R.layout.test_fragment
+        get() = R.layout.fragment_test
 
     override val enableBackArrow: Boolean
         get() = false

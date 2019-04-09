@@ -7,7 +7,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.model.User
 import com.itis.android.mvpapp.presentation.base.BaseFragment
-import kotlinx.android.synthetic.main.login_fragment.*
+import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -25,7 +25,7 @@ class LoginFragment : BaseFragment(), LoginView {
     }
 
     override val mainContentLayout: Int
-        get() = R.layout.login_fragment
+        get() = R.layout.fragment_login
 
     override val enableBackArrow: Boolean
         get() = false

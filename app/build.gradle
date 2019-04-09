@@ -56,6 +56,9 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:${support_version}"
     implementation "com.android.support:design:${support_version}"
 
+    //CircleImageView
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit_version}"
     implementation "com.squareup.retrofit2:converter-gson:${retrofit_version}"
