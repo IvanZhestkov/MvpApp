@@ -14,7 +14,7 @@
             android:background="@color/colorPrimary"
             android:textAlignment="center"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:titleTextColor="@color/white">
+            app:titleTextColor="@color/colorScreenBackground">
 
         <TextView
                 android:id="@+id/toolbar_title"
@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 tools:text="Toolbar Title"
-                android:textColor="@color/black"
+                android:textColor="@color/colorMain"
                 android:textSize="18sp"/>
 
     </android.support.v7.widget.Toolbar>

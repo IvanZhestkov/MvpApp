@@ -9,13 +9,11 @@ import dagger.Provides
 @Module
 class LoginModule {
 
-    @FragmentScope
     @Provides
     fun emailValidator(): EmailValidator {
         return EmailValidator()
     }
 
-    @FragmentScope
     @Provides
     fun passwordValidator(): PasswordValidator {
         return PasswordValidator()

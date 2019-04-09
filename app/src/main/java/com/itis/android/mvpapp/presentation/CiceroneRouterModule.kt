@@ -15,10 +15,10 @@ class CiceroneRouterModule {
     @Provides
     @AuthQualifier
     @Singleton
-    fun provideAuthRouter(): Router = MainRouterImpl()
+    fun provideAuthRouter(): Router = Router()
 
     @Provides
     @MainQualifier
     @Singleton
-    fun provideMainRouter(): Router = MainRouterImpl()
+    fun provideMainRouter(): Router = Router()
 }

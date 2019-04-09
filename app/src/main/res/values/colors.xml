@@ -4,7 +4,16 @@
     <color name="colorPrimaryDark">#82B1FF</color>
     <color name="colorAccent">#82B1FF</color>
 
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
+    <color name="colorScreenBackground">#FFFFFF</color>
+    <color name="colorMain">#273e52</color>
+    <color name="colorInverse">#ffffff</color>
+    <color name="colorInverseOpacity">#7dffffff</color>
+    <color name="colorInverseDark">#f6f8f9</color>
+    <color name="colorSecondary">#92a7a7</color>
+    <color name="colorTertiary">#2c3e50</color>
+    <color name="colorHint">#92a7a7</color>
+    <color name="colorLink">#008fbb</color>
+    <color name="colorDivider">#e1e7e8</color>
+    <color name="colorToolbarBackground">#F6F6F6</color>
 
 </resources>

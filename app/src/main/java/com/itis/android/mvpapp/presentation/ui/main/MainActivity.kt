@@ -30,31 +30,8 @@ class MainActivity : BaseActivity() {
     override val enableBackArrow: Boolean
         get() = false
 
-    private val navigator: Navigator by lazy {
-        object : SupportAppNavigator(this, supportFragmentManager, R.id.main_wrapper) {
-            override fun setupFragmentTransaction(
-                    command: Command?,
-                    currentFragment: Fragment?,
-                    nextFragment: Fragment?,
-                    fragmentTransaction: FragmentTransaction
-            ) {
-                //fix incorrect order lifecycle callback of MainFlowFragment
-                fragmentTransaction.setReorderingAllowed(true)
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
-
-    override fun onResumeFragments() {
-        presenter.setNavigator(navigator)
-        super.onResumeFragments()
-    }
-
-    override fun onPause() {
-        presenter.removeNavigator()
-        super.onPause()
     }
 }
