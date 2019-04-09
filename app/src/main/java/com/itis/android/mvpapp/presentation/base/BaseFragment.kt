@@ -4,23 +4,28 @@ import android.content.Context
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.annotation.StringRes
+import android.support.v7.widget.Toolbar
 import android.view.*
+import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatFragment
+import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.ui.main.MainActivity
 import dagger.android.support.AndroidSupportInjection
 
 abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
 
-    @get:LayoutRes
     protected abstract val mainContentLayout: Int
 
     protected abstract val enableBackArrow: Boolean
+
+    protected abstract val toolbarTitle: Int?
 
     protected val baseActivity
         get() = activity as BaseActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
+        setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
     }
 
@@ -31,7 +36,9 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setHasOptionsMenu(true)
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        toolbar?.findViewById<TextView>(R.id.toolbar_title)?.text = getString(toolbarTitle ?: R.string.app_name)
+
         baseActivity.setBackArrow(enableBackArrow)
     }
 
@@ -39,20 +46,24 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun showProgress() {
-        (activity as? MainActivity)?.showProgress()
+
+    override fun showWaitDialog() {
+        (activity as? BaseActivity)?.showWaitDialog()
     }
 
-    override fun hideProgress() {
-        (activity as? MainActivity)?.hideProgress()
+    override fun hideWaitDialog() {
+        (activity as? BaseActivity)?.hideWaitDialog()
     }
 
-    fun createToolbarTitle(context: Context): String {
-        return context.getString(onCreateToolbarTitle())
+    override fun showErrorDialog(text: Int) {
+        (activity as? BaseActivity)?.showErrorDialog(text)
     }
 
-    @StringRes
-    abstract fun onCreateToolbarTitle(): Int
+    override fun showErrorDialog(text: String) {
+        (activity as? BaseActivity)?.showErrorDialog(text)
+    }
 
-    abstract fun onBackPressed()
+    override fun hideKeyboard() {
+        (activity as? BaseActivity)?.hideKeyboard()
+    }
 }

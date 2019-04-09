@@ -22,4 +22,9 @@
 
     <string name="login">Войти</string>
 
+    <!--Dialogs-->
+    <string name="wait_dialog_progress">Пожалуйста подождите…</string>
+    <string name="error_dialog_ok">Ок</string>
+    <string name="error_dialog_title">Ошибка</string>
+
 </resources>

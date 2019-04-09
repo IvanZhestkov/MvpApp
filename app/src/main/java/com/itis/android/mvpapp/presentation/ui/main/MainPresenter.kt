@@ -1,6 +1,5 @@
 package com.itis.android.mvpapp.presentation.ui.main
 
-import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpView
 import com.itis.android.mvpapp.data.util.CredentialStorage
@@ -36,13 +35,14 @@ class MainPresenter
     }
 
     private fun checkAuth() {
-        unsubscribeOnDestroy(
-            preferences
+        preferences
                 .getSaveTokenSingle()
                 .subscribe({
                     viewState.signedIn()
-                }, { viewState.startSignIn() })
-        )
+                }, {
+                    viewState.startSignIn()
+                })
+                .disposeWhenDestroy()
     }
 
     fun setNavigator(navigator: Navigator) {

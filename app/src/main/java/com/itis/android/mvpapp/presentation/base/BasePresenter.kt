@@ -6,15 +6,18 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 abstract class BasePresenter<V : MvpView> : MvpPresenter<V>() {
-    private val compositeDisposable = CompositeDisposable()
 
-    protected fun unsubscribeOnDestroy(disposable: Disposable) {
-        compositeDisposable.add(disposable)
+    private val destroyDisposable = CompositeDisposable()
+
+    fun Disposable.disposeWhenDestroy() {
+        destroyDisposable.add(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        compositeDisposable.clear()
+        if (!destroyDisposable.isDisposed) {
+            destroyDisposable.dispose()
+        }
     }
 
     open fun onBackPressed() {}

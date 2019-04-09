@@ -1,6 +1,7 @@
 package com.itis.android.mvpapp.presentation.ui.auth.login
 
 import android.os.Bundle
+import android.support.v7.widget.Toolbar
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -13,6 +14,17 @@ import javax.inject.Provider
 
 class LoginFragment : BaseFragment(), LoginView {
 
+    companion object {
+        fun newInstance() = LoginFragment()
+    }
+
+    override val toolbarTitle: Int? = R.string.screen_name_login
+
+    override val mainContentLayout = R.layout.fragment_login
+
+    override val enableBackArrow = false
+
+
     @InjectPresenter
     lateinit var presenter: LoginPresenter
 
@@ -24,20 +36,8 @@ class LoginFragment : BaseFragment(), LoginView {
         return presenterProvider.get()
     }
 
-    override val mainContentLayout: Int
-        get() = R.layout.fragment_login
-
-    override val enableBackArrow: Boolean
-        get() = false
-
-    override fun onCreateToolbarTitle(): Int {
-        return R.string.screen_name_login
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        baseActivity.fragmentOnScreen(this)
-
         initActionView()
     }
 
@@ -67,12 +67,5 @@ class LoginFragment : BaseFragment(), LoginView {
 
     override fun startLogin(user: User) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onBackPressed() {
-    }
-
-    companion object {
-        fun newInstance() = LoginFragment()
     }
 }
