@@ -97,6 +97,9 @@ dependencies {
     //Cicerone
     implementation "ru.terrakok.cicerone:cicerone:${cicerone_version}"
 
+    //TableView
+    implementation 'com.evrencoskun.library:tableview:0.8.8'
+
     //Test
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

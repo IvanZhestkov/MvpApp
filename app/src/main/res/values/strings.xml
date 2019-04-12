@@ -27,4 +27,11 @@
     <string name="error_dialog_ok">Ок</string>
     <string name="error_dialog_title">Ошибка</string>
 
+    <string name="toolbar_task">Задание</string>
+
+    <string name="task_description">Описание задания:</string>
+    <string name="task_description_example">Что необходимо делать в этом задании.\nПодробное описание в файле.</string>
+    <string name="task_download">Скачать задание</string>
+    <string name="task_status_show">Посмотреть</string>
+    <string name="task_status_now_downloaded">Не загружено</string>
 </resources>

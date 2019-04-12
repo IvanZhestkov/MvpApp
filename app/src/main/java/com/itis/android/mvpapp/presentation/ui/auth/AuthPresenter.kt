@@ -24,7 +24,7 @@ class AuthPresenter
     lateinit var authRouter: AuthRouter
 
     @Inject
-    lateinit var preferences: CredentialStorage
+    lateinit var credentialStorage: CredentialStorage
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
