@@ -92,6 +92,15 @@
         <item name="android:textColor">@color/colorMain</item>
     </style>
 
+    <style name="Text.Medium.Link">
+        <item name="android:textColor">@color/colorLink</item>
+    </style>
+
+    <style name="Text.Medium.Thin">
+        <item name="android:textColor">@color/colorMain</item>
+        <item name="fontFamily">@font/roboto_light</item>
+    </style>
+
     <!-- Large text appearances -->
 
     <style name="Text.Large">

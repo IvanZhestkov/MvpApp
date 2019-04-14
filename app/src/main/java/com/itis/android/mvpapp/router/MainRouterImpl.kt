@@ -22,6 +22,10 @@ class MainRouterImpl : MainRouter, Router() {
         navigateTo(Screens.getGroupTaskScreen())
     }
 
+    override fun openTaskSolutionScreen() {
+        navigateTo(Screens.getTaskSolutionScreen())
+    }
+
     override fun goBack() {
         exit()
     }

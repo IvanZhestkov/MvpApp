@@ -11,5 +11,7 @@ interface MainRouter {
 
     fun openGroupTaskScreen()
 
+    fun openTaskSolutionScreen()
+
     fun goBack()
 }
