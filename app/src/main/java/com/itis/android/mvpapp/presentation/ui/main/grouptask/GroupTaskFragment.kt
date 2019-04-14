@@ -87,14 +87,6 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
         )
 
         adapter.setAllItems(columnItems, rowItems, cellItems)
-
-        btn_download_task.setOnClickListener {
-            MaterialFilePicker()
-                    .withActivity(requireActivity())
-                    .withRequestCode(1)
-                    .withHiddenFiles(true) // Show hidden files and folders
-                    .start()
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

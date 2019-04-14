@@ -11,7 +11,7 @@ class MainRouterImpl : MainRouter, Router() {
     }
 
     override fun openProfileScreen() {
-        newRootScreen(Screens.ProfileScreen)
+        newRootScreen(Screens.getProfileScreen())
     }
 
     override fun openLoadTaskScreen() {

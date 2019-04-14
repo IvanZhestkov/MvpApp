@@ -6,16 +6,16 @@
     android:layout_marginTop="@dimen/d8"
     android:orientation="vertical">
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/name"
-        style="@style/Text.Small.Primary"
+        android:textAppearance="@style/Text.Small.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Информационная безопасность" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/list_group"
-        style="@style/Text.Small.Secondary"
+        android:textAppearance="@style/Text.Small.Secondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="11-501 - 11-508, 15-603 - 15-605, 8-305" />

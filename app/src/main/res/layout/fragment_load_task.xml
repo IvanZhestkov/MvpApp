@@ -76,15 +76,15 @@
                 android:layout_marginEnd="@dimen/d16"
                 android:orientation="horizontal">
 
-                <TextView
-                    style="@style/Text.Medium.Title"
+                <android.support.v7.widget.AppCompatTextView
+                    android:textAppearance="@style/Text.Medium.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/subject_title" />
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/subject"
-                    style="@style/Text.Medium.Secondary"
+                    android:textAppearance="@style/Text.Medium.Secondary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/d8"
@@ -101,8 +101,8 @@
                 android:layout_marginTop="@dimen/d16"
                 android:text="@string/load" />
 
-            <TextView
-                style="@style/Text.Medium.Title"
+            <android.support.v7.widget.AppCompatTextView
+                android:textAppearance="@style/Text.Medium.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/d16"
@@ -110,25 +110,20 @@
                 android:text="@string/task_description_title"
                 android:textStyle="bold" />
 
-            <RelativeLayout
+            <EditText
+                android:id="@+id/edt_description_task"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_marginStart="@dimen/d16"
                 android:layout_marginTop="@dimen/d8"
                 android:layout_marginEnd="@dimen/d16"
-                android:background="@drawable/background_border_layout"
-                android:minHeight="150dp">
+                android:background="@drawable/background_comment_edit_text"
+                android:gravity="top"
+                android:hint="@string/hint_enter_description"
+                android:padding="8dp"
+                android:textAppearance="@style/Text.Medium.Thin">
 
-                <EditText
-                    android:id="@+id/edt_description_task"
-                    style="@style/Text.Small.Primary"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/d8"
-                    android:background="@null"
-                    android:hint="@string/hint_enter_description" />
-
-            </RelativeLayout>
+            </EditText>
 
             <Button
                 android:id="@+id/btn_send_task"

@@ -16,7 +16,7 @@ import javax.inject.Provider
 class ProfileFragment : BaseFragment(), ProfileView {
 
     companion object {
-        fun newInstance() = ProfileFragment()
+        fun getInstance() = ProfileFragment()
     }
 
     override val mainContentLayout: Int
@@ -44,6 +44,8 @@ class ProfileFragment : BaseFragment(), ProfileView {
         initActionViews()
         initList()
         createList()
+
+        tv_name.text = getString(R.string.test_name, "Иванов", "Иван", "Иванович")
     }
 
     private fun initActionViews() {
