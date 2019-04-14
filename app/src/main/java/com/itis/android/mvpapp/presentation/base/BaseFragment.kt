@@ -36,9 +36,10 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar).also {it.title = getString(R.string.empty)}
         toolbar?.findViewById<TextView>(R.id.toolbar_title)?.text = getString(toolbarTitle ?: R.string.app_name)
 
+        baseActivity.setSupportActionBar(toolbar)
         baseActivity.setBackArrow(enableBackArrow)
     }
 
