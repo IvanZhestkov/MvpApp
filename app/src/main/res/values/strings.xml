@@ -45,4 +45,15 @@
     <string name="task_download">Скачать задание</string>
     <string name="task_status_show">Посмотреть</string>
     <string name="task_status_now_downloaded">Не загружено</string>
+
+    <!-- Task Solution -->
+    <string name="task_solution_stud">Студент:</string>
+    <string name="task_solution_comment">Комментарий:</string>
+    <string name="task_solution_status">Статус:</string>
+
+    <string name="download">Скачать</string>
+    <string name="confirm">Принять</string>
+    <string name="reject">Отклонить</string>
+    <string name="solution">Решение</string>
+    
 </resources>

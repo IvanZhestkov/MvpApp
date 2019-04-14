@@ -27,7 +27,7 @@ class MainPresenter
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        mainRouter.openGroupTaskScreen()
+        mainRouter.openTaskSolutionScreen()
        // checkAuth()
     }
 

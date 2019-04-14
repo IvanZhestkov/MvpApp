@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_task_solution_stud_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/task_solution_stud"
+                android:textAppearance="@style/Text.Medium.Title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_task_solution_stud"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Иван Иванов"
+                android:textAppearance="@style/Text.Medium.Link"
+                app:layout_constraintBottom_toBottomOf="@id/tv_task_solution_stud_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_task_solution_stud_title"
+                app:layout_constraintTop_toTopOf="@id/tv_task_solution_stud_title" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_task_comment_stud_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/task_solution_comment"
+                android:textAppearance="@style/Text.Medium.Title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_task_solution_stud_title" />
+
+            <EditText
+                android:id="@+id/et_comment_field"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/background_comment_edit_text"
+                android:gravity="top|left"
+                android:padding="8dp"
+                android:textAppearance="@style/Text.Medium.Thin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_task_comment_stud_title" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_task_solution_status_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/task_solution_status"
+                android:textAppearance="@style/Text.Medium.Title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_comment_field" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_task_solution_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="На рассмотрении"
+                android:textAppearance="@style/Text.Medium.Thin"
+                app:layout_constraintBottom_toBottomOf="@id/tv_task_solution_status_title"
+                app:layout_constraintStart_toEndOf="@id/tv_task_solution_status_title"
+                app:layout_constraintTop_toTopOf="@id/tv_task_solution_status_title" />
+
+
+            <Button
+                android:id="@+id/btn_task_solution_download"
+                style="@style/AccentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:text="@string/download"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_task_solution_status_title" />
+
+            <Button
+                android:id="@+id/btn_task_solution_reject"
+                style="@style/RejectButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/reject"
+                app:layout_constraintEnd_toStartOf="@id/btn_task_solution_confirm"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_task_solution_download" />
+
+            <Button
+                android:id="@+id/btn_task_solution_confirm"
+                style="@style/ConfirmButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/confirm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_task_solution_reject"
+                app:layout_constraintTop_toBottomOf="@id/btn_task_solution_download" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

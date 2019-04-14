@@ -3,6 +3,7 @@
     <color name="colorPrimary">#F6F6F6</color>
     <color name="colorPrimaryDark">#82B1FF</color>
     <color name="colorAccent">#82B1FF</color>
+    <color name="colorAccentActivated">#688dcc</color>
 
     <color name="colorScreenBackground">#FFFFFF</color>
     <color name="colorMain">#273e52</color>
@@ -12,12 +13,17 @@
     <color name="colorSecondary">#92a7a7</color>
     <color name="colorTertiary">#2c3e50</color>
     <color name="colorHint">#92a7a7</color>
-    <color name="colorLink">#008fbb</color>
+    <color name="colorLink">#5998FE</color>
     <color name="colorDivider">#e1e7e8</color>
     <color name="colorToolbarBackground">#F6F6F6</color>
 
     <color name="colorDisable">#bdc4c9</color>
-    <color name="colorAccentActivated">#688dcc</color>
+
+    <color name="colorConfirm">#73E2A6</color>
+    <color name="colorConfirmActivated">#59af81</color>
+
+    <color name="colorReject">#FF9191</color>
+    <color name="colorRejectActivated">#ba6a6a</color>
 
     <color name="colorTableDivider">#959393</color>
 </resources>

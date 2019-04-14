@@ -17,4 +17,8 @@ class MainRouterImpl : MainRouter, Router() {
     override fun openGroupTaskScreen() {
         navigateTo(Screens.getGroupTaskScreen())
     }
+
+    override fun openTaskSolutionScreen() {
+        navigateTo(Screens.getTaskSolutionScreen())
+    }
 }
