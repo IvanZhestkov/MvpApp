@@ -33,7 +33,7 @@ class MainActivity : BaseActivity(), MainView {
         get() = R.layout.app_activity_container
 
     override val enableBackArrow: Boolean
-        get() = false
+        get() = true
 
     val fragmentContainer: Int =  R.id.main_wrapper
 

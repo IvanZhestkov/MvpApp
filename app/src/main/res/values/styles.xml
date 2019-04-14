@@ -74,6 +74,11 @@
         <item name="android:textSize">@dimen/d16</item>
     </style>
 
+    <style name="Text.Medium.Title">
+        <item name="android:textColor">@color/colorMain</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+
     <style name="Text.Medium.Inverse">
         <item name="android:textColor">@color/colorInverse</item>
     </style>
@@ -84,11 +89,6 @@
 
     <style name="Text.Medium.Primary">
         <item name="android:textColor">@color/colorMain</item>
-    </style>
-
-    <style name="Text.Medium.Title">
-        <item name="android:textColor">@color/colorMain</item>
-        <item name="fontFamily">@font/roboto_medium</item>
     </style>
 
     <!-- Large text appearances -->

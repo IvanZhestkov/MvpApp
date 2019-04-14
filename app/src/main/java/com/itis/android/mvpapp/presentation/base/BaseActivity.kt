@@ -1,10 +1,8 @@
 package com.itis.android.mvpapp.presentation.base
 
-import android.content.Context
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
-import android.view.inputmethod.InputMethodManager
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.itis.android.mvpapp.presentation.dialog.ErrorDialog
 import com.itis.android.mvpapp.presentation.dialog.WaitDialog
@@ -12,7 +10,6 @@ import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import kotlinx.android.synthetic.main.app_activity_container.*
 import javax.inject.Inject
 
 abstract class BaseActivity : MvpAppCompatActivity(), HasSupportFragmentInjector,
@@ -63,10 +60,5 @@ abstract class BaseActivity : MvpAppCompatActivity(), HasSupportFragmentInjector
 
     override fun showWaitDialog() {
         WaitDialog.getInstance().show(supportFragmentManager, WAIT_DIALOG_TAG)
-    }
-
-    override fun hideKeyboard() {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-        imm?.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 }

@@ -1,15 +1,11 @@
 package com.itis.android.mvpapp.presentation.base
 
-import android.content.Context
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.annotation.StringRes
 import android.support.v7.widget.Toolbar
 import android.view.*
 import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.presentation.ui.main.MainActivity
 import dagger.android.support.AndroidSupportInjection
 
 abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
@@ -61,9 +57,5 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
 
     override fun showErrorDialog(text: String) {
         (activity as? BaseActivity)?.showErrorDialog(text)
-    }
-
-    override fun hideKeyboard() {
-        (activity as? BaseActivity)?.hideKeyboard()
     }
 }

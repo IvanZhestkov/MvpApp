@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d16"
+                android:layout_marginEnd="@dimen/d16"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/Text.Medium.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/date_title" />
+
+                <TextView
+                    android:id="@+id/date"
+                    style="@style/Text.Medium.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d8"
+                    tools:text="12 марта" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d8"
+                android:layout_marginEnd="@dimen/d16"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/Text.Medium.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/group_title" />
+
+                <TextView
+                    android:id="@+id/group"
+                    style="@style/Text.Medium.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d8"
+                    tools:text="11-605" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d8"
+                android:layout_marginEnd="@dimen/d16"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/Text.Medium.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/subject_title" />
+
+                <TextView
+                    android:id="@+id/subject"
+                    style="@style/Text.Medium.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d8"
+                    tools:text="Управление проектами" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_load_task"
+                style="@style/AccentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/d16"
+                android:text="@string/load" />
+
+            <TextView
+                style="@style/Text.Medium.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d32"
+                android:text="@string/task_description_title"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d8"
+                android:layout_marginEnd="@dimen/d16"
+                android:background="@drawable/background_border_layout"
+                android:minHeight="150dp">
+
+                <EditText
+                    android:id="@+id/edt_description_task"
+                    style="@style/Text.Small.Primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/d8"
+                    android:background="@null"
+                    android:hint="@string/hint_enter_description" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_send_task"
+                style="@style/AccentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/d16"
+                android:layout_marginBottom="@dimen/d16"
+                android:text="@string/send" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

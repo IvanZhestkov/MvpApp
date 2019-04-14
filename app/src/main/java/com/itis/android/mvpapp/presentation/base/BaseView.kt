@@ -19,7 +19,4 @@ interface BaseView : MvpView {
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun hideWaitDialog()
-
-    @StateStrategyType(AddToEndSingleStrategy::class)
-    fun hideKeyboard()
 }

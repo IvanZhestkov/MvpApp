@@ -1,204 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:orientation="vertical">
 
-    <android.support.constraint.ConstraintLayout
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/d16"
-        >
+        android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/tv_contact_info"
-            style="@style/Text.Large.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d8"
-            android:text="@string/contact_info_title"
-            android:textSize="@dimen/s18"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/divider2" />
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/colorDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_disciplines" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/civ_profile"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="@dimen/d16"
-            android:scaleType="centerCrop"
-            android:src="@drawable/profile_image"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tv_contact_info"
+                style="@style/Text.Large.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d8"
+                android:text="@string/contact_info_title"
+                android:textSize="@dimen/s18"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/d16" />
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_disciplines" />
 
-        <TextView
-            android:id="@+id/tv_last_name"
-            style="@style/Text.Medium.Primary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/d16"
-            android:layout_marginTop="@dimen/d16"
-            app:layout_constraintStart_toEndOf="@+id/civ_profile"
-            app:layout_constraintTop_toTopOf="@+id/civ_profile"
-            tools:text="Иванов" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_profile"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="@dimen/d8"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_image"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_first_name"
-            style="@style/Text.Medium.Primary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d8"
-            app:layout_constraintStart_toStartOf="@+id/tv_last_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_last_name"
-            tools:text="Иван" />
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/d16" />
 
-        <TextView
-            android:id="@+id/tv_patronymic"
-            style="@style/Text.Medium.Primary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d8"
-            app:layout_constraintStart_toStartOf="@+id/tv_first_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_first_name"
-            tools:text="Иванович" />
+            <TextView
+                android:id="@+id/tv_last_name"
+                style="@style/Text.Medium.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d16"
+                android:text="Иванов"
+                app:layout_constraintStart_toEndOf="@+id/civ_profile"
+                app:layout_constraintTop_toTopOf="@+id/civ_profile"
+                tools:text="Иванов" />
 
-        <TextView
-            android:id="@+id/textView5"
-            style="@style/Text.Small.Secondary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/d8"
-            android:layout_marginTop="@dimen/d8"
-            android:layout_marginEnd="@dimen/d8"
-            android:text="@string/teacher_title"
-            app:layout_constraintEnd_toEndOf="@+id/civ_profile"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/civ_profile" />
+            <TextView
+                android:id="@+id/tv_first_name"
+                style="@style/Text.Medium.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d8"
+                android:text="Иван"
+                app:layout_constraintStart_toStartOf="@+id/tv_last_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_last_name"
+                tools:text="Иван" />
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/d8"
-            android:background="@color/colorDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            <TextView
+                android:id="@+id/tv_patronymic"
+                style="@style/Text.Medium.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d8"
+                android:text="Иванович"
+                app:layout_constraintStart_toStartOf="@+id/tv_first_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_first_name"
+                tools:text="Иванович" />
 
-        <TextView
-            android:id="@+id/tv_personal_info"
-            style="@style/Text.Large.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d8"
-            android:text="@string/personal_info_title"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/divider" />
+            <TextView
+                android:id="@+id/textView5"
+                style="@style/Text.Small.Secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d8"
+                android:layout_marginTop="@dimen/d8"
+                android:layout_marginEnd="@dimen/d8"
+                android:text="@string/teacher_title"
+                app:layout_constraintEnd_toEndOf="@+id/civ_profile"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/civ_profile" />
 
-        <TextView
-            android:id="@+id/tv_birthday_title"
-            style="@style/Text.Small.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d16"
-            android:text="@string/birthday_title"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/tv_personal_info" />
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/d8"
+                android:background="@color/colorDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-        <TextView
-            android:id="@+id/tv_disciplines_title"
-            style="@style/Text.Small.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d8"
-            android:text="@string/disciplines_title"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/tv_birthday_title" />
+            <TextView
+                android:id="@+id/tv_personal_info"
+                style="@style/Text.Large.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d8"
+                android:text="@string/personal_info_title"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_disciplines"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/tv_disciplines_title">
+            <TextView
+                android:id="@+id/tv_birthday_title"
+                style="@style/Text.Medium.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d16"
+                android:text="@string/birthday_title"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_personal_info" />
 
-        </android.support.v7.widget.RecyclerView>
+            <TextView
+                android:id="@+id/tv_disciplines_title"
+                style="@style/Text.Medium.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d8"
+                android:text="@string/disciplines_title"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_birthday_title" />
 
-        <TextView
-            android:id="@+id/tv_birthday"
-            style="@style/Text.Small.Secondary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/d8"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tv_birthday_title"
-            app:layout_constraintStart_toEndOf="@+id/tv_birthday_title"
-            tools:text="05.10.98" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_disciplines"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_disciplines_title">
 
-        <TextView
-            android:id="@+id/tv_email_title"
-            style="@style/Text.Small.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d16"
-            android:text="@string/email_title"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/tv_contact_info" />
+            </android.support.v7.widget.RecyclerView>
 
-        <TextView
-            android:id="@+id/tv_phone_title"
-            style="@style/Text.Small.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d8"
-            android:text="@string/phone_title"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/tv_email_title" />
+            <TextView
+                android:id="@+id/tv_birthday"
+                style="@style/Text.Medium.Secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d8"
+                android:text="05.10.98"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_birthday_title"
+                app:layout_constraintStart_toEndOf="@+id/tv_birthday_title"
+                tools:text="05.10.98" />
 
-        <TextView
-            android:id="@+id/tv_email"
-            style="@style/Text.Small.Secondary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/d8"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tv_email_title"
-            app:layout_constraintStart_toEndOf="@+id/tv_email_title"
-            tools:text="person@email.com" />
+            <TextView
+                android:id="@+id/tv_email_title"
+                style="@style/Text.Medium.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d16"
+                android:text="@string/email_title"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_contact_info" />
 
-        <TextView
-            android:id="@+id/tv_phone"
-            style="@style/Text.Small.Secondary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/d8"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tv_phone_title"
-            app:layout_constraintStart_toEndOf="@+id/tv_phone_title"
-            tools:text="+7 (900) 236 5489" />
+            <TextView
+                android:id="@+id/tv_phone_title"
+                style="@style/Text.Medium.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d8"
+                android:text="@string/phone_title"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_email_title" />
 
-    </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_email"
+                style="@style/Text.Medium.Secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d8"
+                android:text="person@email.com"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_email_title"
+                app:layout_constraintStart_toEndOf="@+id/tv_email_title"
+                tools:text="person@email.com" />
 
-</android.support.v4.widget.NestedScrollView>
+            <TextView
+                android:id="@+id/tv_phone"
+                style="@style/Text.Medium.Secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d8"
+                android:text="+7 (900) 236 5489"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_phone_title"
+                app:layout_constraintStart_toEndOf="@+id/tv_phone_title"
+                tools:text="+7 (900) 236 5489" />
+
+            <Button
+                android:id="@+id/btn_open_tasks"
+                style="@style/AccentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/table_tasks"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_phone_title" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

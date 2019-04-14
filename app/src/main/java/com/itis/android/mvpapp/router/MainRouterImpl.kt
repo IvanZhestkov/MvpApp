@@ -10,11 +10,19 @@ class MainRouterImpl : MainRouter, Router() {
         newRootScreen(Screens.TestScreen(testInitParams))
     }
 
-    override fun goBack() {
-        exit()
+    override fun openProfileScreen() {
+        newRootScreen(Screens.ProfileScreen)
+    }
+
+    override fun openLoadTaskScreen() {
+        navigateTo(Screens.getLoadTaskScreen())
     }
 
     override fun openGroupTaskScreen() {
         navigateTo(Screens.getGroupTaskScreen())
+    }
+
+    override fun goBack() {
+        exit()
     }
 }

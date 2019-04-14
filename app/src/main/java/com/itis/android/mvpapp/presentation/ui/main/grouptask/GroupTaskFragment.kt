@@ -1,5 +1,7 @@
 package com.itis.android.mvpapp.presentation.ui.main.grouptask
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -16,6 +18,8 @@ import com.itis.android.mvpapp.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_group_task.*
 import javax.inject.Inject
 import javax.inject.Provider
+import com.nbsp.materialfilepicker.MaterialFilePicker
+import com.nbsp.materialfilepicker.ui.FilePickerActivity
 
 class GroupTaskFragment : BaseFragment(), GroupTaskView {
 
@@ -83,5 +87,22 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
         )
 
         adapter.setAllItems(columnItems, rowItems, cellItems)
+
+        btn_download_task.setOnClickListener {
+            MaterialFilePicker()
+                    .withActivity(requireActivity())
+                    .withRequestCode(1)
+                    .withHiddenFiles(true) // Show hidden files and folders
+                    .start()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            val filePath = data?.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)
+            Toast.makeText(activity, filePath, Toast.LENGTH_SHORT).show()
+        }
     }
 }

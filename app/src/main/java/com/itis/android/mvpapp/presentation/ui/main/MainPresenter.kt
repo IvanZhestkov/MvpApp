@@ -27,23 +27,25 @@ class MainPresenter
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        mainRouter.openGroupTaskScreen()
+        mainRouter.openProfileScreen()
        // checkAuth()
     }
 
     fun openTestScreen() {
-        mainRouter.openTestScreen(TestInitParams("test_screen"))
+//        mainRouter.openTestScreen(TestInitParams("test_screen"))
+        //mainRouter.openProfileScreen()
     }
 
     private fun checkAuth() {
-        preferences
+        /*preferences
                 .getSaveTokenSingle()
                 .subscribe({
                     viewState.signedIn()
                 }, {
                     viewState.startSignIn()
                 })
-                .disposeWhenDestroy()
+                .disposeWhenDestroy()*/
+        viewState.signedIn()
     }
 
     fun setNavigator(navigator: Navigator) {

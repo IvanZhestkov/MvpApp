@@ -19,5 +19,6 @@
     <color name="colorDisable">#bdc4c9</color>
     <color name="colorAccentActivated">#688dcc</color>
 
+    <color name="colorBorder">#000000</color>
     <color name="colorTableDivider">#959393</color>
 </resources>
