@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "525918873512",
+    "firebase_url": "https://ultimate-studsystem.firebaseio.com",
+    "project_id": "ultimate-studsystem",
+    "storage_bucket": "ultimate-studsystem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525918873512:android:1bfa3586a9791599",
+        "android_client_info": {
+          "package_name": "com.itis.android.mvpapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525918873512-a271v8f47vlsa35abi9gn0e74i27qkdo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itis.android.mvpapp",
+            "certificate_hash": "ca8389ce3e4e0bdb9abebb170b17b26a8c167c2e"
+          }
+        },
+        {
+          "client_id": "525918873512-orlbasneo9ldgo0is9ft4v0vbid3as1a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3l_Rk2G207LvG5IdyRGvziuHJAPjL7ZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525918873512-orlbasneo9ldgo0is9ft4v0vbid3as1a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
