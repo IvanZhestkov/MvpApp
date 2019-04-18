@@ -40,7 +40,7 @@ class GroupListFragment : BaseFragment(), GroupListView {
     }
 
     override fun setGroups(groups: List<Group>) {
-        adapter = GroupListViewPagerAdapter(requireFragmentManager(), requireContext())
+        adapter = GroupListViewPagerAdapter(childFragmentManager, requireContext())
         adapter.addGroups(groups)
         view_pager_tasks.adapter = adapter
         tabGroup.setupWithViewPager(view_pager_tasks)
