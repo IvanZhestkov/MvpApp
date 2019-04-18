@@ -31,7 +31,7 @@ class TasksFragment : BaseFragment(), TasksView {
 
     override val mainContentLayout = R.layout.fragment_tasks
 
-    override val enableBackArrow = true
+    override val enableBackArrow = false
 
     override val toolbarTitle = R.string.toolbar_task
 
@@ -57,7 +57,6 @@ class TasksFragment : BaseFragment(), TasksView {
     private fun initList() {
         rv_tasks.apply {
             layoutManager = LinearLayoutManager(activity)
-            isNestedScrollingEnabled = false
             adapter = TasksAdapter { id ->
                 run {
                     baseActivity.toast("Task position: $id", Toast.LENGTH_SHORT)
@@ -71,6 +70,9 @@ class TasksFragment : BaseFragment(), TasksView {
 
     private fun createList() {
         val tasks = ArrayList<Task>()
+        tasks.add(Task("16.04", "Управление проектами", "Здесь описание задания"))
+        tasks.add(Task("16.04", "Управление проектами", "Здесь описание задания"))
+        tasks.add(Task("16.04", "Управление проектами", "Здесь описание задания"))
         tasks.add(Task("16.04", "Управление проектами", "Здесь описание задания"))
         tasks.add(Task("16.04", "Управление проектами", "Здесь описание задания"))
         tasks.add(Task("16.04", "Управление проектами", "Здесь описание задания"))

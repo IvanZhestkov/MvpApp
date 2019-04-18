@@ -7,8 +7,7 @@ import com.itis.android.mvpapp.presentation.base.BasePresenter
 import javax.inject.Inject
 
 @InjectViewState
-class GroupListPresenter
-@Inject constructor() : BasePresenter<GroupListView>() {
+class GroupListPresenter @Inject constructor() : BasePresenter<GroupListView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

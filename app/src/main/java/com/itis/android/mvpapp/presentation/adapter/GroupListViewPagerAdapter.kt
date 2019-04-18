@@ -8,7 +8,7 @@ import com.itis.android.mvpapp.model.Group
 import com.itis.android.mvpapp.presentation.ui.main.grouplist.tasks.TasksFragment
 import com.itis.android.mvpapp.router.initparams.TasksInitParams
 
-class GroupListViewPagerAdapter(fm: FragmentManager, val context: Context) : FragmentStatePagerAdapter(fm) {
+class GroupListViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     private val groups: MutableList<Group> = ArrayList()
 
