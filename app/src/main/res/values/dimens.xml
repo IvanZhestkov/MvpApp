@@ -1,4 +1,5 @@
 <resources>
+    <dimen name="d4">4dp</dimen>
     <dimen name="d8">8dp</dimen>
     <dimen name="d14">14dp</dimen>
     <dimen name="d16">16dp</dimen>

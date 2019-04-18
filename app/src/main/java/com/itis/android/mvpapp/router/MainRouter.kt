@@ -7,6 +7,8 @@ interface MainRouter {
 
     fun openProfileScreen()
 
+    fun openGroupListScreen()
+
     fun openLoadTaskScreen()
 
     fun openGroupTaskScreen()

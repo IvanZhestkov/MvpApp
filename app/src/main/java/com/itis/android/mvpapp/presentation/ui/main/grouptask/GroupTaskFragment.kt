@@ -18,8 +18,6 @@ import com.itis.android.mvpapp.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_group_task.*
 import javax.inject.Inject
 import javax.inject.Provider
-import com.nbsp.materialfilepicker.MaterialFilePicker
-import com.nbsp.materialfilepicker.ui.FilePickerActivity
 
 class GroupTaskFragment : BaseFragment(), GroupTaskView {
 
@@ -92,9 +90,5 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            val filePath = data?.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)
-            Toast.makeText(activity, filePath, Toast.LENGTH_SHORT).show()
-        }
     }
 }

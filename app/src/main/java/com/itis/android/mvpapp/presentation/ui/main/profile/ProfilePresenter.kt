@@ -13,6 +13,6 @@ class ProfilePresenter
     lateinit var profileRouter: MainRouter
 
     fun openGroupTaskScreen() {
-        profileRouter.openGroupTaskScreen()
+        profileRouter.openGroupListScreen()
     }
 }

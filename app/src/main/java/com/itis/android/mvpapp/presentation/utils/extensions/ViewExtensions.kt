@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import android.widget.Toast
 
 fun View.showKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -61,3 +62,5 @@ fun TextView.setTextStyle(context: Context, resId: Int) {
         this.setTextAppearance(resId)
     }
 }
+
+fun Context?.toast(text: CharSequence, duration: Int = Toast.LENGTH_LONG) = this?.let { Toast.makeText(it, text, duration).show() }

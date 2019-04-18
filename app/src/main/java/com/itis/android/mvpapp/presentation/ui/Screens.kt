@@ -2,11 +2,13 @@ package com.itis.android.mvpapp.presentation.ui
 
 import com.itis.android.mvpapp.router.initparams.TestInitParams
 import com.itis.android.mvpapp.presentation.ui.auth.login.LoginFragment
+import com.itis.android.mvpapp.presentation.ui.main.grouplist.GroupListScreen
 import com.itis.android.mvpapp.presentation.ui.main.grouptask.GroupTaskScreen
 import com.itis.android.mvpapp.presentation.ui.main.loadtask.LoadTaskScreen
 import com.itis.android.mvpapp.presentation.ui.main.profile.ProfileScreen
 import com.itis.android.mvpapp.presentation.ui.main.tasksolution.TaskSolutionScreen
 import com.itis.android.mvpapp.presentation.ui.main.test.TestFragment
+import com.itis.android.mvpapp.router.initparams.TasksInitParams
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 object Screens {
@@ -26,6 +28,8 @@ object Screens {
     }
 
     fun getProfileScreen(): ProfileScreen = ProfileScreen()
+
+    fun getGroupListScreen(): GroupListScreen = GroupListScreen()
 
     fun getLoadTaskScreen(): LoadTaskScreen = LoadTaskScreen()
 

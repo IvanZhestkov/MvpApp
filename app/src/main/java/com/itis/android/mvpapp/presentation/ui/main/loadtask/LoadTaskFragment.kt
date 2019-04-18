@@ -11,8 +11,6 @@ import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import javax.inject.Inject
 import javax.inject.Provider
-import com.nbsp.materialfilepicker.MaterialFilePicker
-import com.nbsp.materialfilepicker.ui.FilePickerActivity
 import kotlinx.android.synthetic.main.fragment_load_task.*
 
 class LoadTaskFragment : BaseFragment(), LoadTaskView {
@@ -40,20 +38,11 @@ class LoadTaskFragment : BaseFragment(), LoadTaskView {
         super.onViewCreated(view, savedInstanceState)
 
         btn_load_task.setOnClickListener {
-            MaterialFilePicker()
-                    .withActivity(requireActivity())
-                    .withRequestCode(1)
-                    .withHiddenFiles(true) // Show hidden files and folders
-                    .start()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            val filePath = data?.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)
-            Toast.makeText(activity, filePath, Toast.LENGTH_SHORT).show()
-        }
     }
 }
