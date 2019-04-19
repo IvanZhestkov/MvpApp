@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.google.firebase.FirebaseApp
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.base.BaseActivity
 import com.itis.android.mvpapp.presentation.ui.auth.AuthActivity
@@ -70,6 +71,6 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun signedIn() {
-        presenter.openTestScreen()
+        presenter.openProfileScreen()
     }
 }

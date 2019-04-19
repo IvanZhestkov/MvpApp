@@ -12,5 +12,5 @@ interface LoginView : BaseView {
     fun showPasswordError(hasError: Boolean)
 
     @StateStrategyType(OneExecutionStateStrategy::class)
-    fun startLogin(user: User)
+    fun openMainScreen()
 }

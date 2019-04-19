@@ -1,7 +1,8 @@
 package com.itis.android.mvpapp.presentation.ui.auth.login
 
+import android.util.Log
 import com.arellomobile.mvp.InjectViewState
-import com.itis.android.mvpapp.model.User
+import com.google.firebase.auth.FirebaseAuth
 import com.itis.android.mvpapp.data.repository.AuthRepository
 import com.itis.android.mvpapp.data.util.CredentialStorage
 import com.itis.android.mvpapp.presentation.base.BasePresenter
@@ -22,12 +23,25 @@ class LoginPresenter
     @Inject
     lateinit var preferences: CredentialStorage
 
+    private var firebaseAuth: FirebaseAuth? = null
 
     fun login(email: String, password: String) {
         if (!validateForm(email, password)) {
             return
         }
-        val user = User(email = email, password = password)
+
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        viewState.showWaitDialog()
+        firebaseAuth?.signInWithEmailAndPassword(email, password)
+                ?.addOnCompleteListener {
+                    if (!it.isSuccessful) {
+                        viewState.showErrorDialog("Неправильный логин или пароль!")
+                    } else {
+                        viewState.openMainScreen()
+                    }
+                    viewState.hideWaitDialog()
+                }
     }
 
     private fun validateForm(email: String, password: String): Boolean {

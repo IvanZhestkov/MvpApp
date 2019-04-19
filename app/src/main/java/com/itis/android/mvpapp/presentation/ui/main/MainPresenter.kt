@@ -2,6 +2,8 @@ package com.itis.android.mvpapp.presentation.ui.main
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.itis.android.mvpapp.data.util.CredentialStorage
 import com.itis.android.mvpapp.router.MainRouter
 import com.itis.android.mvpapp.presentation.base.BasePresenter
@@ -25,25 +27,38 @@ class MainPresenter
     @Inject
     lateinit var preferences: CredentialStorage
 
+    private var firebaseAuth: FirebaseAuth? = null
+
+    private var firebaseUser: FirebaseUser? = null
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        mainRouter.openGroupListScreen()
-       // checkAuth()
+        //mainRouter.openProfileScreen()
+        checkAuth()
     }
 
-    fun openTestScreen() {
-        mainRouter.openTestScreen(TestInitParams("test_screen"))
+    fun openProfileScreen() {
+        mainRouter.openProfileScreen()
     }
 
     private fun checkAuth() {
-        preferences
+        /*preferences
                 .getSaveTokenSingle()
                 .subscribe({
                     viewState.signedIn()
                 }, {
                     viewState.startSignIn()
                 })
-                .disposeWhenDestroy()
+                .disposeWhenDestroy()*/
+
+        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseUser = firebaseAuth?.currentUser
+
+        if (firebaseUser == null) {
+            viewState.startSignIn()
+        } else {
+            viewState.signedIn()
+        }
     }
 
     fun setNavigator(navigator: Navigator) {

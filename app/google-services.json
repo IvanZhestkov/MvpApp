@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "525918873512-a68a133attn1eodnbm7pd60sgu04np4u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itis.android.mvpapp",
+            "certificate_hash": "a3009c9f1cac7b48f85016b4db13d64ee11219ad"
+          }
+        },
+        {
           "client_id": "525918873512-orlbasneo9ldgo0is9ft4v0vbid3as1a.apps.googleusercontent.com",
           "client_type": 3
         }
