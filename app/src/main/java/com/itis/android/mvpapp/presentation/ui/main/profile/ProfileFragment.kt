@@ -23,7 +23,7 @@ class ProfileFragment : BaseFragment(), ProfileView {
         get() = R.layout.fragment_teacher_profile
 
     override val enableBackArrow: Boolean
-        get() = true
+        get() = false
 
     override val toolbarTitle: Int?
         get() = R.string.screen_name_profile

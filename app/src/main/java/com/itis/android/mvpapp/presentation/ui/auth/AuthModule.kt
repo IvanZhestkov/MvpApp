@@ -1,16 +1,12 @@
 package com.itis.android.mvpapp.presentation.ui.auth
 
-import com.itis.android.mvpapp.presentation.ui.main.MainActivity
 import com.itis.android.mvpapp.router.AuthRouter
 import com.itis.android.mvpapp.router.AuthRouterImpl
-import com.itis.android.mvpapp.router.MainRouter
-import com.itis.android.mvpapp.router.MainRouterImpl
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
 @Module(includes = [AuthBuilder::class])

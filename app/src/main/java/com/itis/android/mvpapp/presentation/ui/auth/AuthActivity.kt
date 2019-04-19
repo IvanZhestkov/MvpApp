@@ -9,7 +9,7 @@ import ru.terrakok.cicerone.Navigator
 import javax.inject.Inject
 import javax.inject.Provider
 
-class AuthActivity: BaseActivity(), AuthView {
+class AuthActivity : BaseActivity(), AuthView {
 
     @InjectPresenter
     lateinit var presenter: AuthPresenter
@@ -24,12 +24,12 @@ class AuthActivity: BaseActivity(), AuthView {
     fun providePresenter(): AuthPresenter = presenterProvider.get()
 
     override val mainContentLayout: Int
-        get() = R.layout.app_activity_container
+        get() = R.layout.activity_auth
 
     override val enableBackArrow: Boolean
         get() = false
 
-    val fragmentContainer: Int =  R.id.main_wrapper
+    val fragmentContainer: Int = R.id.auth_wrapper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

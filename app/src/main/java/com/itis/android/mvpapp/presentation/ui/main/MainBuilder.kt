@@ -11,15 +11,11 @@ import com.itis.android.mvpapp.presentation.ui.main.messages.MessagesFragment
 import com.itis.android.mvpapp.presentation.ui.main.profile.ProfileFragment
 import com.itis.android.mvpapp.presentation.ui.main.tasksolution.TaskSolutionFragment
 import com.itis.android.mvpapp.presentation.ui.main.tasksolution.TaskSolutionModule
-import com.itis.android.mvpapp.presentation.ui.main.test.TestFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class MainBuilder {
-
-    @ContributesAndroidInjector()
-    abstract fun buildTestFragment(): TestFragment
 
     @ContributesAndroidInjector()
     abstract fun buildProfileFragment(): ProfileFragment

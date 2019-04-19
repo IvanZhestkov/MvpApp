@@ -2,18 +2,13 @@ package com.itis.android.mvpapp.presentation.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentTransaction
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.google.firebase.FirebaseApp
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.base.BaseActivity
 import com.itis.android.mvpapp.presentation.ui.auth.AuthActivity
-import kotlinx.android.synthetic.main.app_activity_container.*
+import kotlinx.android.synthetic.main.activity_main.*
 import ru.terrakok.cicerone.Navigator
-import ru.terrakok.cicerone.android.support.SupportAppNavigator
-import ru.terrakok.cicerone.commands.Command
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -32,17 +27,15 @@ class MainActivity : BaseActivity(), MainView {
     fun providePresenter(): MainPresenter = presenterProvider.get()
 
     override val mainContentLayout: Int
-        get() = R.layout.app_activity_container
+        get() = R.layout.activity_main
 
     override val enableBackArrow: Boolean
         get() = true
 
     val fragmentContainer: Int = R.id.main_wrapper
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         menu_bottom_bar.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -71,6 +64,6 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun signedIn() {
-        presenter.openProfileScreen()
+        presenter.openGroupListScreen()
     }
 }

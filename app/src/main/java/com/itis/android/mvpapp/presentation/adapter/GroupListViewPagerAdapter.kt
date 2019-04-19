@@ -1,6 +1,5 @@
 package com.itis.android.mvpapp.presentation.adapter
 
-import android.content.Context
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
