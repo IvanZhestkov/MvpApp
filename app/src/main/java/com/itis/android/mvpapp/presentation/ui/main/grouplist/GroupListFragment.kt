@@ -22,7 +22,7 @@ class GroupListFragment : BaseFragment(), GroupListView {
 
     override val mainContentLayout = R.layout.fragment_group_list
 
-    override val enableBackArrow = true
+    override val enableBackArrow = false
 
     override val toolbarTitle = R.string.toolbar_task
 

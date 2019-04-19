@@ -7,6 +7,7 @@ import com.itis.android.mvpapp.presentation.ui.main.grouptask.GroupTaskFragment
 import com.itis.android.mvpapp.presentation.ui.main.grouptask.GroupTaskModule
 import com.itis.android.mvpapp.presentation.ui.main.loadtask.LoadTaskFragment
 import com.itis.android.mvpapp.presentation.ui.main.loadtask.LoadTaskModule
+import com.itis.android.mvpapp.presentation.ui.main.messages.MessagesFragment
 import com.itis.android.mvpapp.presentation.ui.main.profile.ProfileFragment
 import com.itis.android.mvpapp.presentation.ui.main.tasksolution.TaskSolutionFragment
 import com.itis.android.mvpapp.presentation.ui.main.tasksolution.TaskSolutionModule
@@ -37,4 +38,7 @@ abstract class MainBuilder {
 
     @ContributesAndroidInjector(modules = [TaskSolutionModule::class])
     abstract fun buildTaskSolutionFragment(): TaskSolutionFragment
+
+    @ContributesAndroidInjector
+    abstract fun buildMessagesFragment(): MessagesFragment
 }

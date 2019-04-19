@@ -11,8 +11,4 @@ class ProfilePresenter
 
     @Inject
     lateinit var profileRouter: MainRouter
-
-    fun openGroupTaskScreen() {
-        profileRouter.openGroupListScreen()
-    }
 }

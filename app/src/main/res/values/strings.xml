@@ -74,5 +74,8 @@
     <string name="name_discipline_format">- %s:</string>
 
     <string name="test_name">%s\n%s\n%s</string>
+    <string name="main_menu_rasp">Расписание</string>
+    <string name="main_menu_messages">Сообщения</string>
+    <string name="main_menu_profile">Профиль</string>
 
 </resources>

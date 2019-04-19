@@ -27,7 +27,7 @@ class MainPresenter
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        mainRouter.openProfileScreen()
+        mainRouter.openGroupListScreen()
        // checkAuth()
     }
 
@@ -52,5 +52,17 @@ class MainPresenter
 
     fun removeNavigator() {
         navigatorHolder.removeNavigator()
+    }
+
+    fun onGroups() {
+        mainRouter.openGroupListScreen()
+    }
+
+    fun onMessages() {
+        mainRouter.openMessagesScreen()
+    }
+
+    fun onProfile() {
+        mainRouter.openProfileScreen()
     }
 }

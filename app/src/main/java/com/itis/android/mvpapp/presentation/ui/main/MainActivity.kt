@@ -9,6 +9,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.base.BaseActivity
 import com.itis.android.mvpapp.presentation.ui.auth.AuthActivity
+import kotlinx.android.synthetic.main.app_activity_container.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
@@ -35,11 +36,21 @@ class MainActivity : BaseActivity(), MainView {
     override val enableBackArrow: Boolean
         get() = true
 
-    val fragmentContainer: Int =  R.id.main_wrapper
+    val fragmentContainer: Int = R.id.main_wrapper
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        menu_bottom_bar.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.main_menu_groups -> presenter.onGroups()
+                R.id.main_menu_messages -> presenter.onMessages()
+                else -> presenter.onProfile()
+            }
+            true
+        }
     }
 
     override fun onResumeFragments() {

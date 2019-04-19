@@ -15,7 +15,11 @@ class MainRouterImpl : MainRouter, Router() {
     }
 
     override fun openGroupListScreen() {
-        navigateTo(Screens.getGroupListScreen())
+        newRootScreen(Screens.getGroupListScreen())
+    }
+
+    override fun openMessagesScreen() {
+        newRootScreen(Screens.getMessagesScreen())
     }
 
     override fun openLoadTaskScreen() {

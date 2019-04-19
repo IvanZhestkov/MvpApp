@@ -24,6 +24,7 @@
 
     <color name="colorReject">#FF9191</color>
     <color name="colorRejectActivated">#ba6a6a</color>
+    <color name="colorNavBarItemUnselected">#969696</color>
 
     <color name="colorBorder">#000000</color>
     <color name="colorTableDivider">#959393</color>

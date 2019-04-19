@@ -15,5 +15,7 @@ interface MainRouter {
 
     fun openTaskSolutionScreen()
 
+    fun openMessagesScreen()
+
     fun goBack()
 }

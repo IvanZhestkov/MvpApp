@@ -41,17 +41,10 @@ class ProfileFragment : BaseFragment(), ProfileView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initActionViews()
         initList()
         createList()
 
         tv_name.text = getString(R.string.test_name, "Иванов", "Иван", "Иванович")
-    }
-
-    private fun initActionViews() {
-        btn_open_tasks.setOnClickListener {
-            presenter.openGroupTaskScreen()
-        }
     }
 
     private fun initList() {

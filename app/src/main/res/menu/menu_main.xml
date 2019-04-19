@@ -1,9 +1,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
-      xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.itis.android.mvpapp.presentation.ui.main.MainActivity">
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
-          android:orderInCategory="100"
-          app:showAsAction="never"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.itis.android.mvpapp.presentation.ui.main.MainActivity">
+
+    <item
+        android:id="@+id/main_menu_groups"
+        android:icon="@drawable/ic_menu_main_rasp"
+        android:title="@string/main_menu_rasp" />
+
+    <item
+        android:id="@+id/main_menu_messages"
+        android:icon="@drawable/ic_menu_main_chat"
+        android:title="@string/main_menu_messages" />
+
+    <item
+        android:id="@+id/main_menu_projects"
+        android:icon="@drawable/ic_menu_main_profile"
+        android:title="@string/main_menu_profile" />
 </menu>
