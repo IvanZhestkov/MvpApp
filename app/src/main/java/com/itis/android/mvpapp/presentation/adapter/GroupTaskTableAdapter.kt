@@ -19,12 +19,10 @@ import android.widget.TextView
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.utils.extensions.setTextStyle
 
-
-class GroupTaskTableAdapter(val context: Context) :
-        AbstractTableAdapter<GroupTaskColumnHeader, GroupTaskRowHeader, GroupTaskCell>(context) {
+class GroupTaskTableAdapter(val context: Context) : AbstractTableAdapter<GroupTaskColumnHeader, GroupTaskRowHeader, GroupTaskCell>(context) {
 
     companion object {
-        private const val COLUMN_ANSWER = 0
+        const val COLUMN_ANSWER = 0
         private const val COLUMN_MARK = 1
 
         private const val VIEW_ANSWER = 10
@@ -116,14 +114,13 @@ class GroupTaskTableAdapter(val context: Context) :
 
     inner class CellAnswerViewHolder(itemView: View) : AbstractViewHolder(itemView) {
 
+        var cellItem: GroupTaskCell? = null
+
         fun bindView(item: GroupTaskCell?, row: Int, column: Int) = with(itemView) {
+            cellItem = item
             val rand = (Math.random() * 2).toInt()
 
-            cell_answer_text.text = context.getString(
-                    if (rand == 1) R.string.task_status_now_downloaded
-                    else R.string.task_status_show)
-
-            if(rand == 1) {
+            if (rand == 1) {
                 cell_answer_text.text = context.getString(R.string.task_status_show)
                 cell_answer_text.setTextStyle(context, R.style.Text_Small_Link)
             } else {

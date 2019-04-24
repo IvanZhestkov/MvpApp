@@ -64,6 +64,6 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun signedIn() {
-        presenter.openGroupListScreen()
+        presenter.onGroups()
     }
 }

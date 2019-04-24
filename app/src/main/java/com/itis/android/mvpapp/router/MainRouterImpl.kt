@@ -1,6 +1,7 @@
 package com.itis.android.mvpapp.router
 
 import com.itis.android.mvpapp.presentation.ui.Screens
+import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams
 import ru.terrakok.cicerone.Router
 
 class MainRouterImpl : MainRouter, Router() {
@@ -17,8 +18,8 @@ class MainRouterImpl : MainRouter, Router() {
         newRootScreen(Screens.getMessagesScreen())
     }
 
-    override fun openLoadTaskScreen() {
-        navigateTo(Screens.getLoadTaskScreen())
+    override fun openLoadTaskScreen(loadTaskInitParams: LoadTaskInitParams) {
+        navigateTo(Screens.getLoadTaskScreen(loadTaskInitParams))
     }
 
     override fun openGroupTaskScreen() {

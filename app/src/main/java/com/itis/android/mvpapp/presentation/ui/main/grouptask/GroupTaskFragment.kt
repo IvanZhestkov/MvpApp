@@ -15,6 +15,7 @@ import com.itis.android.mvpapp.model.table.grouptask.GroupTaskRowHeader
 import com.itis.android.mvpapp.presentation.adapter.GroupTaskTableAdapter
 import com.itis.android.mvpapp.presentation.adapter.tableClickListener.TableClickListenerAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
+import com.itis.android.mvpapp.presentation.utils.extensions.toast
 import kotlinx.android.synthetic.main.fragment_group_task.*
 import javax.inject.Inject
 import javax.inject.Provider
@@ -31,6 +32,9 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
 
     override val toolbarTitle = R.string.toolbar_task
 
+    override val menu: Int?
+        get() = null
+
     @InjectPresenter
     lateinit var presenter: GroupTaskPresenter
 
@@ -46,13 +50,10 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        table_group_task.adapter = adapter
-        table_group_task.tableViewListener = object : TableClickListenerAdapter() {
-            override fun onCellClicked(cellView: RecyclerView.ViewHolder, column: Int, row: Int) {
-                Toast.makeText(context, "$row $column", Toast.LENGTH_SHORT).show()
-            }
-        }
+        initTable()
+    }
 
+    override fun showTable() {
         val columnItems = listOf(
                 GroupTaskColumnHeader("Решение"),
                 GroupTaskColumnHeader("Оценка")
@@ -74,7 +75,7 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
         val cellItems = listOf(
                 listOf(GroupTaskCell("a"), GroupTaskCell("a")),
                 listOf(GroupTaskCell("a"), GroupTaskCell("a")),
-                listOf(GroupTaskCell("a"), GroupTaskCell("a")),
+                listOf(GroupTaskCell("as"), GroupTaskCell("a")),
                 listOf(GroupTaskCell("a"), GroupTaskCell("a")),
                 listOf(GroupTaskCell("a"), GroupTaskCell("a")),
                 listOf(GroupTaskCell("a"), GroupTaskCell("a")),
@@ -87,8 +88,19 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
         adapter.setAllItems(columnItems, rowItems, cellItems)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
+    private fun initTable() {
+        table_group_task.adapter = adapter
+        table_group_task.tableViewListener = object : TableClickListenerAdapter() {
+            override fun onCellClicked(cellView: RecyclerView.ViewHolder, column: Int, row: Int) {
+                when (column) {
+                    GroupTaskTableAdapter.COLUMN_ANSWER -> {
+                        val item = (cellView as GroupTaskTableAdapter.CellAnswerViewHolder).cellItem
+                        if (item?.text == "as") {
+                            presenter.openTaskSolutionScreen()
+                        }
+                    }
+                }
+            }
+        }
     }
 }

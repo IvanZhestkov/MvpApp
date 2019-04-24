@@ -16,13 +16,15 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
 
     protected abstract val toolbarTitle: Int?
 
+    protected abstract val menu: Int?
+
     protected val baseActivity
         get() = activity as BaseActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
-        setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,8 +43,8 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
+        this.menu?.let { inflater?.inflate(it, menu) }
     }
-
 
     override fun showWaitDialog() {
         (activity as? BaseActivity)?.showWaitDialog()

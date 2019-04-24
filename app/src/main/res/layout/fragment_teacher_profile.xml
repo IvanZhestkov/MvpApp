@@ -11,17 +11,17 @@
         layout="@layout/layout_toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -75,7 +75,6 @@
                 android:layout_marginEnd="8dp"
                 android:gravity="center_vertical"
                 android:lineSpacingExtra="4dp"
-                android:text="Жестков\nИван\nВикторович"
                 android:textAppearance="@style/Text.Medium.Title"
                 app:layout_constraintBottom_toBottomOf="@+id/civ_profile"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -153,7 +152,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/d8"
-                android:text="05.10.98"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_birthday_title"
                 app:layout_constraintStart_toEndOf="@+id/tv_birthday_title"
                 tools:text="05.10.98" />
@@ -184,7 +182,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/d8"
-                android:text="person@email.com"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_email_title"
                 app:layout_constraintStart_toEndOf="@+id/tv_email_title"
                 tools:text="person@email.com" />
@@ -195,10 +192,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/d8"
-                android:text="+7 (900) 236 5489"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_phone_title"
                 app:layout_constraintStart_toEndOf="@+id/tv_phone_title"
                 tools:text="+7 (900) 236 5489" />
+
+            <Button
+                android:id="@+id/btn_logout"
+                style="@style/AccentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/logout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_phone_title" />
+
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v4.widget.NestedScrollView>

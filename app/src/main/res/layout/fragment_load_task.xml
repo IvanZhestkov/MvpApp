@@ -34,13 +34,15 @@
                     android:layout_height="wrap_content"
                     android:text="@string/date_title" />
 
-                <TextView
-                    android:id="@+id/date"
-                    style="@style/Text.Medium.Secondary"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/d8"
-                    tools:text="12 марта" />
+                    android:background="@null"
+                    android:hint="@string/enter_date"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    android:textAppearance="@style/Text.Medium.Secondary" />
 
             </LinearLayout>
 
@@ -59,7 +61,7 @@
                     android:text="@string/group_title" />
 
                 <TextView
-                    android:id="@+id/group"
+                    android:id="@+id/tv_group"
                     style="@style/Text.Medium.Secondary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -77,18 +79,20 @@
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:textAppearance="@style/Text.Medium.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/subject_title" />
+                    android:text="@string/subject_title"
+                    android:textAppearance="@style/Text.Medium.Title" />
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/subject"
-                    android:textAppearance="@style/Text.Medium.Secondary"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/d8"
-                    tools:text="Управление проектами" />
+                    android:background="@null"
+                    android:hint="@string/enter_subject_name"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textAppearance="@style/Text.Medium.Secondary" />
 
             </LinearLayout>
 
@@ -102,12 +106,12 @@
                 android:text="@string/load" />
 
             <android.support.v7.widget.AppCompatTextView
-                android:textAppearance="@style/Text.Medium.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/d16"
                 android:layout_marginTop="@dimen/d32"
                 android:text="@string/task_description_title"
+                android:textAppearance="@style/Text.Medium.Title"
                 android:textStyle="bold" />
 
             <EditText

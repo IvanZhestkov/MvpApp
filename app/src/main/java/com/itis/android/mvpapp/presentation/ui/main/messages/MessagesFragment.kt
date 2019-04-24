@@ -21,6 +21,9 @@ class MessagesFragment : BaseFragment(), MessagesView {
 
     override val toolbarTitle = R.string.birthday_title
 
+    override val menu: Int?
+        get() = null
+
     @InjectPresenter
     lateinit var presenter: MessagesPresenter
 

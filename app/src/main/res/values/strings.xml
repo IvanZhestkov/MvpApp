@@ -6,6 +6,9 @@
 
     <string name="screen_name_profile">Профиль</string>
 
+    <!--Menu-->
+    <string name="add_task">Добавить задание</string>
+
     <!--Auth-->
     <string name="enter_correct_name">Введите правильный e-mail</string>
     <string name="enter_correct_password">Введите правильный пароль</string>
@@ -18,6 +21,7 @@
 
     <!--Buttons-->
     <string name="login">Войти</string>
+    <string name="logout">Выйти</string>
     <string name="load">Загрузить</string>
     <string name="send">Отправить</string>
 
@@ -73,9 +77,14 @@
 
     <string name="name_discipline_format">- %s:</string>
 
+    <!--Bottom Bar-->
     <string name="test_name">%s\n%s\n%s</string>
     <string name="main_menu_rasp">Расписание</string>
     <string name="main_menu_messages">Сообщения</string>
     <string name="main_menu_profile">Профиль</string>
 
+    <string name="rationale_doc_picker">We need this pemission to read documents from device.</string>
+
+    <string name="enter_date">Введите дату</string>
+    <string name="enter_subject_name">Введите название предмета</string>
 </resources>

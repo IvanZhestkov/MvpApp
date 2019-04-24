@@ -5,6 +5,8 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+
     defaultConfig {
         applicationId "com.itis.android.mvpapp"
         minSdkVersion 21
@@ -71,6 +73,7 @@ dependencies {
 
     //Firebase
     implementation 'com.google.firebase:firebase-auth:16.2.1'
+    implementation 'com.google.firebase:firebase-database:16.0.1'
 
     //GSON
     implementation 'com.google.code.gson:gson:2.8.5'
@@ -99,6 +102,9 @@ dependencies {
 
     //TableView
     implementation 'com.evrencoskun.library:tableview:0.8.8'
+
+    //EasyPermissions
+    implementation 'pub.devrel:easypermissions:2.0.1'
 
     //Test
     testImplementation 'junit:junit:4.12'

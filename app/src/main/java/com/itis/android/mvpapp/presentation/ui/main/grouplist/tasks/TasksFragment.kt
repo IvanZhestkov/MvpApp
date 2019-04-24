@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.fragment_tasks.*
 import javax.inject.Inject
 import javax.inject.Provider
 import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_group_list.*
 
 class TasksFragment : BaseFragment(), TasksView {
 
@@ -35,6 +37,9 @@ class TasksFragment : BaseFragment(), TasksView {
 
     override val toolbarTitle = R.string.toolbar_task
 
+    override val menu: Int?
+        get() = null
+
     @InjectPresenter
     lateinit var presenter: TasksPresenter
 
@@ -51,7 +56,6 @@ class TasksFragment : BaseFragment(), TasksView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initList()
-        createList()
     }
 
     private fun initList() {
@@ -60,15 +64,31 @@ class TasksFragment : BaseFragment(), TasksView {
             adapter = TasksAdapter { id ->
                 run {
                     baseActivity.toast("Task position: $id", Toast.LENGTH_SHORT)
+                    presenter.openGroupTaskScreen()
                 }
             }
             val dividerItemDecoration = DividerItemDecoration(this.context,
                     (layoutManager as LinearLayoutManager).orientation)
             addItemDecoration(dividerItemDecoration)
         }
+
+        /*rv_tasks.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0 || dy < 0 && btn_add_task.isShown)
+                    btn_add_task.hide()
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    btn_add_task.show()
+                }
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+        })*/
     }
 
-    private fun createList() {
+    override fun showTasks() {
         val tasks = ArrayList<Task>()
         tasks.add(Task("16.04", "Управление проектами", "Здесь описание задания"))
         tasks.add(Task("16.04", "Управление проектами", "Здесь описание задания"))

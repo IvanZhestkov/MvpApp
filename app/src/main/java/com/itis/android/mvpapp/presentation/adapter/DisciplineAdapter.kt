@@ -43,7 +43,7 @@ class DisciplineAdapter : RecyclerView.Adapter<DisciplineAdapter.DisciplineViewH
             name.text = itemView.resources.getString(
                     R.string.name_discipline_format, item.name)
 
-            list_group.text = item.groups.joinToString { it }
+            list_group.text = item.groups.joinToString { it.toString() }
         }
     }
 }

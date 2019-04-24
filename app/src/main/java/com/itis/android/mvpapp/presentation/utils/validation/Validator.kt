@@ -12,17 +12,18 @@ object Validator {
     )
 
     fun isEmailValid(emailStr: String): Boolean {
-        val matcher = validEmailAddressRegex.matcher(emailStr)
-        return matcher.find()
+        /*val matcher = validEmailAddressRegex.matcher(emailStr)
+        return matcher.find()*/
+        return true
     }
 
     fun isPasswordValid(password: String): Boolean {
-        if (password.length > 20) {
+        /*if (password.length > 20) {
             return false
         }
         if (!atLeastOneNumberPattern.matcher(password).find()) {
             return false
-        }
+        }*/
         return true
     }
 }

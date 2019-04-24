@@ -30,6 +30,8 @@ class LoginFragment : BaseFragment(), LoginView {
 
     override val enableBackArrow = false
 
+    override val menu: Int?
+        get() = null
 
     @InjectPresenter
     lateinit var presenter: LoginPresenter

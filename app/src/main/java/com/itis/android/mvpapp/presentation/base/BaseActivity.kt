@@ -3,6 +3,7 @@ package com.itis.android.mvpapp.presentation.base
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
+import android.view.MenuItem
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.itis.android.mvpapp.presentation.dialog.ErrorDialog
 import com.itis.android.mvpapp.presentation.dialog.WaitDialog
@@ -13,7 +14,7 @@ import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
 abstract class BaseActivity : MvpAppCompatActivity(), HasSupportFragmentInjector,
-    BaseView {
+        BaseView {
 
     companion object {
         private const val ERROR_DIALOG_TAG = "ERROR_DIALOG_TAG"
@@ -34,6 +35,16 @@ abstract class BaseActivity : MvpAppCompatActivity(), HasSupportFragmentInjector
         setContentView(mainContentLayout)
 
         setBackArrow(enableBackArrow)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {

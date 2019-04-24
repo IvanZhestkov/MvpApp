@@ -2,12 +2,22 @@ package com.itis.android.mvpapp.presentation.ui.main.grouplist
 
 import com.arellomobile.mvp.InjectViewState
 import com.itis.android.mvpapp.R
+import com.itis.android.mvpapp.data.repository.GroupListRepository
 import com.itis.android.mvpapp.model.Group
 import com.itis.android.mvpapp.presentation.base.BasePresenter
+import com.itis.android.mvpapp.router.MainRouter
+import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams
 import javax.inject.Inject
 
 @InjectViewState
-class GroupListPresenter @Inject constructor() : BasePresenter<GroupListView>() {
+class GroupListPresenter
+@Inject constructor() : BasePresenter<GroupListView>() {
+
+    @Inject
+    lateinit var groupListRouter: MainRouter
+
+    @Inject
+    lateinit var groupListRepository: GroupListRepository
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -15,17 +25,10 @@ class GroupListPresenter @Inject constructor() : BasePresenter<GroupListView>() 
     }
 
     private fun initGroups() {
-        viewState.setGroups(getGroups())
+        viewState.setGroups(groupListRepository.getGroups())
     }
 
-    private fun getGroups() = listOf(
-            Group(0, "11-601"),
-            Group(1, "11-602"),
-            Group(2, "11-603"),
-            Group(3, "11-604"),
-            Group(4, "11-605"),
-            Group(5, "11-606"),
-            Group(6, "11-607"),
-            Group(7, "11-608")
-    )
+    fun openLoadTaskScreen(groupId: Int) {
+        groupListRouter.openLoadTaskScreen(LoadTaskInitParams(groupId))
+    }
 }

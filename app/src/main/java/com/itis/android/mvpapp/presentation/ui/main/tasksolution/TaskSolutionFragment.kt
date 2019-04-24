@@ -17,6 +17,9 @@ class TaskSolutionFragment: BaseFragment(), TaskSolutionView {
 
     override val toolbarTitle = R.string.solution
 
+    override val menu: Int?
+        get() = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
