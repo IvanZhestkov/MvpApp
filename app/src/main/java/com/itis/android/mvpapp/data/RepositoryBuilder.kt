@@ -28,4 +28,8 @@ abstract class RepositoryBuilder {
     @Binds
     @Singleton
     abstract fun bindTasksRepository(repositoryImpl: TasksRepositoryImpl): TasksRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindConnectionRepository(repositoryImpl: ConnectionRepositoryImpl): ConnectionRepository
 }
