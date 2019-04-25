@@ -1,9 +1,7 @@
 package com.itis.android.mvpapp.presentation.ui.main.grouplist
 
 import com.arellomobile.mvp.InjectViewState
-import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.data.repository.GroupListRepository
-import com.itis.android.mvpapp.model.Group
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.router.MainRouter
 import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams

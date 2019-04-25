@@ -1,7 +1,7 @@
 package com.itis.android.mvpapp.data.repository.impl
 
 import com.itis.android.mvpapp.data.repository.GroupListRepository
-import com.itis.android.mvpapp.model.Group
+import com.itis.android.mvpapp.presentation.model.Group
 import javax.inject.Inject
 
 class GroupListRepositoryImpl

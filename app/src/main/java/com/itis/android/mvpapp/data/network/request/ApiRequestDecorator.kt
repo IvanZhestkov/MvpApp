@@ -1,12 +1,9 @@
 package com.itis.android.mvpapp.data.network.request
 
 import com.google.gson.JsonObject
-import com.itis.android.mvpapp.model.User
+import com.itis.android.mvpapp.presentation.model.User
 import io.reactivex.*
 import retrofit2.Response
-import java.lang.IllegalArgumentException
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
 
 
 class ApiRequestDecorator(val apiRequest: ApiRequest) : ApiRequest {

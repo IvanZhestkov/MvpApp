@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.model.Discipline
-import com.itis.android.mvpapp.model.Task
-import kotlinx.android.synthetic.main.item_discipline.view.*
+import com.itis.android.mvpapp.presentation.model.Task
 import kotlinx.android.synthetic.main.item_task.view.*
 
 class TasksAdapter(

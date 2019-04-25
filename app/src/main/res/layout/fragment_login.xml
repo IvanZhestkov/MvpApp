@@ -20,7 +20,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/d16"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="130dp"
         android:layout_marginEnd="@dimen/d16"
         android:hint="@string/hint_email"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,7 @@
     <Button
         android:id="@+id/btn_login"
         style="@style/AccentButton"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/d32"
         android:text="@string/login"

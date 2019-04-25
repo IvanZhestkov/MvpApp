@@ -6,16 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.evrencoskun.tableview.adapter.AbstractTableAdapter
 import com.evrencoskun.tableview.adapter.recyclerview.holder.AbstractViewHolder
-import com.itis.android.mvpapp.model.table.grouptask.GroupTaskCell
-import com.itis.android.mvpapp.model.table.grouptask.GroupTaskColumnHeader
-import com.itis.android.mvpapp.model.table.grouptask.GroupTaskRowHeader
+import com.itis.android.mvpapp.presentation.model.table.grouptask.GroupTaskCell
+import com.itis.android.mvpapp.presentation.model.table.grouptask.GroupTaskColumnHeader
+import com.itis.android.mvpapp.presentation.model.table.grouptask.GroupTaskRowHeader
 import kotlinx.android.synthetic.main.item_croup_task_cell_mark.view.*
 import kotlinx.android.synthetic.main.item_group_task_cell_answer.view.*
 import kotlinx.android.synthetic.main.item_group_task_column_header.view.*
 import kotlinx.android.synthetic.main.item_group_task_row_header.view.*
-import android.support.v4.widget.TextViewCompat.setTextAppearance
-import android.os.Build
-import android.widget.TextView
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.utils.extensions.setTextStyle
 

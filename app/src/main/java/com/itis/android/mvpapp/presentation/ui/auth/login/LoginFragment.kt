@@ -2,16 +2,10 @@ package com.itis.android.mvpapp.presentation.ui.auth.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.model.User
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.presentation.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_login.*

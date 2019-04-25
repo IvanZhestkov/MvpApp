@@ -1,21 +1,17 @@
 package com.itis.android.mvpapp.presentation.ui.main.grouptask
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.model.table.grouptask.GroupTaskCell
-import com.itis.android.mvpapp.model.table.grouptask.GroupTaskColumnHeader
-import com.itis.android.mvpapp.model.table.grouptask.GroupTaskRowHeader
+import com.itis.android.mvpapp.presentation.model.table.grouptask.GroupTaskCell
+import com.itis.android.mvpapp.presentation.model.table.grouptask.GroupTaskColumnHeader
+import com.itis.android.mvpapp.presentation.model.table.grouptask.GroupTaskRowHeader
 import com.itis.android.mvpapp.presentation.adapter.GroupTaskTableAdapter
 import com.itis.android.mvpapp.presentation.adapter.tableClickListener.TableClickListenerAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
-import com.itis.android.mvpapp.presentation.utils.extensions.toast
 import kotlinx.android.synthetic.main.fragment_group_task.*
 import javax.inject.Inject
 import javax.inject.Provider

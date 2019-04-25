@@ -7,7 +7,7 @@ import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.model.Task
+import com.itis.android.mvpapp.presentation.model.Task
 import com.itis.android.mvpapp.presentation.adapter.TasksAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.presentation.utils.extensions.extractInitParams
@@ -18,8 +18,6 @@ import kotlinx.android.synthetic.main.fragment_tasks.*
 import javax.inject.Inject
 import javax.inject.Provider
 import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_group_list.*
 
 class TasksFragment : BaseFragment(), TasksView {
 

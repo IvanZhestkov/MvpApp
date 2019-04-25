@@ -87,4 +87,6 @@
 
     <string name="enter_date">Введите дату</string>
     <string name="enter_subject_name">Введите название предмета</string>
+    <string name="download_error">Ошибка</string>
+    <string name="repeat">Повторить</string>
 </resources>

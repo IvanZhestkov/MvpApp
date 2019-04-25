@@ -1,18 +1,13 @@
 package com.itis.android.mvpapp.presentation.ui.main.grouplist
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.model.Group
+import com.itis.android.mvpapp.presentation.model.Group
 import com.itis.android.mvpapp.presentation.adapter.GroupListViewPagerAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
-import com.itis.android.mvpapp.presentation.utils.extensions.toast
 import kotlinx.android.synthetic.main.fragment_group_list.*
 import javax.inject.Inject
 import javax.inject.Provider

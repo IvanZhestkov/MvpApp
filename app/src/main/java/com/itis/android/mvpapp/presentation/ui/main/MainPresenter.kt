@@ -9,8 +9,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.itis.android.mvpapp.data.util.CredentialStorage
-import com.itis.android.mvpapp.model.User
-import com.itis.android.mvpapp.model.UserRole
+import com.itis.android.mvpapp.presentation.model.User
+import com.itis.android.mvpapp.presentation.model.UserRole
 import com.itis.android.mvpapp.router.MainRouter
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import ru.terrakok.cicerone.Navigator

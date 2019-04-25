@@ -9,6 +9,7 @@ import com.itis.android.mvpapp.presentation.ui.main.loadtask.LoadTaskFragment
 import com.itis.android.mvpapp.presentation.ui.main.loadtask.LoadTaskModule
 import com.itis.android.mvpapp.presentation.ui.main.messages.MessagesFragment
 import com.itis.android.mvpapp.presentation.ui.main.profile.ProfileFragment
+import com.itis.android.mvpapp.presentation.ui.main.profile.ProfileModule
 import com.itis.android.mvpapp.presentation.ui.main.tasksolution.TaskSolutionFragment
 import com.itis.android.mvpapp.presentation.ui.main.tasksolution.TaskSolutionModule
 import dagger.Module
@@ -17,13 +18,13 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class MainBuilder {
 
-    @ContributesAndroidInjector()
+    @ContributesAndroidInjector(modules = [ProfileModule::class])
     abstract fun buildProfileFragment(): ProfileFragment
 
     @ContributesAndroidInjector(modules = [GroupListModule::class])
     abstract fun buildGroupListFragment(): GroupListFragment
 
-    @ContributesAndroidInjector()
+    @ContributesAndroidInjector
     abstract fun buildTasksFragment(): TasksFragment
 
     @ContributesAndroidInjector(modules = [LoadTaskModule::class])

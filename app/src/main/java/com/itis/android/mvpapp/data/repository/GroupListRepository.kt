@@ -1,6 +1,6 @@
 package com.itis.android.mvpapp.data.repository
 
-import com.itis.android.mvpapp.model.Group
+import com.itis.android.mvpapp.presentation.model.Group
 
 
 interface GroupListRepository {

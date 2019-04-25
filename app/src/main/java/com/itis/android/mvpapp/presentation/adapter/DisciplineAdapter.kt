@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.model.Discipline
+import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
 import kotlinx.android.synthetic.main.item_discipline.view.*
 
 class DisciplineAdapter : RecyclerView.Adapter<DisciplineAdapter.DisciplineViewHolder>() {
 
-    private val items: MutableList<Discipline> = mutableListOf()
+    var items: MutableList<TeacherDisciplineItem> = mutableListOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisciplineViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_discipline, parent, false)
@@ -23,16 +27,6 @@ class DisciplineAdapter : RecyclerView.Adapter<DisciplineAdapter.DisciplineViewH
 
     override fun getItemCount(): Int {
         return items.size
-    }
-
-    fun addItems(models: List<Discipline>) {
-        clearItems()
-        items.addAll(models)
-        notifyDataSetChanged()
-    }
-
-    private fun clearItems() {
-        items.clear()
     }
 
     inner class DisciplineViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

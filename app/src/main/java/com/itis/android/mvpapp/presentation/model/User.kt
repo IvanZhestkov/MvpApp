@@ -1,7 +1,4 @@
-package com.itis.android.mvpapp.model
-
-import com.google.firebase.database.PropertyName
-import com.google.gson.annotations.SerializedName
+package com.itis.android.mvpapp.presentation.model
 
 data class User(
 

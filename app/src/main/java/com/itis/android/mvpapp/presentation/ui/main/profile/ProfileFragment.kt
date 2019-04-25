@@ -7,12 +7,12 @@ import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.model.Discipline
-import com.itis.android.mvpapp.model.User
 import com.itis.android.mvpapp.presentation.adapter.DisciplineAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
+import com.itis.android.mvpapp.presentation.model.TeacherInfoModel
 import com.itis.android.mvpapp.presentation.ui.auth.AuthActivity
 import kotlinx.android.synthetic.main.fragment_teacher_profile.*
+import kotlinx.android.synthetic.main.layout_progress_error.*
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -40,6 +40,9 @@ class ProfileFragment : BaseFragment(), ProfileView {
     @Inject
     lateinit var presenterProvider: Provider<ProfilePresenter>
 
+    @Inject
+    lateinit var adapter: DisciplineAdapter
+
     @ProvidePresenter
     fun providePresenter(): ProfilePresenter {
         return presenterProvider.get()
@@ -52,41 +55,50 @@ class ProfileFragment : BaseFragment(), ProfileView {
         initActionViews()
     }
 
-    override fun showProfile(user: User?) {
+    override fun showProfile(teacherInfoModel: TeacherInfoModel) {
         //createList()
-        tv_name.text = getString(R.string.test_name, user?.first_name, user?.last_name, user?.middle_name)
-        tv_birthday.text = user?.birth_date
-        tv_email.text = user?.email
-        tv_phone.text = user?.phone
-    }
+        tv_name.text = getString(
+                R.string.test_name,
+                teacherInfoModel.firstName, teacherInfoModel.lastName, teacherInfoModel.middleName
+        )
+        tv_birthday.text = teacherInfoModel.birthDate
+        tv_email.text = teacherInfoModel.email
+        tv_phone.text = teacherInfoModel.phone
 
-    override fun showDisciplines(items: List<Discipline>) {
-        (rv_disciplines.adapter as DisciplineAdapter).addItems(items)
+        adapter.items = teacherInfoModel.disciplines.toMutableList()
     }
 
     private fun initList() {
-        rv_disciplines.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = DisciplineAdapter()
-            isNestedScrollingEnabled = false
-        }
+        rv_disciplines.adapter = adapter
+        rv_disciplines.layoutManager = LinearLayoutManager(context)
+        rv_disciplines.isNestedScrollingEnabled = false
     }
 
     private fun initActionViews() {
         btn_logout.setOnClickListener {
-            presenter.logout()
+            presenter.onLogout()
             val intent = Intent(baseActivity, AuthActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         }
     }
 
-    private fun createList() {
-        val disciplines = ArrayList<Discipline>()
-        disciplines.add(Discipline("Информационная безопасность", listOf("11-501 - 11-508", "15-603 - 15-605", "8-305")))
-        disciplines.add(Discipline("Управление проектами", listOf("11-501 - 11-508", "15-603 - 15-605", "8-305")))
-        disciplines.add(Discipline("База данных", listOf("11-501 - 11-508", "15-603 - 15-605", "8-305")))
+    override fun showProgress() {
+        progress.visibility = View.VISIBLE
+    }
 
-        (rv_disciplines.adapter as DisciplineAdapter).addItems(disciplines)
+    override fun hideProgress() {
+        progress.visibility = View.GONE
+    }
+
+    override fun showRetry(errorText: String) {
+        text_retry.text = errorText
+        btn_retry.setOnClickListener { presenter.onRetry() }
+
+        progress_error.visibility = View.VISIBLE
+    }
+
+    override fun hideRetry() {
+        progress_error.visibility = View.GONE
     }
 }

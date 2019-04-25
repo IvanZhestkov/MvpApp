@@ -2,7 +2,7 @@ package com.itis.android.mvpapp.data.repository.impl
 
 import com.google.gson.JsonObject
 import com.itis.android.mvpapp.data.repository.AuthRepository
-import com.itis.android.mvpapp.model.User
+import com.itis.android.mvpapp.presentation.model.User
 import io.reactivex.Single
 import retrofit2.Response
 import javax.inject.Inject
