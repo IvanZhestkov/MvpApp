@@ -42,7 +42,7 @@ class TasksAdapter(
         fun bind() = with(itemView) {
             val item = items[adapterPosition]
 
-            tv_deadline.text = item.deadline
+            tv_deadline.text = item.expiration_date
             tv_subject.text = item.subject
             tv_task_description.text = item.description
 

@@ -12,9 +12,8 @@ object Validator {
     )
 
     fun isEmailValid(emailStr: String): Boolean {
-        /*val matcher = validEmailAddressRegex.matcher(emailStr)
-        return matcher.find()*/
-        return true
+        val matcher = validEmailAddressRegex.matcher(emailStr)
+        return matcher.find()
     }
 
     fun isPasswordValid(password: String): Boolean {

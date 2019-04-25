@@ -4,10 +4,7 @@ import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.itis.android.mvpapp.data.util.CredentialStorage
 import com.itis.android.mvpapp.presentation.model.User
 import com.itis.android.mvpapp.presentation.model.UserRole
@@ -30,13 +27,15 @@ class MainPresenter
     @Inject
     lateinit var preferences: CredentialStorage
 
-    private var auth: FirebaseAuth? = null
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
-    private var user: FirebaseUser? = null
+    @Inject
+    lateinit var firebaseDB: FirebaseDatabase
 
-    private var database = FirebaseDatabase.getInstance()
+    private var firebaseUser: FirebaseUser? = null
 
-    private var myRef = database.getReference("users")
+    private lateinit var myRef: DatabaseReference
 
     private var isProfessor: Boolean = false
 
@@ -46,31 +45,31 @@ class MainPresenter
     }
 
     private fun checkAuth() {
-        auth = FirebaseAuth.getInstance()
-        user = auth?.currentUser
+        //myRef = firebaseDB.getReference("users")
+        firebaseUser = firebaseAuth.currentUser
 
-        if (user == null) {
+        if (firebaseUser == null) {
             viewState.startSignIn()
         } else {
-            checkIsProfessor()
-            onGroups()
+            viewState.signedIn()
         }
     }
 
     private fun checkIsProfessor() {
-        user?.uid?.let { myRef.child(it) }
-            ?.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val user = dataSnapshot.getValue(User::class.java)
-                    Log.d("TAG checkIsProfessor: ", "${user?.role}")
-                    if (user?.role == UserRole.PROFESSOR) {
-                        isProfessor = true
+        firebaseUser?.uid.let { myRef.child(it.toString()) }
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val user = dataSnapshot.getValue(User::class.java)
+                        Log.d("TAG checkIsProfessor: ", "${user?.role}")
+                        if (user?.role == UserRole.PROFESSOR) {
+                            isProfessor = true
+                        }
+                        onGroups()
                     }
-                }
 
-                override fun onCancelled(error: DatabaseError) {
-                }
-            })
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
         Log.d("TAG checkIsProfessor: ", "$isProfessor")
     }
 
@@ -91,8 +90,6 @@ class MainPresenter
     }
 
     fun onProfile() {
-        if (isProfessor) {
-            mainRouter.openProfileScreen()
-        }
+        mainRouter.openProfileScreen()
     }
 }

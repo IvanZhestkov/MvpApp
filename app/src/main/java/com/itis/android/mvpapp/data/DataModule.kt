@@ -29,12 +29,6 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideFirebaseUser(): FirebaseUser {
-        return FirebaseAuth.getInstance().currentUser ?: throw IllegalArgumentException("Firebase User is null")
-    }
-
-    @Provides
-    @Singleton
     fun provideFirebaseAuth(): FirebaseAuth {
         return FirebaseAuth.getInstance()
     }

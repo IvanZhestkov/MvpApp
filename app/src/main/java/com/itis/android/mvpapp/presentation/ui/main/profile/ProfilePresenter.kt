@@ -1,16 +1,11 @@
 package com.itis.android.mvpapp.presentation.ui.main.profile
 
-import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
 import com.itis.android.mvpapp.data.repository.TeacherRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationObservableTransformer
-import com.itis.android.mvpapp.router.MainRouter
 import javax.inject.Inject
-import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
 
 @InjectViewState
 class ProfilePresenter
@@ -24,7 +19,7 @@ class ProfilePresenter
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        update()
+        loadProfile()
     }
 
     fun onLogout() {
@@ -32,10 +27,10 @@ class ProfilePresenter
     }
 
     fun onRetry() {
-        update()
+        loadProfile()
     }
 
-    private fun update() {
+    private fun loadProfile() {
         teacherRepository
                 .getTeacherInfoObservable()
                 .compose(PresentationObservableTransformer())

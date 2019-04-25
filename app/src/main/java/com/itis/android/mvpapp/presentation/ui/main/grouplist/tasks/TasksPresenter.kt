@@ -24,7 +24,7 @@ class TasksPresenter
     }
 
     private fun loadTasks() {
-        viewState.showTasks()
+        viewState.showTasks(listOf())
     }
 
     fun openGroupTaskScreen() {

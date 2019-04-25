@@ -69,24 +69,9 @@ class TasksFragment : BaseFragment(), TasksView {
                     (layoutManager as LinearLayoutManager).orientation)
             addItemDecoration(dividerItemDecoration)
         }
-
-        /*rv_tasks.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0 || dy < 0 && btn_add_task.isShown)
-                    btn_add_task.hide()
-            }
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    btn_add_task.show()
-                }
-                super.onScrollStateChanged(recyclerView, newState)
-            }
-        })*/
     }
 
-    override fun showTasks() {
+    override fun showTasks(items: List<Task>) {
         val tasks = ArrayList<Task>()
         tasks.add(Task("16.04", "Управление проектами", "Здесь описание задания"))
         tasks.add(Task("16.04", "Управление проектами", "Здесь описание задания"))

@@ -1,5 +1,6 @@
 package com.itis.android.mvpapp.data.repository.impl
 
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.itis.android.mvpapp.data.repository.TeacherRepository
@@ -20,15 +21,17 @@ import javax.inject.Inject
 class TeacherRepositoryImpl @Inject constructor() : TeacherRepository {
 
     @Inject
-    lateinit var firebaseUser: FirebaseUser
+    lateinit var firebaseDB: FirebaseDatabase
 
     @Inject
-    lateinit var firebaseDB: FirebaseDatabase
+    lateinit var firebaseAuth: FirebaseAuth
+
+    private var firebaseUser: FirebaseUser? = null
 
     override fun getTeacherInfoObservable(): Observable<TeacherInfoModel> {
         return Single.zip(
                 getTeacherInfo(),
-                getDesciplineSingle(),
+                getDisciplineSingle(),
                 BiFunction<TeacherInfoItem, List<TeacherDisciplineItem>, TeacherInfoModel>
                 { t1, t2 ->
                     TeacherInfoModelMapper.map(t1, t2)
@@ -36,11 +39,12 @@ class TeacherRepositoryImpl @Inject constructor() : TeacherRepository {
     }
 
     private fun getTeacherInfo(): Single<TeacherInfoItem> {
+        firebaseUser = firebaseAuth.currentUser
         val ref = firebaseDB.getReference("users")
 
         val subject = AsyncSubject.create<Pair<String, TeacherInfoItem>>()
 
-        firebaseUser.uid.let { ref.child(it) }
+        firebaseUser?.uid.let { ref.child(it.toString()) }
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         val user = dataSnapshot.getValue(TeacherInfoItem::class.java)
@@ -63,7 +67,7 @@ class TeacherRepositoryImpl @Inject constructor() : TeacherRepository {
         }
     }
 
-    private fun getDesciplineSingle(): Single<List<TeacherDisciplineItem>> {
+    private fun getDisciplineSingle(): Single<List<TeacherDisciplineItem>> {
         val ref = firebaseDB.getReference("courses")
 
         val mapCourse: MutableMap<String?, MutableList<String?>> = HashMap()
@@ -82,7 +86,7 @@ class TeacherRepositoryImpl @Inject constructor() : TeacherRepository {
                 snapshot.children.mapNotNullTo(listCourse) {
                     it.getValue<Course>(Course::class.java)
                 }
-                listCourse.filter { it.professor_id == firebaseUser.uid }.forEach { course ->
+                listCourse.filter { it.professor_id == firebaseUser?.uid }.forEach { course ->
                     mapCourse[course.subject_name] =
                             (mapCourse[course.subject_name]
                                     ?: mutableListOf()).also { it.add(course.group_id) }

@@ -2,9 +2,13 @@ package com.itis.android.mvpapp.presentation.ui.auth.login
 
 import com.arellomobile.mvp.InjectViewState
 import com.google.firebase.auth.FirebaseAuth
-import com.itis.android.mvpapp.data.repository.AuthRepository
+import com.itis.android.mvpapp.data.repository.LoginRepository
 import com.itis.android.mvpapp.data.util.CredentialStorage
 import com.itis.android.mvpapp.presentation.base.BasePresenter
+import com.itis.android.mvpapp.presentation.model.UserRole
+import com.itis.android.mvpapp.presentation.rx.transformer.PresentationCompletableTransformer
+import com.itis.android.mvpapp.presentation.rx.transformer.PresentationObservableTransformer
+import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
 import com.itis.android.mvpapp.presentation.utils.validation.Validator
 import com.itis.android.mvpapp.router.AuthRouter
 import javax.inject.Inject
@@ -17,27 +21,38 @@ class LoginPresenter
     lateinit var loginRouter: AuthRouter
 
     @Inject
-    lateinit var authRepository: AuthRepository
+    lateinit var loginRepository: LoginRepository
 
     @Inject
     lateinit var preferences: CredentialStorage
 
-    private var auth: FirebaseAuth? = null
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     fun login(email: String, password: String) {
         if (!validateForm(email, password)) {
             return
         }
 
-        auth = FirebaseAuth.getInstance()
-
         viewState.showWaitDialog()
-        auth?.signInWithEmailAndPassword(email, password)
-                ?.addOnCompleteListener {
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener {
                     if (!it.isSuccessful) {
                         viewState.showErrorDialog("Неправильный логин или пароль!")
                     } else {
-                        viewState.openMainScreen()
+                        loginRepository
+                                .getUser()
+                                .compose(PresentationSingleTransformer())
+                                .subscribe({ user ->
+                                    when (user.role) {
+                                        UserRole.PROFESSOR -> viewState.openMainScreen()
+                                        else -> {
+                                        }
+                                    }
+                                }, {
+                                    viewState.showErrorDialog("Неправильный логин или пароль!")
+                                })
+                                .disposeWhenDestroy()
                     }
                     viewState.hideWaitDialog()
                 }

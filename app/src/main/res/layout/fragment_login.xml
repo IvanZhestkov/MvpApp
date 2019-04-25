@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/layout_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/ti_email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/d16"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="@dimen/d16"
-        android:hint="@string/hint_email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        android:hint="@string/hint_email">
 
         <EditText
             android:id="@+id/edt_email"
@@ -40,13 +37,10 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/ti_password"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/d16"
-        android:hint="@string/hint_password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ti_email">
+        android:hint="@string/hint_password">
 
         <EditText
             android:id="@+id/edt_password"
@@ -63,10 +57,26 @@
         style="@style/AccentButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="@dimen/d32"
-        android:text="@string/login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ti_password" />
+        android:text="@string/login" />
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/professor_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/d32"
+        android:text="MAbramskiy@stud.kpfu.ru"
+        android:textAppearance="@style/Text.Medium.Primary" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/student_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/d16"
+        android:text="RBagautdinov@stud.kpfu.ru "
+        android:textAppearance="@style/Text.Medium.Primary" />
+
+</LinearLayout>

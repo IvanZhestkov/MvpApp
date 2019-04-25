@@ -49,6 +49,14 @@ class LoginFragment : BaseFragment(), LoginView {
             val password = edt_password.text.toString().trim()
             presenter.login(email, password)
         }
+        professor_account.setOnClickListener {
+            edt_email.setText(professor_account.text)
+            edt_password.setText("makpfu123")
+        }
+        student_account.setOnClickListener {
+            edt_email.setText(student_account.text)
+            edt_password.setText("rbkpfu123")
+        }
     }
 
     override fun showEmailError(hasError: Boolean) {
