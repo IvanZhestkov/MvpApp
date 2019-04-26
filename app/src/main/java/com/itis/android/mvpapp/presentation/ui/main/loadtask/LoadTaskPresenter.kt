@@ -12,15 +12,15 @@ class LoadTaskPresenter
     @Inject
     lateinit var groupListRepository: GroupListRepository
 
-    private var groupId: Int = 0
+    private var groupName: String = ""
 
-    fun init(groupId: Int) {
-        this.groupId = groupId
+    fun init(groupName: String) {
+        this.groupName = groupName
     }
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.showTaskGroup(getGroupNameById(groupId))
+        viewState.showTaskGroup(groupName)
     }
 
     private fun getGroupNameById(groupId: Int): String {

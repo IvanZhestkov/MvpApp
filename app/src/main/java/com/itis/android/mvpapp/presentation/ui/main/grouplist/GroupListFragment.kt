@@ -5,6 +5,7 @@ import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
+import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
 import com.itis.android.mvpapp.presentation.model.Group
 import com.itis.android.mvpapp.presentation.adapter.GroupListViewPagerAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
@@ -48,15 +49,15 @@ class GroupListFragment : BaseFragment(), GroupListView {
 
     private fun initActionView() {
         btn_add_task.setOnClickListener {
-            presenter.openLoadTaskScreen(view_pager_tasks.currentItem)
+            presenter.openLoadTaskScreen(adapter.groups[view_pager_tasks.currentItem])
         }
     }
 
-    override fun setupViewPager(tasks: List<TaskModel>) {
+    override fun setupViewPager(tasks: List<TaskModel>, disciplines: List<TeacherDisciplineItem>) {
         adapter = GroupListViewPagerAdapter(childFragmentManager)
-        adapter.groups = tasks
+        adapter.groups = disciplines
                 .asSequence()
-                .map { it.groupNumber ?: "" }
+                .map { it.group_id ?: "" }
                 .filter { it.isNotEmpty() }
                 .distinct()
                 .sorted()

@@ -4,6 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.itis.android.mvpapp.data.repository.GroupListRepository
 import com.itis.android.mvpapp.data.repository.TasksRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
+import com.itis.android.mvpapp.presentation.rx.transformer.PresentationObservableTransformer
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
 import com.itis.android.mvpapp.router.MainRouter
 import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams
@@ -19,19 +20,21 @@ class GroupListPresenter
     @Inject
     lateinit var tasksRepository: TasksRepository
 
+
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         update()
     }
 
-    fun openLoadTaskScreen(groupId: Int) {
+    fun openLoadTaskScreen(groupId: String) {
         groupListRouter.openLoadTaskScreen(LoadTaskInitParams(groupId))
     }
 
     private fun update() {
         tasksRepository
-                .getTasks()
-                .compose(PresentationSingleTransformer())
+                .getGroupList()
+                .compose(PresentationObservableTransformer())
                 .doOnSubscribe {
                     viewState.showProgress()
                     viewState.hideRetry()
@@ -40,7 +43,7 @@ class GroupListPresenter
                 .doAfterTerminate { viewState.hideProgress() }
                 .subscribe({
                     viewState.showTabs()
-                    viewState.setupViewPager(it)
+                    viewState.setupViewPager(it.first, it.second)
                 }, {
                     it.printStackTrace()
                 }).disposeWhenDestroy()

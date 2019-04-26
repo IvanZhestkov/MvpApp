@@ -4,14 +4,14 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class LoadTaskInitParams(
-        val groupId: Int
+        val groupName: String?
 ) : InitParams {
     constructor(parcel: Parcel) : this(
-            parcel.readInt()
+            parcel.readString()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(groupId)
+        parcel.writeString(groupName)
     }
 
     override fun describeContents(): Int {

@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_tasks.*
 import javax.inject.Inject
 import javax.inject.Provider
 import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.RecyclerView
 import com.itis.android.mvpapp.presentation.model.TaskModel
 import java.lang.IllegalArgumentException
 
@@ -59,7 +60,7 @@ class TasksFragment : BaseFragment(), TasksView {
     }
 
     fun getTasks(): ArrayList<TaskModel> = (arguments?.getSerializable(KEY_TASKS) as? ArrayList<TaskModel>)
-            ?: throw IllegalArgumentException("tasks is null")
+        ?: throw IllegalArgumentException("tasks is null")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -74,7 +75,7 @@ class TasksFragment : BaseFragment(), TasksView {
 
         rv_tasks.adapter = adapter
         rv_tasks.layoutManager = LinearLayoutManager(context)
-        rv_tasks.addItemDecoration(DividerItemDecoration(this.context, LinearLayoutManager.HORIZONTAL))
+        rv_tasks.addItemDecoration(DividerItemDecoration(this.context, LinearLayoutManager.VERTICAL))
     }
 
     override fun setTasks(items: List<TaskModel>) {

@@ -4,12 +4,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.itis.android.mvpapp.data.pojo.TaskItem
+import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
 import com.itis.android.mvpapp.data.repository.DisciplinesRepository
 import com.itis.android.mvpapp.data.repository.TasksRepository
 import com.itis.android.mvpapp.presentation.model.TaskModel
 import com.itis.android.mvpapp.presentation.model.TaskModelMapper
 import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.functions.BiFunction
 import io.reactivex.subjects.AsyncSubject
 import java.lang.Exception
 import javax.inject.Inject
@@ -24,6 +26,16 @@ class TasksRepositoryImpl @Inject constructor() : TasksRepository {
 
     @Inject
     lateinit var disciplinesRepository: DisciplinesRepository
+
+    override fun getGroupList(): Observable<Pair<List<TaskModel>, List<TeacherDisciplineItem>>> {
+        return Single.zip(
+                getTasks(),
+                disciplinesRepository.getDisciplinesSingle(),
+                BiFunction<List<TaskModel>, List<TeacherDisciplineItem>, Pair<List<TaskModel>, List<TeacherDisciplineItem>>>
+                { t1, t2 ->
+                    Pair(t1, t2)
+                }).toObservable()
+    }
 
     override fun getTasks(): Single<List<TaskModel>> {
         val ref = firebaseDB.getReference("tasks")

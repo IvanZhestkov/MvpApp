@@ -29,23 +29,24 @@ class DisciplinesRepositoryImpl @Inject constructor() : DisciplinesRepository {
 
         val subject = AsyncSubject.create<Pair<String, List<TeacherDisciplineItem>>>()
 
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(error: DatabaseError) {
-                subject.onNext(Pair(error.message, emptyList()))
-                subject.onComplete()
-            }
+        ref.orderByChild("professor_id").equalTo(firebaseAuth.currentUser?.uid)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(error: DatabaseError) {
+                        subject.onNext(Pair(error.message, emptyList()))
+                        subject.onComplete()
+                    }
 
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val disciplines: MutableList<TeacherDisciplineItem> = mutableListOf()
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val disciplines: MutableList<TeacherDisciplineItem> = mutableListOf()
 
-                snapshot.children.mapNotNullTo(disciplines) { data ->
-                    data.getValue<TeacherDisciplineItem>(TeacherDisciplineItem::class.java).also { it?.id = data.key }
-                }
+                        snapshot.children.mapNotNullTo(disciplines) { data ->
+                            data.getValue<TeacherDisciplineItem>(TeacherDisciplineItem::class.java).also { it?.id = data.key }
+                        }
 
-                subject.onNext(Pair("", disciplines))
-                subject.onComplete()
-            }
-        })
+                        subject.onNext(Pair("", disciplines))
+                        subject.onComplete()
+                    }
+                })
 
         return Single.just(isOnline(context)).flatMap { connected ->
             if (connected) {

@@ -1,9 +1,7 @@
 package com.itis.android.mvpapp.presentation.ui.main.loadtask
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -56,7 +54,7 @@ class LoadTaskFragment : BaseFragment(), LoadTaskView, EasyPermissions.Permissio
     @ProvidePresenter
     fun providePresenter(): LoadTaskPresenter {
         return presenterProvider.get().apply {
-            init(extractInitParams<LoadTaskInitParams>().groupId)
+            extractInitParams<LoadTaskInitParams>().groupName?.let { init(it) }
         }
     }
 

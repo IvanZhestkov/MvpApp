@@ -22,7 +22,7 @@ object TeacherInfoModelMapper {
     fun map(teacherInfoItem: TeacherInfoItem, disciplines: List<TeacherDisciplineItem>): TeacherInfoModel {
         val mapCourse: MutableMap<String?, MutableList<String?>> = HashMap()
 
-        disciplines.filter { it.professor_id == FirebaseAuth.getInstance().currentUser?.uid }.forEach { course ->
+        disciplines.forEach { course ->
                   mapCourse[course.subject_name] =
                           (mapCourse[course.subject_name]
                                   ?: mutableListOf()).also { it.add(course.group_id) }

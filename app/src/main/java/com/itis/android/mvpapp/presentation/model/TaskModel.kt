@@ -16,7 +16,7 @@ data class TaskModel(
         var professorId: String? = null
 ): Serializable
 
-object TaskModelMapper {
+object  TaskModelMapper {
     fun map(taskItem: TaskItem, disciplineItem: TeacherDisciplineItem): TaskModel {
         return TaskModel(
                 taskItem.expiration_date,
