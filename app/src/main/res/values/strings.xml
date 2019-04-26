@@ -35,13 +35,13 @@
     <string name="phone_title">Телефон:</string>
     <string name="table_tasks">Таблица заданий</string>
 
-    <!--Task-->
+    <!--TaskItem-->
     <string name="date_title">Дата:</string>
     <string name="group_title">Группа:</string>
     <string name="subject_title">Предмет:</string>
     <string name="task_description_title">Описание задания:</string>
 
-    <!-- Task Solution -->
+    <!-- TaskItem Solution -->
     <string name="task_solution_stud">Студент:</string>
     <string name="task_solution_comment">Комментарий:</string>
     <string name="task_solution_status">Статус:</string>

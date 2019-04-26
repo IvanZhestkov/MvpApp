@@ -1,5 +1,6 @@
 package com.itis.android.mvpapp.presentation.model
 
+import com.google.firebase.auth.FirebaseAuth
 import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
 import com.itis.android.mvpapp.data.pojo.TeacherInfoItem
 
@@ -13,12 +14,23 @@ data class TeacherInfoModel(
         var phone: String? = null,
         var photo: String? = null,
         var role: UserRole? = null,
-        val disciplines: List<TeacherDisciplineItem>
+        val disciplines: List<TeacherDisciplineModel>
 )
 
 object TeacherInfoModelMapper {
 
     fun map(teacherInfoItem: TeacherInfoItem, disciplines: List<TeacherDisciplineItem>): TeacherInfoModel {
+        val mapCourse: MutableMap<String?, MutableList<String?>> = HashMap()
+
+        disciplines.filter { it.professor_id == FirebaseAuth.getInstance().currentUser?.uid }.forEach { course ->
+                  mapCourse[course.subject_name] =
+                          (mapCourse[course.subject_name]
+                                  ?: mutableListOf()).also { it.add(course.group_id) }
+              }
+
+
+        val mappedDisciplines = mapCourse.toList().map { TeacherDisciplineModel(it.first, it.second.toList()) }
+
         return TeacherInfoModel(
                 teacherInfoItem.id,
                 teacherInfoItem.email,
@@ -29,7 +41,7 @@ object TeacherInfoModelMapper {
                 teacherInfoItem.phone,
                 teacherInfoItem.photo,
                 teacherInfoItem.role,
-                disciplines
+                mappedDisciplines
         )
     }
 }

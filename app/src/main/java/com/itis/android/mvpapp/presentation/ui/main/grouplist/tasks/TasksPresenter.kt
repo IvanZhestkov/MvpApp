@@ -2,6 +2,7 @@ package com.itis.android.mvpapp.presentation.ui.main.grouplist.tasks
 
 import com.arellomobile.mvp.InjectViewState
 import com.itis.android.mvpapp.presentation.base.BasePresenter
+import com.itis.android.mvpapp.presentation.model.TaskModel
 import com.itis.android.mvpapp.router.MainRouter
 import javax.inject.Inject
 
@@ -12,19 +13,12 @@ class TasksPresenter
     @Inject
     lateinit var tasksRouter: MainRouter
 
-    private var groupId: Int = 0
-
-    fun init(groupId: Int) {
-        this.groupId = groupId
-    }
+    @Inject
+    lateinit var tasks: ArrayList<TaskModel>
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        loadTasks()
-    }
-
-    private fun loadTasks() {
-        viewState.showTasks(listOf())
+        viewState.setTasks(tasks)
     }
 
     fun openGroupTaskScreen() {

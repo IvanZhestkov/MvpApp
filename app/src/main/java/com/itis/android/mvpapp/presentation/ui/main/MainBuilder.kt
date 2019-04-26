@@ -3,6 +3,7 @@ package com.itis.android.mvpapp.presentation.ui.main
 import com.itis.android.mvpapp.presentation.ui.main.grouplist.GroupListFragment
 import com.itis.android.mvpapp.presentation.ui.main.grouplist.GroupListModule
 import com.itis.android.mvpapp.presentation.ui.main.grouplist.tasks.TasksFragment
+import com.itis.android.mvpapp.presentation.ui.main.grouplist.tasks.TasksModule
 import com.itis.android.mvpapp.presentation.ui.main.grouptask.GroupTaskFragment
 import com.itis.android.mvpapp.presentation.ui.main.grouptask.GroupTaskModule
 import com.itis.android.mvpapp.presentation.ui.main.loadtask.LoadTaskFragment
@@ -24,7 +25,7 @@ abstract class MainBuilder {
     @ContributesAndroidInjector(modules = [GroupListModule::class])
     abstract fun buildGroupListFragment(): GroupListFragment
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [TasksModule::class])
     abstract fun buildTasksFragment(): TasksFragment
 
     @ContributesAndroidInjector(modules = [LoadTaskModule::class])

@@ -31,5 +31,5 @@ abstract class RepositoryBuilder {
 
     @Binds
     @Singleton
-    abstract fun bindConnectionRepository(repositoryImpl: ConnectionRepositoryImpl): ConnectionRepository
+    abstract fun bindDisciplinesRepository(repositoryImpl: DisciplinesRepositoryImpl): DisciplinesRepository
 }

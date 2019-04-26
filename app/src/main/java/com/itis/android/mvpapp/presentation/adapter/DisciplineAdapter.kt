@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
+import com.itis.android.mvpapp.presentation.model.TeacherDisciplineModel
 import kotlinx.android.synthetic.main.item_discipline.view.*
 
 class DisciplineAdapter : RecyclerView.Adapter<DisciplineAdapter.DisciplineViewHolder>() {
 
-    var items: MutableList<TeacherDisciplineItem> = mutableListOf()
+    var items: MutableList<TeacherDisciplineModel> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -35,9 +36,9 @@ class DisciplineAdapter : RecyclerView.Adapter<DisciplineAdapter.DisciplineViewH
             val item = items[adapterPosition]
 
             name.text = itemView.resources.getString(
-                    R.string.name_discipline_format, item.name)
+                    R.string.name_discipline_format, item.disciplineName)
 
-            list_group.text = item.groups.joinToString { it.toString() }
+            list_group.text = item.groupList?.joinToString { it.toString() }
         }
     }
 }

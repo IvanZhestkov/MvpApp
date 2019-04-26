@@ -5,18 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.presentation.model.Task
+import com.itis.android.mvpapp.data.pojo.TaskItem
+import com.itis.android.mvpapp.presentation.model.TaskModel
 import kotlinx.android.synthetic.main.item_task.view.*
 
-class TasksAdapter(
-        private val onItemClickListener: (Int) -> Unit
-) : RecyclerView.Adapter<TasksAdapter.TasksViewHolder>() {
+class TasksAdapter : RecyclerView.Adapter<TasksAdapter.TasksViewHolder>() {
 
-    private val items: MutableList<Task> = mutableListOf()
+    var items: MutableList<TaskModel> = mutableListOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
+    var onItemClickListener: ((Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false)
-        return TasksViewHolder(view, onItemClickListener)
+        return TasksViewHolder(view)
     }
 
     override fun onBindViewHolder(viewHolder: TasksViewHolder, position: Int) {
@@ -27,27 +32,17 @@ class TasksAdapter(
         return items.size
     }
 
-    fun addItems(models: List<Task>) {
-        clearItems()
-        items.addAll(models)
-        notifyDataSetChanged()
-    }
-
-    private fun clearItems() {
-        items.clear()
-    }
-
-    inner class TasksViewHolder(itemView: View, private val onClickListener: (Int) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    inner class TasksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind() = with(itemView) {
             val item = items[adapterPosition]
 
             tv_deadline.text = item.expiration_date
-            tv_subject.text = item.subject
+            tv_subject.text = item.disciplineName
             tv_task_description.text = item.description
 
             itemView.setOnClickListener {
-                onClickListener.invoke(adapterPosition)
+                onItemClickListener?.invoke(adapterPosition)
             }
         }
     }

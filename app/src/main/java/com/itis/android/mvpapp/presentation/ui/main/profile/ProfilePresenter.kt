@@ -2,6 +2,8 @@ package com.itis.android.mvpapp.presentation.ui.main.profile
 
 import com.arellomobile.mvp.InjectViewState
 import com.google.firebase.auth.FirebaseAuth
+import com.itis.android.mvpapp.data.repository.DisciplinesRepository
+import com.itis.android.mvpapp.data.repository.TasksRepository
 import com.itis.android.mvpapp.data.repository.TeacherRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationObservableTransformer

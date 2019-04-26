@@ -1,5 +1,7 @@
 package com.itis.android.mvpapp.data.network
 
+import android.content.Context
+import android.net.ConnectivityManager
 import com.itis.android.mvpapp.data.network.request.ApiRequest
 import com.itis.android.mvpapp.data.network.request.ApiRequestDecorator
 import dagger.Module
