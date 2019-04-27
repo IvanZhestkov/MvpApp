@@ -7,7 +7,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.base.BaseFragment
-import com.itis.android.mvpapp.presentation.ui.main.MainActivity
+import com.itis.android.mvpapp.presentation.ui.teacher.TeacherActivity
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 import javax.inject.Provider
@@ -76,7 +76,7 @@ class LoginFragment : BaseFragment(), LoginView {
     }
 
     override fun openMainScreen() {
-        val intent = Intent(baseActivity, MainActivity::class.java)
+        val intent = Intent(baseActivity, TeacherActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
     }

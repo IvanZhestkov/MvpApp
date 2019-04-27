@@ -34,28 +34,25 @@ class LoginPresenter
             return
         }
 
-        viewState.showWaitDialog()
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener {
-                    if (!it.isSuccessful) {
-                        viewState.showErrorDialog("Неправильный логин или пароль!")
-                    } else {
-                        loginRepository
-                                .getUser()
-                                .compose(PresentationSingleTransformer())
-                                .subscribe({ user ->
-                                    when (user.role) {
-                                        UserRole.PROFESSOR -> viewState.openMainScreen()
-                                        else -> {
-                                        }
-                                    }
-                                }, {
-                                    viewState.showErrorDialog("Неправильный логин или пароль!")
-                                })
-                                .disposeWhenDestroy()
-                    }
+        loginRepository
+                .login(email, password)
+                .compose(PresentationSingleTransformer())
+                .doOnSubscribe {
+                    viewState.showWaitDialog()
+                }
+                .doAfterTerminate {
                     viewState.hideWaitDialog()
                 }
+                .subscribe({ user ->
+                    when (user.role) {
+                        UserRole.PROFESSOR -> viewState.openMainScreen()
+                        else -> {
+                        }
+                    }
+                }, {
+                    viewState.showErrorDialog("Неправильный логин или пароль!")
+                })
+                .disposeWhenDestroy()
     }
 
     private fun validateForm(email: String, password: String): Boolean {

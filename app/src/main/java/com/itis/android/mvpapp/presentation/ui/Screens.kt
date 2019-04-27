@@ -1,12 +1,12 @@
 package com.itis.android.mvpapp.presentation.ui
 
 import com.itis.android.mvpapp.presentation.ui.auth.login.LoginFragment
-import com.itis.android.mvpapp.presentation.ui.main.groups.GroupsScreen
-import com.itis.android.mvpapp.presentation.ui.main.grouptask.GroupTaskScreen
-import com.itis.android.mvpapp.presentation.ui.main.loadtask.LoadTaskScreen
-import com.itis.android.mvpapp.presentation.ui.main.messages.MessagesScreen
-import com.itis.android.mvpapp.presentation.ui.main.profile.ProfileScreen
-import com.itis.android.mvpapp.presentation.ui.main.tasksolution.TaskSolutionScreen
+import com.itis.android.mvpapp.presentation.ui.teacher.groups.GroupsScreen
+import com.itis.android.mvpapp.presentation.ui.teacher.grouptask.GroupTaskScreen
+import com.itis.android.mvpapp.presentation.ui.teacher.loadtask.LoadTaskScreen
+import com.itis.android.mvpapp.presentation.ui.teacher.messages.MessagesScreen
+import com.itis.android.mvpapp.presentation.ui.teacher.profile.ProfileScreen
+import com.itis.android.mvpapp.presentation.ui.teacher.tasksolution.TaskSolutionScreen
 import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 

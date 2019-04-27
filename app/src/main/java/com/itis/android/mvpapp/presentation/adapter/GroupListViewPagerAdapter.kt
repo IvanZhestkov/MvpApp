@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.itis.android.mvpapp.presentation.model.GroupModel
-import com.itis.android.mvpapp.presentation.ui.main.groups.tasks.TasksFragment
+import com.itis.android.mvpapp.presentation.ui.teacher.groups.tasks.TasksFragment
 
 class GroupListViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
