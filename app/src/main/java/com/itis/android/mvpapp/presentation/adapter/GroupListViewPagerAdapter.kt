@@ -3,28 +3,19 @@ package com.itis.android.mvpapp.presentation.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.itis.android.mvpapp.presentation.model.Group
-import com.itis.android.mvpapp.presentation.model.TaskModel
-import com.itis.android.mvpapp.presentation.ui.main.grouplist.tasks.TasksFragment
-import com.itis.android.mvpapp.router.initparams.TasksInitParams
+import com.itis.android.mvpapp.presentation.model.GroupModel
+import com.itis.android.mvpapp.presentation.ui.main.groups.tasks.TasksFragment
 
 class GroupListViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-    var groups: MutableList<String> = ArrayList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    var tasks: MutableList<TaskModel> = ArrayList()
+    var groups: MutableList<GroupModel> = ArrayList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
     override fun getItem(position: Int): Fragment {
-        val groupName = groups[position]
-        return TasksFragment.getInstance(ArrayList(tasks.filter { it.groupNumber == groupName }))
+        return TasksFragment.getInstance(groups[position])
     }
 
     override fun getCount(): Int {
@@ -32,6 +23,6 @@ class GroupListViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return groups[position]
+        return groups[position].name
     }
 }

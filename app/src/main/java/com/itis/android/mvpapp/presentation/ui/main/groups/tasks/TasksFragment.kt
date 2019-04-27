@@ -1,4 +1,4 @@
-package com.itis.android.mvpapp.presentation.ui.main.grouplist.tasks
+package com.itis.android.mvpapp.presentation.ui.main.groups.tasks
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -7,30 +7,26 @@ import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.data.pojo.TaskItem
 import com.itis.android.mvpapp.presentation.adapter.TasksAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
-import com.itis.android.mvpapp.presentation.utils.extensions.extractInitParams
-import com.itis.android.mvpapp.presentation.utils.extensions.putInitParams
 import com.itis.android.mvpapp.presentation.utils.extensions.toast
-import com.itis.android.mvpapp.router.initparams.TasksInitParams
 import kotlinx.android.synthetic.main.fragment_tasks.*
 import javax.inject.Inject
 import javax.inject.Provider
 import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.RecyclerView
+import com.itis.android.mvpapp.presentation.model.GroupModel
 import com.itis.android.mvpapp.presentation.model.TaskModel
 import java.lang.IllegalArgumentException
 
 class TasksFragment : BaseFragment(), TasksView {
 
     companion object {
-        private const val KEY_TASKS = "KEY_TASKS"
+        private const val KEY_GROUP = "KEY_GROUP"
 
-        fun getInstance(tasks: ArrayList<TaskModel>): TasksFragment {
+        fun getInstance(group: GroupModel): TasksFragment {
             return TasksFragment().also {
                 it.arguments = Bundle().apply {
-                    putSerializable(KEY_TASKS, tasks)
+                    putSerializable(KEY_GROUP, group)
                 }
             }
         }
@@ -59,7 +55,7 @@ class TasksFragment : BaseFragment(), TasksView {
         return presenterProvider.get()
     }
 
-    fun getTasks(): ArrayList<TaskModel> = (arguments?.getSerializable(KEY_TASKS) as? ArrayList<TaskModel>)
+    fun getGroup(): GroupModel = (arguments?.getSerializable(KEY_GROUP) as? GroupModel)
         ?: throw IllegalArgumentException("tasks is null")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,5 +76,13 @@ class TasksFragment : BaseFragment(), TasksView {
 
     override fun setTasks(items: List<TaskModel>) {
         adapter.items = items.toMutableList()
+    }
+
+    override fun hideEmptyState() {
+        text_no_available_tasks.visibility = View.GONE
+    }
+
+    override fun showEmptyState() {
+        text_no_available_tasks.visibility = View.VISIBLE
     }
 }

@@ -1,9 +1,9 @@
 package com.itis.android.mvpapp.presentation.ui.main
 
-import com.itis.android.mvpapp.presentation.ui.main.grouplist.GroupListFragment
-import com.itis.android.mvpapp.presentation.ui.main.grouplist.GroupListModule
-import com.itis.android.mvpapp.presentation.ui.main.grouplist.tasks.TasksFragment
-import com.itis.android.mvpapp.presentation.ui.main.grouplist.tasks.TasksModule
+import com.itis.android.mvpapp.presentation.ui.main.groups.GroupsFragment
+import com.itis.android.mvpapp.presentation.ui.main.groups.GroupsModule
+import com.itis.android.mvpapp.presentation.ui.main.groups.tasks.TasksFragment
+import com.itis.android.mvpapp.presentation.ui.main.groups.tasks.TasksModule
 import com.itis.android.mvpapp.presentation.ui.main.grouptask.GroupTaskFragment
 import com.itis.android.mvpapp.presentation.ui.main.grouptask.GroupTaskModule
 import com.itis.android.mvpapp.presentation.ui.main.loadtask.LoadTaskFragment
@@ -22,8 +22,8 @@ abstract class MainBuilder {
     @ContributesAndroidInjector(modules = [ProfileModule::class])
     abstract fun buildProfileFragment(): ProfileFragment
 
-    @ContributesAndroidInjector(modules = [GroupListModule::class])
-    abstract fun buildGroupListFragment(): GroupListFragment
+    @ContributesAndroidInjector(modules = [GroupsModule::class])
+    abstract fun buildGroupListFragment(): GroupsFragment
 
     @ContributesAndroidInjector(modules = [TasksModule::class])
     abstract fun buildTasksFragment(): TasksFragment

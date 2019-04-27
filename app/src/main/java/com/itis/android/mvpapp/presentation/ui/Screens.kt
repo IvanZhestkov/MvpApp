@@ -1,7 +1,7 @@
 package com.itis.android.mvpapp.presentation.ui
 
 import com.itis.android.mvpapp.presentation.ui.auth.login.LoginFragment
-import com.itis.android.mvpapp.presentation.ui.main.grouplist.GroupListScreen
+import com.itis.android.mvpapp.presentation.ui.main.groups.GroupsScreen
 import com.itis.android.mvpapp.presentation.ui.main.grouptask.GroupTaskScreen
 import com.itis.android.mvpapp.presentation.ui.main.loadtask.LoadTaskScreen
 import com.itis.android.mvpapp.presentation.ui.main.messages.MessagesScreen
@@ -22,7 +22,7 @@ object Screens {
 
     fun getProfileScreen(): ProfileScreen = ProfileScreen()
 
-    fun getGroupListScreen(): GroupListScreen = GroupListScreen()
+    fun getGroupListScreen(): GroupsScreen = GroupsScreen()
 
     fun getLoadTaskScreen(initParams: LoadTaskInitParams): LoadTaskScreen = LoadTaskScreen(initParams)
 

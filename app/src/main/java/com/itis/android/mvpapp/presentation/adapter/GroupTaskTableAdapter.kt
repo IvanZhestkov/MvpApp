@@ -91,9 +91,8 @@ class GroupTaskTableAdapter(val context: Context) : AbstractTableAdapter<GroupTa
     }
 
     override fun onCreateCornerView(): View {
-        return LayoutInflater.from(context).inflate(R.layout.item_group_task_corner, null)
+        return LayoutInflater.from(context).inflate(R.layout.item_group_task_corner, null, false)
     }
-
 
     inner class ColumnHeaderViewHolder(itemView: View) : AbstractViewHolder(itemView) {
 

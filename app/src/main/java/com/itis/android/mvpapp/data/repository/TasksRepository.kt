@@ -8,6 +8,4 @@ import io.reactivex.Single
 
 interface TasksRepository {
     fun getTasks(): Single<List<TaskModel>>
-
-    fun getGroupList(): Observable<Pair<List<TaskModel>, List<TeacherDisciplineItem>>>
 }

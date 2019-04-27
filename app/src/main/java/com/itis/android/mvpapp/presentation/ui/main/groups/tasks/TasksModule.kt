@@ -1,7 +1,7 @@
-package com.itis.android.mvpapp.presentation.ui.main.grouplist.tasks
+package com.itis.android.mvpapp.presentation.ui.main.groups.tasks
 
 import com.itis.android.mvpapp.presentation.adapter.TasksAdapter
-import com.itis.android.mvpapp.presentation.model.TaskModel
+import com.itis.android.mvpapp.presentation.model.GroupModel
 import dagger.Module
 import dagger.Provides
 
@@ -9,7 +9,7 @@ import dagger.Provides
 class TasksModule {
 
     @Provides
-    fun getTasks(fragment: TasksFragment): ArrayList<TaskModel> = fragment.getTasks()
+    fun getGroup(fragment: TasksFragment): GroupModel = fragment.getGroup()
 
 
     @Provides

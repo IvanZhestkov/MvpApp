@@ -8,6 +8,4 @@ import dagger.Provides
 @Module
 class GroupTaskModule {
 
-    @Provides
-    fun provideTableAdapter(context: Context): GroupTaskTableAdapter = GroupTaskTableAdapter(context)
 }

@@ -1,15 +1,14 @@
-package com.itis.android.mvpapp.presentation.ui.main.grouplist
+package com.itis.android.mvpapp.presentation.ui.main.groups
 
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
-import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
 import com.itis.android.mvpapp.presentation.base.BaseView
-import com.itis.android.mvpapp.presentation.model.TaskModel
+import com.itis.android.mvpapp.presentation.model.GroupModel
 
-interface GroupListView: BaseView {
+interface GroupsView: BaseView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun setupViewPager(tasks: List<TaskModel>, disciplines: List<TeacherDisciplineItem>)
+    fun setupViewPager(groups: MutableList<GroupModel>)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showProgress()

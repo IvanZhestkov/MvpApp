@@ -1,30 +1,28 @@
-package com.itis.android.mvpapp.presentation.ui.main.grouplist
+package com.itis.android.mvpapp.presentation.ui.main.groups
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
-import com.itis.android.mvpapp.presentation.model.Group
 import com.itis.android.mvpapp.presentation.adapter.GroupListViewPagerAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
-import com.itis.android.mvpapp.presentation.model.TaskModel
-import kotlinx.android.synthetic.main.dialog_error.view.*
-import kotlinx.android.synthetic.main.fragment_group_list.*
+import com.itis.android.mvpapp.presentation.model.GroupModel
+import kotlinx.android.synthetic.main.fragment_groups.*
 import kotlinx.android.synthetic.main.layout_progress_error.*
 import javax.inject.Inject
 import javax.inject.Provider
 
-class GroupListFragment : BaseFragment(), GroupListView {
+class GroupsFragment : BaseFragment(), GroupsView {
 
     private lateinit var adapter: GroupListViewPagerAdapter
 
     companion object {
-        fun getInstance() = GroupListFragment()
+        fun getInstance() = GroupsFragment()
     }
 
-    override val mainContentLayout = R.layout.fragment_group_list
+    override val mainContentLayout = R.layout.fragment_groups
 
     override val enableBackArrow = false
 
@@ -34,36 +32,29 @@ class GroupListFragment : BaseFragment(), GroupListView {
         get() = null
 
     @InjectPresenter
-    lateinit var presenter: GroupListPresenter
+    lateinit var presenter: GroupsPresenter
 
     @Inject
-    lateinit var presenterProvider: Provider<GroupListPresenter>
+    lateinit var presenterProvider: Provider<GroupsPresenter>
 
     @ProvidePresenter
-    fun providePresenter(): GroupListPresenter = presenterProvider.get()
+    fun providePresenter(): GroupsPresenter = presenterProvider.get()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initActionView()
     }
 
     private fun initActionView() {
         btn_add_task.setOnClickListener {
-            presenter.openLoadTaskScreen(adapter.groups[view_pager_tasks.currentItem])
+            presenter.openLoadTaskScreen(adapter.groups[view_pager_tasks.currentItem].name ?: "")
         }
     }
 
-    override fun setupViewPager(tasks: List<TaskModel>, disciplines: List<TeacherDisciplineItem>) {
+    override fun setupViewPager(groups: MutableList<GroupModel>) {
         adapter = GroupListViewPagerAdapter(childFragmentManager)
-        adapter.groups = disciplines
-                .asSequence()
-                .map { it.group_id ?: "" }
-                .filter { it.isNotEmpty() }
-                .distinct()
-                .sorted()
-                .toMutableList()
-
-        adapter.tasks = tasks.toMutableList()
+        adapter.groups = groups
 
         view_pager_tasks.adapter = adapter
         tabGroup.setupWithViewPager(view_pager_tasks)

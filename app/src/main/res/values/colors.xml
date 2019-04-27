@@ -18,6 +18,7 @@
     <color name="colorToolbarBackground">#F6F6F6</color>
 
     <color name="colorDisable">#bdc4c9</color>
+    <color name="cellSelected">#dbdbdb</color>
 
     <color name="colorConfirm">#73E2A6</color>
     <color name="colorConfirmActivated">#59af81</color>

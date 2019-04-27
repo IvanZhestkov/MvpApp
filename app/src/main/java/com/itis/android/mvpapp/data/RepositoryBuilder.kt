@@ -19,10 +19,6 @@ abstract class RepositoryBuilder {
 
     @Binds
     @Singleton
-    abstract fun bindGroupListRepository(repositoryImpl: GroupListRepositoryImpl): GroupListRepository
-
-    @Binds
-    @Singleton
     abstract fun bindDisciplineRepository(repositoryImpl: TeacherRepositoryImpl): TeacherRepository
 
     @Binds
@@ -32,4 +28,8 @@ abstract class RepositoryBuilder {
     @Binds
     @Singleton
     abstract fun bindDisciplinesRepository(repositoryImpl: DisciplinesRepositoryImpl): DisciplinesRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindGroupsRepository(repositoryImpl: GroupsRepositoryImpl): GroupsRepository
 }

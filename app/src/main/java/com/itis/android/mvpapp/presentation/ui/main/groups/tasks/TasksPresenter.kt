@@ -1,8 +1,8 @@
-package com.itis.android.mvpapp.presentation.ui.main.grouplist.tasks
+package com.itis.android.mvpapp.presentation.ui.main.groups.tasks
 
 import com.arellomobile.mvp.InjectViewState
 import com.itis.android.mvpapp.presentation.base.BasePresenter
-import com.itis.android.mvpapp.presentation.model.TaskModel
+import com.itis.android.mvpapp.presentation.model.GroupModel
 import com.itis.android.mvpapp.router.MainRouter
 import javax.inject.Inject
 
@@ -14,11 +14,16 @@ class TasksPresenter
     lateinit var tasksRouter: MainRouter
 
     @Inject
-    lateinit var tasks: ArrayList<TaskModel>
+    lateinit var group: GroupModel
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.setTasks(tasks)
+
+        if (group.tasks.isEmpty()) {
+            viewState.showEmptyState()
+        } else {
+            viewState.setTasks(group.tasks)
+        }
     }
 
     fun openGroupTaskScreen() {

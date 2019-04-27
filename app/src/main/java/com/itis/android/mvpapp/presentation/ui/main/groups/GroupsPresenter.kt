@@ -1,9 +1,10 @@
-package com.itis.android.mvpapp.presentation.ui.main.grouplist
+package com.itis.android.mvpapp.presentation.ui.main.groups
 
 import com.arellomobile.mvp.InjectViewState
-import com.itis.android.mvpapp.data.repository.GroupListRepository
+import com.itis.android.mvpapp.data.repository.GroupsRepository
 import com.itis.android.mvpapp.data.repository.TasksRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
+import com.itis.android.mvpapp.presentation.model.GroupModelMapper
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationObservableTransformer
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
 import com.itis.android.mvpapp.router.MainRouter
@@ -11,15 +12,14 @@ import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams
 import javax.inject.Inject
 
 @InjectViewState
-class GroupListPresenter
-@Inject constructor() : BasePresenter<GroupListView>() {
+class GroupsPresenter
+@Inject constructor() : BasePresenter<GroupsView>() {
 
     @Inject
     lateinit var groupListRouter: MainRouter
 
     @Inject
-    lateinit var tasksRepository: TasksRepository
-
+    lateinit var groupsRepository: GroupsRepository
 
 
     override fun onFirstViewAttach() {
@@ -32,9 +32,9 @@ class GroupListPresenter
     }
 
     private fun update() {
-        tasksRepository
-                .getGroupList()
-                .compose(PresentationObservableTransformer())
+        groupsRepository
+                .getGroupsSingle()
+                .compose(PresentationSingleTransformer())
                 .doOnSubscribe {
                     viewState.showProgress()
                     viewState.hideRetry()
@@ -43,7 +43,7 @@ class GroupListPresenter
                 .doAfterTerminate { viewState.hideProgress() }
                 .subscribe({
                     viewState.showTabs()
-                    viewState.setupViewPager(it.first, it.second)
+                    viewState.setupViewPager(it.toMutableList())
                 }, {
                     it.printStackTrace()
                 }).disposeWhenDestroy()

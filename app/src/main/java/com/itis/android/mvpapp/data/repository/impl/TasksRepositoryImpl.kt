@@ -27,16 +27,6 @@ class TasksRepositoryImpl @Inject constructor() : TasksRepository {
     @Inject
     lateinit var disciplinesRepository: DisciplinesRepository
 
-    override fun getGroupList(): Observable<Pair<List<TaskModel>, List<TeacherDisciplineItem>>> {
-        return Single.zip(
-                getTasks(),
-                disciplinesRepository.getDisciplinesSingle(),
-                BiFunction<List<TaskModel>, List<TeacherDisciplineItem>, Pair<List<TaskModel>, List<TeacherDisciplineItem>>>
-                { t1, t2 ->
-                    Pair(t1, t2)
-                }).toObservable()
-    }
-
     override fun getTasks(): Single<List<TaskModel>> {
         val ref = firebaseDB.getReference("tasks")
 
@@ -75,7 +65,6 @@ class TasksRepositoryImpl @Inject constructor() : TasksRepository {
                             subject.onNext(Pair(it.message ?: "error", emptyList()))
                             subject.onComplete()
                         })
-
             }
         })
 
