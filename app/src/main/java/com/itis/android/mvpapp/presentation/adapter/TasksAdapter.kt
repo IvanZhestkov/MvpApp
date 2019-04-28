@@ -17,7 +17,7 @@ class TasksAdapter : RecyclerView.Adapter<TasksAdapter.TasksViewHolder>() {
             notifyDataSetChanged()
         }
 
-    var onItemClickListener: ((Int) -> Unit)? = null
+    var onItemClickListener: ((TaskModel) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false)
@@ -42,7 +42,7 @@ class TasksAdapter : RecyclerView.Adapter<TasksAdapter.TasksViewHolder>() {
             tv_task_description.text = item.description
 
             itemView.setOnClickListener {
-                onItemClickListener?.invoke(adapterPosition)
+                onItemClickListener?.invoke(item)
             }
         }
     }

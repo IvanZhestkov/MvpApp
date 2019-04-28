@@ -1,7 +1,10 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.grouptask
 
 import com.arellomobile.mvp.InjectViewState
+import com.itis.android.mvpapp.data.repository.TaskSolutionRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
+import com.itis.android.mvpapp.presentation.model.TaskModel
+import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
 import com.itis.android.mvpapp.router.MainRouter
 import javax.inject.Inject
 
@@ -12,16 +15,43 @@ class GroupTaskPresenter
     @Inject
     lateinit var groupTaskRouter: MainRouter
 
+    @Inject
+    lateinit var taskSolutionRepository: TaskSolutionRepository
+
+    private var task: TaskModel? = null
+
+    fun init(task: TaskModel) {
+        this.task = task
+    }
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         loadDataForTable()
     }
 
-    private fun loadDataForTable() {
-        viewState.showTable()
+    fun onRetry() {
+        loadDataForTable()
     }
 
     fun openTaskSolutionScreen() {
         groupTaskRouter.openTaskSolutionScreen()
+    }
+
+    private fun loadDataForTable() {
+        taskSolutionRepository
+                .getTaskSolutions(task?.disciplineId, task?.taskId)
+                .compose(PresentationSingleTransformer())
+                .doOnSubscribe {
+                    viewState.showProgress()
+                    viewState.hideRetry()
+                }
+                .doAfterTerminate {
+                    viewState.hideProgress()
+                }
+                .subscribe({
+                    viewState.showTable(it)
+                }, {
+                    viewState.showRetry("Ошибка")
+                }).disposeWhenDestroy()
     }
 }

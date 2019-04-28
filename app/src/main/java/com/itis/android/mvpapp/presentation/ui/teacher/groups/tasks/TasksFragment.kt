@@ -64,9 +64,8 @@ class TasksFragment : BaseFragment(), TasksView {
     }
 
     private fun initList() {
-        adapter.onItemClickListener = { id ->
-            baseActivity.toast("TaskItem position: $id", Toast.LENGTH_SHORT)
-            presenter.openGroupTaskScreen()
+        adapter.onItemClickListener = { task ->
+            presenter.openGroupTaskScreen(task)
         }
 
         rv_tasks.adapter = adapter

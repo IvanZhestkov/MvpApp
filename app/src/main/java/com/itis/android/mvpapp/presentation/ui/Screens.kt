@@ -7,6 +7,7 @@ import com.itis.android.mvpapp.presentation.ui.teacher.loadtask.LoadTaskScreen
 import com.itis.android.mvpapp.presentation.ui.teacher.messages.MessagesScreen
 import com.itis.android.mvpapp.presentation.ui.teacher.profile.ProfileScreen
 import com.itis.android.mvpapp.presentation.ui.teacher.tasksolution.TaskSolutionScreen
+import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
 import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
@@ -26,7 +27,7 @@ object Screens {
 
     fun getLoadTaskScreen(initParams: LoadTaskInitParams): LoadTaskScreen = LoadTaskScreen(initParams)
 
-    fun getGroupTaskScreen(): GroupTaskScreen = GroupTaskScreen()
+    fun getGroupTaskScreen(initParams: GroupTaskInitParams): GroupTaskScreen = GroupTaskScreen(initParams)
 
     fun getTaskSolutionScreen(): TaskSolutionScreen = TaskSolutionScreen()
 
