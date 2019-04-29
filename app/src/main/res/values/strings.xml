@@ -95,4 +95,6 @@
     <string name="Add_file">Добавить файл</string>
     <string name="downloading">Загрузка</string>
 
+    <string name="Tasks_list">Список заданий</string>
+
 </resources>
