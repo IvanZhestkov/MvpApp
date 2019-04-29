@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_send_task_student"
+        style="@style/AccentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="84dp"
+        android:layout_marginBottom="@dimen/d16"
+        android:text="@string/Add_file" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/d32"
+        android:layout_marginTop="84dp"
+        android:text="@string/task_description_title"
+        android:textAppearance="@style/Text.Medium.Title"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edt_description_task"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="@dimen/d16"
+        android:layout_marginTop="@dimen/d8"
+        android:layout_marginEnd="@dimen/d16"
+        android:background="@drawable/background_comment_edit_text"
+        android:gravity="top"
+        android:hint="@string/hint_enter_description"
+        android:padding="8dp"
+        android:textAppearance="@style/Text.Medium.Thin" />
+
+    <Button
+        android:id="@+id/btn_send_task"
+        style="@style/AccentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/d16"
+        android:layout_marginBottom="@dimen/d16"
+        android:text="@string/send" />
+
+</LinearLayout>

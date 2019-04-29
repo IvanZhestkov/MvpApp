@@ -90,4 +90,9 @@
     <string name="download_error">Ошибка</string>
     <string name="repeat">Повторить</string>
     <string name="no_available_task">Нет доступных заданий</string>
+
+
+    <string name="Add_file">Добавить файл</string>
+    <string name="downloading">Загрузка</string>
+
 </resources>
