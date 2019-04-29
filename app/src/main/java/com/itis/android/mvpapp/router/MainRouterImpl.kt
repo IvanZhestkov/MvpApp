@@ -6,6 +6,10 @@ import ru.terrakok.cicerone.Router
 
 class MainRouterImpl : MainRouter, Router() {
 
+    override fun openTaskListScreen() {
+        newRootScreen(Screens.getTasksListScreen())
+    }
+
     override fun openProfileScreen() {
         newRootScreen(Screens.getProfileScreen())
     }
