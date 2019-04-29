@@ -12,4 +12,7 @@ interface LoginView : BaseView {
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun openMainScreen()
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun openStudentMainScreen()
 }
