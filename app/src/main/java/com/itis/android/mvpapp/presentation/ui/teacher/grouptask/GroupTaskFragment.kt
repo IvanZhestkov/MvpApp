@@ -81,40 +81,18 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
 
     override fun showTable(solutions: List<TaskSolutionModel>) {
         val columnItems = mutableListOf(
-                GroupTaskColumnHeader("Решение"),
-                GroupTaskColumnHeader("Оценка")
+            GroupTaskColumnHeader("Решение"),
+            GroupTaskColumnHeader("Оценка")
         )
 
-        val rowItems: MutableList<GroupTaskRowHeader> = mutableListOf(
-                /* GroupTaskRowHeader("Алекбаев Азат"),
-                 GroupTaskRowHeader("Багаутдинов Роман"),
-                 GroupTaskRowHeader("Бедрин Олег"),
-                 GroupTaskRowHeader("Валиев Айзат"),
-                 GroupTaskRowHeader("Габитова Елизавета"),
-                 GroupTaskRowHeader("Гаврилов Максим"),
-                 GroupTaskRowHeader("Гаязов Дамир"),
-                 GroupTaskRowHeader("Жестков Иван"),
-                 GroupTaskRowHeader("Дроздов Антон"),
-                 GroupTaskRowHeader("Гафурова Алина")*/
-        )
+        val rowItems: MutableList<GroupTaskRowHeader> = mutableListOf()
+
+        val cellItems: MutableList<List<GroupTaskCell>> = mutableListOf()
 
         solutions.forEach { solution ->
             rowItems.add(GroupTaskRowHeader("${solution.user?.last_name} ${solution.user?.first_name}"))
+            cellItems.add(mutableListOf(GroupTaskCell("a"), GroupTaskCell("a")))
         }
-
-        val cellItems = mutableListOf(
-                mutableListOf(GroupTaskCell("a"), GroupTaskCell("a")),
-                mutableListOf(GroupTaskCell("a"), GroupTaskCell("a"))
-                /*mutableListOf(GroupTaskCell("as"), GroupTaskCell("a")),
-                mutableListOf(GroupTaskCell("a"), GroupTaskCell("a")),
-                mutableListOf(GroupTaskCell("a"), GroupTaskCell("a")),
-                mutableListOf(GroupTaskCell("a"), GroupTaskCell("a")),
-                mutableListOf(GroupTaskCell("a"), GroupTaskCell("a")),
-                mutableListOf(GroupTaskCell("a"), GroupTaskCell("a")),
-                mutableListOf(GroupTaskCell("a"), GroupTaskCell("a")),
-                mutableListOf(GroupTaskCell("a"), GroupTaskCell("a"))*/
-        )
-
 
         adapter?.setAllItems(columnItems, rowItems, cellItems)
     }

@@ -59,7 +59,7 @@ class TaskSolutionRepositoryImpl @Inject constructor() : TaskSolutionRepository 
                             userRepository
                                     .getUserById(solution.userId ?: "")
                                     .toObservable()
-                                    .map { TaskSolutionModel(it, solutions.filter { it.userId == solution.userId }) }
+                                    .map { TaskSolutionModel(it, solutions.filter { it.userId == solution.userId }[0]) }
                         }.toList()
                         .subscribe({
                             subject.onNext(Pair("", it))

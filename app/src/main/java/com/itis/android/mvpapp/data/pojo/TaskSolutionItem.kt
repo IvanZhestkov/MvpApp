@@ -1,5 +1,8 @@
 package com.itis.android.mvpapp.data.pojo
 
+import android.os.Parcel
+import android.os.Parcelable
+
 data class TaskSolutionItem(
     var checking_date: String? = null,
     var commentary: String? = null,
@@ -10,4 +13,42 @@ data class TaskSolutionItem(
     var taskId: String? = null,
     var disciplineId: String? = null,
     var userId: String? = null
-)
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readInt(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(checking_date)
+        parcel.writeString(commentary)
+        parcel.writeInt(score)
+        parcel.writeString(solution_file_link)
+        parcel.writeString(status)
+        parcel.writeString(uploading_date)
+        parcel.writeString(taskId)
+        parcel.writeString(disciplineId)
+        parcel.writeString(userId)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<TaskSolutionItem> {
+        override fun createFromParcel(parcel: Parcel): TaskSolutionItem {
+            return TaskSolutionItem(parcel)
+        }
+
+        override fun newArray(size: Int): Array<TaskSolutionItem?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
