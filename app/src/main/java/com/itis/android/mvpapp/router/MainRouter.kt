@@ -2,6 +2,7 @@ package com.itis.android.mvpapp.router
 
 import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
 import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams
+import com.itis.android.mvpapp.router.initparams.TaskSolutionInitParams
 
 interface MainRouter {
     fun openProfileScreen()
@@ -12,7 +13,7 @@ interface MainRouter {
 
     fun openGroupTaskScreen(groupTaskInitParams: GroupTaskInitParams)
 
-    fun openTaskSolutionScreen()
+    fun openTaskSolutionScreen(taskSolutionInitParams: TaskSolutionInitParams)
 
     fun openMessagesScreen()
 

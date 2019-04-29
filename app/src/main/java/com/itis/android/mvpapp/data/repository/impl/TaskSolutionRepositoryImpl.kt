@@ -1,18 +1,12 @@
 package com.itis.android.mvpapp.data.repository.impl
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.itis.android.mvpapp.data.pojo.TaskItem
 import com.itis.android.mvpapp.data.pojo.TaskSolutionItem
-import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
 import com.itis.android.mvpapp.data.repository.*
-import com.itis.android.mvpapp.presentation.model.TaskModel
-import com.itis.android.mvpapp.presentation.model.TaskModelMapper
-import com.itis.android.mvpapp.presentation.model.TaskSolutionModel
+import com.itis.android.mvpapp.presentation.model.UserSolutionModel
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.functions.BiFunction
 import io.reactivex.subjects.AsyncSubject
 import java.lang.Exception
 import javax.inject.Inject
@@ -28,10 +22,10 @@ class TaskSolutionRepositoryImpl @Inject constructor() : TaskSolutionRepository 
     @Inject
     lateinit var userRepository: UserRepository
 
-    override fun getTaskSolutions(disciplineId: String?, taskId: String?): Single<List<TaskSolutionModel>> {
+    override fun getTaskSolutions(disciplineId: String?, taskId: String?): Single<List<UserSolutionModel>> {
         val ref = disciplineId?.let { firebaseDB.getReference("solutions").child(it) }
 
-        val subject = AsyncSubject.create<Pair<String, List<TaskSolutionModel>>>()
+        val subject = AsyncSubject.create<Pair<String, List<UserSolutionModel>>>()
         val solutions: MutableList<TaskSolutionItem> = mutableListOf()
 
         ref?.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -59,7 +53,7 @@ class TaskSolutionRepositoryImpl @Inject constructor() : TaskSolutionRepository 
                             userRepository
                                     .getUserById(solution.userId ?: "")
                                     .toObservable()
-                                    .map { TaskSolutionModel(it, solutions.filter { it.userId == solution.userId }[0]) }
+                                    .map { UserSolutionModel(it, solutions.filter { it.userId == solution.userId }[0]) }
                         }.toList()
                         .subscribe({
                             subject.onNext(Pair("", it))

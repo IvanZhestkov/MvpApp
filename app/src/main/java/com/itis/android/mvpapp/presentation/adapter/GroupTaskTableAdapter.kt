@@ -104,7 +104,8 @@ class GroupTaskTableAdapter(val context: Context) : AbstractTableAdapter<GroupTa
     inner class RowHeaderViewHolder(itemView: View) : AbstractViewHolder(itemView) {
 
         fun bindView(item: GroupTaskRowHeader?) = with(itemView) {
-            header_row_text.text = item?.text
+            val user = item?.solution?.user
+            header_row_text.text = "${user?.last_name} ${user?.first_name}"
         }
     }
 
@@ -116,7 +117,14 @@ class GroupTaskTableAdapter(val context: Context) : AbstractTableAdapter<GroupTa
             cellItem = item
             val rand = (Math.random() * 2).toInt()
 
-            if (rand == 1) {
+            /*if (rand == 1) {
+                cell_answer_text.text = context.getString(R.string.task_status_show)
+                cell_answer_text.setTextStyle(context, R.style.Text_Small_Link)
+            } else {
+                cell_answer_text.text = context.getString(R.string.task_status_now_downloaded)
+                cell_answer_text.setTextStyle(context, R.style.Text_Small_Disable)
+            }*/
+            if (cellItem?.solution != null) {
                 cell_answer_text.text = context.getString(R.string.task_status_show)
                 cell_answer_text.setTextStyle(context, R.style.Text_Small_Link)
             } else {

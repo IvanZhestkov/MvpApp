@@ -12,16 +12,19 @@ import com.itis.android.mvpapp.presentation.model.table.grouptask.GroupTaskRowHe
 import com.itis.android.mvpapp.presentation.adapter.GroupTaskTableAdapter
 import com.itis.android.mvpapp.presentation.adapter.tableClickListener.TableClickListenerAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
-import com.itis.android.mvpapp.presentation.model.TaskSolutionModel
+import com.itis.android.mvpapp.presentation.model.UserSolutionModel
 import com.itis.android.mvpapp.presentation.utils.extensions.extractInitParams
 import com.itis.android.mvpapp.presentation.utils.extensions.putInitParams
 import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
+import com.itis.android.mvpapp.router.initparams.TaskSolutionInitParams
 import kotlinx.android.synthetic.main.fragment_group_task.*
 import kotlinx.android.synthetic.main.layout_progress_error.*
 import javax.inject.Inject
 import javax.inject.Provider
 
 class GroupTaskFragment : BaseFragment(), GroupTaskView {
+
+    private lateinit var userSolutions: List<UserSolutionModel>
 
     companion object {
         fun getInstance(initParams: GroupTaskInitParams): GroupTaskFragment {
@@ -79,7 +82,9 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
         progress_error.visibility = View.GONE
     }
 
-    override fun showTable(solutions: List<TaskSolutionModel>) {
+    override fun showTable(solutions: List<UserSolutionModel>) {
+        userSolutions = solutions
+
         val columnItems = mutableListOf(
             GroupTaskColumnHeader("Решение"),
             GroupTaskColumnHeader("Оценка")
@@ -90,8 +95,8 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
         val cellItems: MutableList<List<GroupTaskCell>> = mutableListOf()
 
         solutions.forEach { solution ->
-            rowItems.add(GroupTaskRowHeader("${solution.user?.last_name} ${solution.user?.first_name}"))
-            cellItems.add(mutableListOf(GroupTaskCell("a"), GroupTaskCell("a")))
+            rowItems.add(GroupTaskRowHeader(solution))
+            cellItems.add(mutableListOf(GroupTaskCell(solution.solution), GroupTaskCell(solution.solution)))
         }
 
         adapter?.setAllItems(columnItems, rowItems, cellItems)
@@ -105,7 +110,7 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
                 when (column) {
                     GroupTaskTableAdapter.COLUMN_ANSWER -> {
                         val item = (cellView as GroupTaskTableAdapter.CellAnswerViewHolder).cellItem
-                        presenter.openTaskSolutionScreen()
+                        presenter.openTaskSolutionScreen(userSolutions[row])
                     }
                 }
             }

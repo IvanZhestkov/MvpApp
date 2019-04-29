@@ -3,6 +3,7 @@ package com.itis.android.mvpapp.router
 import com.itis.android.mvpapp.presentation.ui.Screens
 import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
 import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams
+import com.itis.android.mvpapp.router.initparams.TaskSolutionInitParams
 import ru.terrakok.cicerone.Router
 
 class MainRouterImpl : MainRouter, Router() {
@@ -27,8 +28,8 @@ class MainRouterImpl : MainRouter, Router() {
         navigateTo(Screens.getGroupTaskScreen(groupTaskInitParams))
     }
 
-    override fun openTaskSolutionScreen() {
-        navigateTo(Screens.getTaskSolutionScreen())
+    override fun openTaskSolutionScreen(taskSolutionInitParams: TaskSolutionInitParams) {
+        navigateTo(Screens.getTaskSolutionScreen(taskSolutionInitParams))
     }
 
     override fun goBack() {

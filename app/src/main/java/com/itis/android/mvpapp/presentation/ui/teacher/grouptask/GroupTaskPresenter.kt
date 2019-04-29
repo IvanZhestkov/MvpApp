@@ -4,8 +4,10 @@ import com.arellomobile.mvp.InjectViewState
 import com.itis.android.mvpapp.data.repository.TaskSolutionRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.TaskModel
+import com.itis.android.mvpapp.presentation.model.UserSolutionModel
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
 import com.itis.android.mvpapp.router.MainRouter
+import com.itis.android.mvpapp.router.initparams.TaskSolutionInitParams
 import javax.inject.Inject
 
 @InjectViewState
@@ -33,25 +35,25 @@ class GroupTaskPresenter
         loadDataForTable()
     }
 
-    fun openTaskSolutionScreen() {
-        groupTaskRouter.openTaskSolutionScreen()
+    fun openTaskSolutionScreen(userSolution: UserSolutionModel) {
+        groupTaskRouter.openTaskSolutionScreen(TaskSolutionInitParams(userSolution))
     }
 
     private fun loadDataForTable() {
         taskSolutionRepository
-                .getTaskSolutions(task?.disciplineId, task?.taskId)
-                .compose(PresentationSingleTransformer())
-                .doOnSubscribe {
-                    viewState.showProgress()
-                    viewState.hideRetry()
-                }
-                .doAfterTerminate {
-                    viewState.hideProgress()
-                }
-                .subscribe({
-                    viewState.showTable(it)
-                }, {
-                    viewState.showRetry("Ошибка")
-                }).disposeWhenDestroy()
+            .getTaskSolutions(task?.disciplineId, task?.taskId)
+            .compose(PresentationSingleTransformer())
+            .doOnSubscribe {
+                viewState.showProgress()
+                viewState.hideRetry()
+            }
+            .doAfterTerminate {
+                viewState.hideProgress()
+            }
+            .subscribe({
+                viewState.showTable(it)
+            }, {
+                viewState.showRetry("Ошибка")
+            }).disposeWhenDestroy()
     }
 }
