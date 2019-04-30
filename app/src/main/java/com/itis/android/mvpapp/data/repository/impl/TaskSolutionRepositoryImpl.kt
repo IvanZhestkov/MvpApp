@@ -1,7 +1,9 @@
 package com.itis.android.mvpapp.data.repository.impl
 
+import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.itis.android.mvpapp.data.network.isOnline
 import com.itis.android.mvpapp.data.pojo.TaskSolutionItem
 import com.itis.android.mvpapp.data.repository.*
 import com.itis.android.mvpapp.presentation.model.UserSolutionModel
@@ -20,9 +22,15 @@ class TaskSolutionRepositoryImpl @Inject constructor() : TaskSolutionRepository 
     lateinit var firebaseDB: FirebaseDatabase
 
     @Inject
+    lateinit var context: Context
+
+    @Inject
     lateinit var userRepository: UserRepository
 
-    override fun getTaskSolutions(disciplineId: String?, taskId: String?): Single<List<UserSolutionModel>> {
+    @Inject
+    lateinit var studentsRepository: StudentsRepository
+
+    override fun getTaskSolutions(disciplineId: String?, taskId: String?, groupId: String?): Single<List<UserSolutionModel>> {
         val ref = disciplineId?.let { firebaseDB.getReference("solutions").child(it) }
 
         val subject = AsyncSubject.create<Pair<String, List<UserSolutionModel>>>()
@@ -47,28 +55,41 @@ class TaskSolutionRepositoryImpl @Inject constructor() : TaskSolutionRepository 
                     }
                 }
 
-                val d = Observable
-                        .fromIterable(solutions)
-                        .flatMap { solution ->
-                            userRepository
-                                    .getUserById(solution.userId ?: "")
-                                    .toObservable()
-                                    .map { UserSolutionModel(it, solutions.filter { it.userId == solution.userId }[0]) }
-                        }.toList()
-                        .subscribe({
-                            subject.onNext(Pair("", it))
-                            subject.onComplete()
-                        }, {
-                            subject.onNext(Pair(it.message ?: "error", emptyList()))
-                            subject.onComplete()
-                        })
+                var d = groupId?.let {
+                    studentsRepository
+                            .getStudentsByGroupId(it)
+                            .toObservable()
+                            .flatMap { Observable.fromIterable(it) }
+                            .flatMap { studentId ->
+                                userRepository
+                                        .getUserById(studentId)
+                                        .toObservable()
+                                        .map { user ->
+                                            UserSolutionModel(user,
+                                                    solutions.filter { it.userId == studentId }.getOrNull(0))
+                                        }
+                            }.toList()
+                            .subscribe({
+                                subject.onNext(Pair("", it))
+                                subject.onComplete()
+                            }, {
+                                subject.onNext(Pair(it.message ?: "error", emptyList()))
+                                subject.onComplete()
+                            })
+                }
             }
         })
 
-        return subject.singleOrError().flatMap { (errorMessage, solutions) ->
-            when {
-                errorMessage.isEmpty() -> Single.just(solutions)
-                else -> Single.error(Exception())
+        return Single.just(isOnline(context)).flatMap { isConnected ->
+            if (isConnected) {
+                subject.singleOrError().flatMap { (errorMessage, solutions) ->
+                    when {
+                        errorMessage.isEmpty() -> Single.just(solutions)
+                        else -> Single.error(Exception())
+                    }
+                }
+            } else {
+                Single.error(Exception())
             }
         }
     }

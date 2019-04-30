@@ -5,5 +5,5 @@ import java.io.Serializable
 
 data class UserSolutionModel(
         var user: User? = null,
-        var solution: TaskSolutionItem
+        var solution: TaskSolutionItem? = null
 ): Serializable

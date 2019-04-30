@@ -36,4 +36,8 @@ abstract class RepositoryBuilder {
     @Binds
     @Singleton
     abstract fun bindUserRepository(repositoryImpl: UserRepositoryImpl): UserRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindStudentsRepository(repositoryImpl: StudentsRepositoryImpl): StudentsRepository
 }

@@ -86,8 +86,8 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
         userSolutions = solutions
 
         val columnItems = mutableListOf(
-            GroupTaskColumnHeader("Решение"),
-            GroupTaskColumnHeader("Оценка")
+                GroupTaskColumnHeader("Решение"),
+                GroupTaskColumnHeader("Оценка")
         )
 
         val rowItems: MutableList<GroupTaskRowHeader> = mutableListOf()
@@ -110,7 +110,9 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
                 when (column) {
                     GroupTaskTableAdapter.COLUMN_ANSWER -> {
                         val item = (cellView as GroupTaskTableAdapter.CellAnswerViewHolder).cellItem
-                        presenter.openTaskSolutionScreen(userSolutions[row])
+                        if (item?.solution != null) {
+                            presenter.openTaskSolutionScreen(userSolutions[row])
+                        }
                     }
                 }
             }

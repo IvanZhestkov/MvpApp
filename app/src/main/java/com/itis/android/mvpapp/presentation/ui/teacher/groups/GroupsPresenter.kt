@@ -42,7 +42,7 @@ class GroupsPresenter
                     viewState.showTabs()
                     viewState.setupViewPager(it.toMutableList())
                 }, {
-                    it.printStackTrace()
+                    viewState.showRetry("Ошибка")
                 }).disposeWhenDestroy()
     }
 

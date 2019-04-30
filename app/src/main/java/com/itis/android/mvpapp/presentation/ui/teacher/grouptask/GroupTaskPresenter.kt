@@ -41,7 +41,7 @@ class GroupTaskPresenter
 
     private fun loadDataForTable() {
         taskSolutionRepository
-            .getTaskSolutions(task?.disciplineId, task?.taskId)
+            .getTaskSolutions(task?.disciplineId, task?.taskId, task?.groupNumber)
             .compose(PresentationSingleTransformer())
             .doOnSubscribe {
                 viewState.showProgress()
