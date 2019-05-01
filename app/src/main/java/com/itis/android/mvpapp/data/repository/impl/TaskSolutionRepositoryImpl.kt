@@ -30,7 +30,11 @@ class TaskSolutionRepositoryImpl @Inject constructor() : TaskSolutionRepository 
     @Inject
     lateinit var studentsRepository: StudentsRepository
 
-    override fun getTaskSolutions(disciplineId: String?, taskId: String?, groupId: String?): Single<List<UserSolutionModel>> {
+    override fun getTaskSolutions(
+            disciplineId: String?,
+            taskId: String?,
+            groupId: String?
+    ): Single<List<UserSolutionModel>> {
         val ref = disciplineId?.let { firebaseDB.getReference("solutions").child(it) }
 
         val subject = AsyncSubject.create<Pair<String, List<UserSolutionModel>>>()
@@ -47,6 +51,7 @@ class TaskSolutionRepositoryImpl @Inject constructor() : TaskSolutionRepository 
                     userSnapshot.children.filter { it.key == taskId }.forEach { taskSnapshot ->
                         taskSnapshot.children.mapNotNullTo(solutions) { solutionSnapshot ->
                             solutionSnapshot.getValue<TaskSolutionItem>(TaskSolutionItem::class.java).also {
+                                it?.id = solutionSnapshot.key
                                 it?.taskId = taskSnapshot.key
                                 it?.disciplineId = snapshot.key
                                 it?.userId = userSnapshot.key
@@ -66,7 +71,8 @@ class TaskSolutionRepositoryImpl @Inject constructor() : TaskSolutionRepository 
                                         .toObservable()
                                         .map { user ->
                                             UserSolutionModel(user,
-                                                    solutions.filter { it.userId == studentId }.getOrNull(0))
+                                                    solutions.filter { it.userId == studentId }.getOrNull(0)
+                                            )
                                         }
                             }.toList()
                             .subscribe({
@@ -92,5 +98,15 @@ class TaskSolutionRepositoryImpl @Inject constructor() : TaskSolutionRepository 
                 Single.error(Exception())
             }
         }
+    }
+
+    override fun updateSolutionStatus(solution: TaskSolutionItem, status: String) {
+        val disciplineId = solution.disciplineId ?: ""
+        val userId = solution.userId ?: ""
+        val taskId = solution.taskId ?: ""
+        val solutionId = solution.id ?: ""
+
+        val ref = firebaseDB.getReference("solutions")
+        ref.child(disciplineId).child(userId).child(taskId).child(solutionId).child("status").setValue(status)
     }
 }

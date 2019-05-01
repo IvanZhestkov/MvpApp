@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class TaskSolutionItem(
+    var id: String? = null,
     var checking_date: String? = null,
     var commentary: String? = null,
     var score: Int = 0,
@@ -17,6 +18,7 @@ data class TaskSolutionItem(
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
+        parcel.readString(),
         parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
@@ -27,6 +29,7 @@ data class TaskSolutionItem(
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
         parcel.writeString(checking_date)
         parcel.writeString(commentary)
         parcel.writeInt(score)

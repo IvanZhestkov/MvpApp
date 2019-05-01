@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_task_solution.*
 import javax.inject.Inject
 import javax.inject.Provider
 
-class TaskSolutionFragment: BaseFragment(), TaskSolutionView {
+class TaskSolutionFragment : BaseFragment(), TaskSolutionView, View.OnClickListener {
 
     companion object {
         fun getInstance(initParams: TaskSolutionInitParams): TaskSolutionFragment {
@@ -46,7 +46,28 @@ class TaskSolutionFragment: BaseFragment(), TaskSolutionView {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initActionView()
+    }
+
     override fun showStudentName(user: User) {
         tv_task_solution_stud.text = "${user.last_name} ${user.first_name}"
+    }
+
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.btn_task_solution_confirm -> {
+                presenter.updateSolutionStatus("accepted")
+            }
+            R.id.btn_task_solution_reject -> {
+                presenter.updateSolutionStatus("rejected")
+            }
+        }
+    }
+
+    private fun initActionView() {
+        btn_task_solution_confirm.setOnClickListener(this)
+        btn_task_solution_reject.setOnClickListener(this)
     }
 }
