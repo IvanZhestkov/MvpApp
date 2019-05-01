@@ -36,10 +36,12 @@ class GroupsPresenter
                     viewState.showProgress()
                     viewState.hideRetry()
                     viewState.hideTabs()
+                    viewState.hideFAB()
                 }
                 .doAfterTerminate { viewState.hideProgress() }
                 .subscribe({
                     viewState.showTabs()
+                    viewState.showFAB()
                     viewState.setupViewPager(it.toMutableList())
                 }, {
                     viewState.showRetry("Ошибка")

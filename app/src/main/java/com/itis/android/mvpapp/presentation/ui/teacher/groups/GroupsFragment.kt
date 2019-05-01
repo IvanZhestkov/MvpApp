@@ -85,4 +85,12 @@ class GroupsFragment : BaseFragment(), GroupsView {
     override fun hideTabs() {
         tabGroup.visibility = View.GONE
     }
+
+    override fun showFAB() {
+        btn_add_task.show()
+    }
+
+    override fun hideFAB() {
+        btn_add_task.hide()
+    }
 }
