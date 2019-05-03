@@ -18,13 +18,7 @@ class LoginPresenter
 @Inject constructor() : BasePresenter<LoginView>() {
 
     @Inject
-    lateinit var loginRouter: AuthRouter
-
-    @Inject
     lateinit var loginRepository: LoginRepository
-
-    @Inject
-    lateinit var preferences: CredentialStorage
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
