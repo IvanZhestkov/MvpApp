@@ -6,8 +6,8 @@ import com.itis.android.mvpapp.presentation.ui.teacher.groups.tasks.TasksFragmen
 import com.itis.android.mvpapp.presentation.ui.teacher.groups.tasks.TasksModule
 import com.itis.android.mvpapp.presentation.ui.teacher.grouptask.GroupTaskFragment
 import com.itis.android.mvpapp.presentation.ui.teacher.grouptask.GroupTaskModule
-import com.itis.android.mvpapp.presentation.ui.teacher.loadtask.LoadTaskFragment
-import com.itis.android.mvpapp.presentation.ui.teacher.loadtask.LoadTaskModule
+import com.itis.android.mvpapp.presentation.ui.teacher.newtask.NewTaskFragment
+import com.itis.android.mvpapp.presentation.ui.teacher.newtask.NewTaskModule
 import com.itis.android.mvpapp.presentation.ui.teacher.messages.MessagesFragment
 import com.itis.android.mvpapp.presentation.ui.teacher.profile.ProfileFragment
 import com.itis.android.mvpapp.presentation.ui.teacher.profile.ProfileModule
@@ -28,8 +28,8 @@ abstract class TeacherBuilder {
     @ContributesAndroidInjector(modules = [TasksModule::class])
     abstract fun buildTasksFragment(): TasksFragment
 
-    @ContributesAndroidInjector(modules = [LoadTaskModule::class])
-    abstract fun buildLoadTaskFragment(): LoadTaskFragment
+    @ContributesAndroidInjector(modules = [NewTaskModule::class])
+    abstract fun buildNewTaskFragment(): NewTaskFragment
 
     @ContributesAndroidInjector(modules = [GroupTaskModule::class])
     abstract fun buildGroupTaskFragment(): GroupTaskFragment

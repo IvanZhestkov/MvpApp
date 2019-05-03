@@ -7,7 +7,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.itis.android.mvpapp.data.network.isOnline
-import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.TeacherDisciplineItem
 import com.itis.android.mvpapp.data.repository.DisciplinesRepository
 import io.reactivex.Single
 import io.reactivex.subjects.AsyncSubject

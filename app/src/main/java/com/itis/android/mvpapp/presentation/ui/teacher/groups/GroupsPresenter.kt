@@ -5,7 +5,7 @@ import com.itis.android.mvpapp.data.repository.GroupsRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
 import com.itis.android.mvpapp.router.MainRouter
-import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams
+import com.itis.android.mvpapp.router.initparams.NewTaskInitParams
 import javax.inject.Inject
 
 @InjectViewState
@@ -25,7 +25,7 @@ class GroupsPresenter
     }
 
     fun openLoadTaskScreen(groupId: String) {
-        groupListRouter.openLoadTaskScreen(LoadTaskInitParams(groupId))
+        groupListRouter.openNewTaskScreen(NewTaskInitParams(groupId))
     }
 
     private fun update() {

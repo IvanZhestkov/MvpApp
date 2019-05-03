@@ -1,4 +1,4 @@
-package com.itis.android.mvpapp.presentation.ui.teacher.loadtask
+package com.itis.android.mvpapp.presentation.ui.teacher.newtask
 
 import android.Manifest
 import android.content.Intent
@@ -11,7 +11,7 @@ import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import javax.inject.Inject
 import javax.inject.Provider
-import kotlinx.android.synthetic.main.fragment_load_task.*
+import kotlinx.android.synthetic.main.fragment_new_task.*
 import com.itis.android.mvpapp.presentation.utils.extensions.toast
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.AfterPermissionGranted
@@ -19,9 +19,9 @@ import pub.devrel.easypermissions.AppSettingsDialog
 import android.app.Activity.RESULT_OK
 import com.itis.android.mvpapp.presentation.utils.extensions.extractInitParams
 import com.itis.android.mvpapp.presentation.utils.extensions.putInitParams
-import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams
+import com.itis.android.mvpapp.router.initparams.NewTaskInitParams
 
-class LoadTaskFragment : BaseFragment(), LoadTaskView, EasyPermissions.PermissionCallbacks {
+class NewTaskFragment : BaseFragment(), NewTaskView, EasyPermissions.PermissionCallbacks {
 
     private var docPaths: ArrayList<String> = ArrayList()
 
@@ -29,32 +29,32 @@ class LoadTaskFragment : BaseFragment(), LoadTaskView, EasyPermissions.Permissio
         const val RC_FILE_PICKER_PERM = 321
         const val MAX_ATTACHMENT_COUNT = 10
 
-        fun getInstance(initParams: LoadTaskInitParams): LoadTaskFragment {
-            return LoadTaskFragment().also {
+        fun getInstance(initParams: NewTaskInitParams): NewTaskFragment {
+            return NewTaskFragment().also {
                 it.putInitParams(initParams)
             }
         }
     }
 
-    override val mainContentLayout = R.layout.fragment_load_task
+    override val mainContentLayout = R.layout.fragment_new_task
 
     override val enableBackArrow = true
 
-    override val toolbarTitle = R.string.toolbar_task
+    override val toolbarTitle = R.string.toobar_new_task
 
     override val menu: Int?
         get() = null
 
     @InjectPresenter
-    lateinit var presenter: LoadTaskPresenter
+    lateinit var presenter: NewTaskPresenter
 
     @Inject
-    lateinit var presenterProvider: Provider<LoadTaskPresenter>
+    lateinit var presenterProvider: Provider<NewTaskPresenter>
 
     @ProvidePresenter
-    fun providePresenter(): LoadTaskPresenter {
+    fun providePresenter(): NewTaskPresenter {
         return presenterProvider.get().apply {
-            extractInitParams<LoadTaskInitParams>().groupName?.let { init(it) }
+            extractInitParams<NewTaskInitParams>().groupName?.let { init(it) }
         }
     }
 

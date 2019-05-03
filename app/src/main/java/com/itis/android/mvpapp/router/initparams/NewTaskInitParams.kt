@@ -3,7 +3,7 @@ package com.itis.android.mvpapp.router.initparams
 import android.os.Parcel
 import android.os.Parcelable
 
-class LoadTaskInitParams(
+class NewTaskInitParams(
         val groupName: String?
 ) : InitParams {
     constructor(parcel: Parcel) : this(
@@ -18,12 +18,12 @@ class LoadTaskInitParams(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<LoadTaskInitParams> {
-        override fun createFromParcel(parcel: Parcel): LoadTaskInitParams {
-            return LoadTaskInitParams(parcel)
+    companion object CREATOR : Parcelable.Creator<NewTaskInitParams> {
+        override fun createFromParcel(parcel: Parcel): NewTaskInitParams {
+            return NewTaskInitParams(parcel)
         }
 
-        override fun newArray(size: Int): Array<LoadTaskInitParams?> {
+        override fun newArray(size: Int): Array<NewTaskInitParams?> {
             return arrayOfNulls(size)
         }
     }

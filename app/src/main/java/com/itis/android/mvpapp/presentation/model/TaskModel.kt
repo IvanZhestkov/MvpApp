@@ -1,7 +1,7 @@
 package com.itis.android.mvpapp.presentation.model
 
-import com.itis.android.mvpapp.data.pojo.TaskItem
-import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.TaskItem
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.TeacherDisciplineItem
 import java.io.Serializable
 
 data class TaskModel(

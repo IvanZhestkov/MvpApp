@@ -3,13 +3,13 @@ package com.itis.android.mvpapp.presentation.ui
 import com.itis.android.mvpapp.presentation.ui.auth.login.LoginFragment
 import com.itis.android.mvpapp.presentation.ui.teacher.groups.GroupsScreen
 import com.itis.android.mvpapp.presentation.ui.teacher.grouptask.GroupTaskScreen
-import com.itis.android.mvpapp.presentation.ui.teacher.loadtask.LoadTaskScreen
+import com.itis.android.mvpapp.presentation.ui.teacher.newtask.NewTaskScreen
 import com.itis.android.mvpapp.presentation.ui.teacher.messages.MessagesScreen
 import com.itis.android.mvpapp.presentation.ui.teacher.profile.ProfileScreen
 import com.itis.android.mvpapp.presentation.ui.teacher.tasksolution.TaskSolutionScreen
 import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
-import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams
 import com.itis.android.mvpapp.router.initparams.TaskSolutionInitParams
+import com.itis.android.mvpapp.router.initparams.NewTaskInitParams
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 object Screens {
@@ -26,7 +26,7 @@ object Screens {
 
     fun getGroupListScreen(): GroupsScreen = GroupsScreen()
 
-    fun getLoadTaskScreen(initParams: LoadTaskInitParams): LoadTaskScreen = LoadTaskScreen(initParams)
+    fun getNewTaskScreen(initParams: NewTaskInitParams): NewTaskScreen = NewTaskScreen(initParams)
 
     fun getGroupTaskScreen(initParams: GroupTaskInitParams): GroupTaskScreen = GroupTaskScreen(initParams)
 

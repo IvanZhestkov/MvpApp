@@ -1,4 +1,4 @@
-package com.itis.android.mvpapp.presentation.model.table.grouptask
+package com.itis.android.mvpapp.presentation.model.table
 
 import com.itis.android.mvpapp.data.pojo.TaskSolutionItem
 

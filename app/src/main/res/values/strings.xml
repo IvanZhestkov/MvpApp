@@ -57,6 +57,7 @@
     <string name="error_dialog_title">Ошибка</string>
 
     <string name="toolbar_task">Задание</string>
+    <string name="toobar_new_task">Новое задание</string>
 
     <string name="empty" />
 

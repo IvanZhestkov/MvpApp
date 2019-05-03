@@ -1,4 +1,4 @@
-package com.itis.android.mvpapp.data.pojo
+package com.itis.android.mvpapp.data.network.pojo.firebase.response
 
 data class TaskItem(
         var expiration_date: String? = null,

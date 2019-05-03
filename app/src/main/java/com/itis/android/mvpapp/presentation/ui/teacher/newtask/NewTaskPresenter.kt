@@ -1,12 +1,12 @@
-package com.itis.android.mvpapp.presentation.ui.teacher.loadtask
+package com.itis.android.mvpapp.presentation.ui.teacher.newtask
 
 import com.arellomobile.mvp.InjectViewState
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import javax.inject.Inject
 
 @InjectViewState
-class LoadTaskPresenter
-@Inject constructor() : BasePresenter<LoadTaskView>() {
+class NewTaskPresenter
+@Inject constructor() : BasePresenter<NewTaskView>() {
 
     private var groupName: String = ""
 

@@ -1,6 +1,5 @@
-package com.itis.android.mvpapp.data.pojo
+package com.itis.android.mvpapp.data.network.pojo.firebase.response
 
-import com.google.firebase.database.PropertyName
 import com.itis.android.mvpapp.presentation.model.UserRole
 
 data class TeacherInfoItem(

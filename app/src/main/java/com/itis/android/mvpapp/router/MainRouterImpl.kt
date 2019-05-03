@@ -1,8 +1,8 @@
 package com.itis.android.mvpapp.router
 
 import com.itis.android.mvpapp.presentation.ui.Screens
+import com.itis.android.mvpapp.router.initparams.NewTaskInitParams
 import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
-import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams
 import com.itis.android.mvpapp.router.initparams.TaskSolutionInitParams
 import ru.terrakok.cicerone.Router
 
@@ -20,8 +20,8 @@ class MainRouterImpl : MainRouter, Router() {
         newRootScreen(Screens.getMessagesScreen())
     }
 
-    override fun openLoadTaskScreen(loadTaskInitParams: LoadTaskInitParams) {
-        navigateTo(Screens.getLoadTaskScreen(loadTaskInitParams))
+    override fun openNewTaskScreen(newTaskInitParams: NewTaskInitParams) {
+        navigateTo(Screens.getNewTaskScreen(newTaskInitParams))
     }
 
     override fun openGroupTaskScreen(groupTaskInitParams: GroupTaskInitParams) {
