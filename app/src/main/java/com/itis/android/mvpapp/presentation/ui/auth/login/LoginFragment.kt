@@ -49,8 +49,12 @@ class LoginFragment : BaseFragment(), LoginView {
             val password = edt_password.text.toString().trim()
             presenter.login(email, password)
         }
-        professor_account.setOnClickListener {
-            edt_email.setText(professor_account.text)
+        professor_account1.setOnClickListener {
+            edt_email.setText(professor_account1.text)
+            edt_password.setText("agkpfu123")
+        }
+        professor_account2.setOnClickListener {
+            edt_email.setText(professor_account2.text)
             edt_password.setText("makpfu123")
         }
         student_account.setOnClickListener {

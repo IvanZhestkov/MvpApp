@@ -29,4 +29,6 @@
 
     <color name="colorBorder">#000000</color>
     <color name="colorTableDivider">#959393</color>
+
+    <color name="colorGrey">#737A80</color>
 </resources>
