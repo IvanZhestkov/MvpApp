@@ -3,14 +3,10 @@ package com.itis.android.mvpapp.presentation.ui.auth.login
 import com.arellomobile.mvp.InjectViewState
 import com.google.firebase.auth.FirebaseAuth
 import com.itis.android.mvpapp.data.repository.LoginRepository
-import com.itis.android.mvpapp.data.util.CredentialStorage
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.UserRole
-import com.itis.android.mvpapp.presentation.rx.transformer.PresentationCompletableTransformer
-import com.itis.android.mvpapp.presentation.rx.transformer.PresentationObservableTransformer
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
 import com.itis.android.mvpapp.presentation.utils.validation.Validator
-import com.itis.android.mvpapp.router.AuthRouter
 import javax.inject.Inject
 
 @InjectViewState
@@ -39,8 +35,9 @@ class LoginPresenter
                 }
                 .subscribe({ user ->
                     when (user.role) {
-                        UserRole.PROFESSOR -> viewState.openMainScreen()
+                        UserRole.PROFESSOR -> viewState.openTeacherScreen()
                         else -> {
+                            viewState.openStudentScreen()
                         }
                     }
                 }, {
