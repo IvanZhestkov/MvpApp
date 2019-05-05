@@ -9,18 +9,14 @@ import com.itis.android.mvpapp.data.network.pojo.studapi.request.UploadTaskReque
 import com.itis.android.mvpapp.data.network.request.ApiRequest
 import com.itis.android.mvpapp.data.repository.DisciplinesRepository
 import com.itis.android.mvpapp.data.repository.TasksRepository
-import com.itis.android.mvpapp.presentation.model.FileModel
 import com.itis.android.mvpapp.presentation.model.TaskModel
 import com.itis.android.mvpapp.presentation.model.TaskModelMapper
 import com.itis.android.mvpapp.presentation.model.UploadTaskModel
+import com.itis.android.mvpapp.presentation.util.extensions.getFileName
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.AsyncSubject
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.http.Multipart
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -31,6 +27,9 @@ class TasksRepositoryImpl @Inject constructor() : TasksRepository {
 
     @Inject
     lateinit var firebaseDB: FirebaseDatabase
+
+    @Inject
+    lateinit var firebaseStorage: FirebaseStorage
 
     @Inject
     lateinit var disciplinesRepository: DisciplinesRepository
@@ -88,7 +87,20 @@ class TasksRepositoryImpl @Inject constructor() : TasksRepository {
     }
 
     override fun addTask(task: UploadTaskModel): Completable {
-        val subject = AsyncSubject.create<Boolean>()
+        val addTaskSubject = AsyncSubject.create<Boolean>()
+        val addFileSubject = AsyncSubject.create<Boolean>()
+
+        val filename = getFileName()
+        task.file?.let {
+            val ref = firebaseStorage.reference
+            ref.child(filename).putBytes(it).addOnCompleteListener {
+                addFileSubject.onNext(it.isSuccessful)
+                addFileSubject.onComplete()
+            }.addOnCanceledListener {
+                addFileSubject.onNext(false)
+                addFileSubject.onComplete()
+            }
+        }
 
         val d = disciplinesRepository
                 .getDisciplineByNameAndGroup(task.discipline.orEmpty(), task.group.orEmpty())
@@ -99,55 +111,32 @@ class TasksRepositoryImpl @Inject constructor() : TasksRepository {
                             task.name,
                             task.description,
                             task.deadLine,
-                            System.currentTimeMillis().toString()
-                    )
+                            System.currentTimeMillis().toString(),
+                            filename
+                            )
 
                     ref.setValue(uploadTaskItem).addOnCompleteListener {
-                        val taskRequest = UploadTaskRequest(discipline.id, ref.key, firebaseAuth.currentUser?.uid)
-
-                        sendFile(taskRequest, task.file).subscribe({
-                            subject.onNext(it.isSuccessful)
-                            subject.onComplete()
-                        }, {
-                            subject.onNext(false)
-                            subject.onComplete()
-                        })
+                        addTaskSubject.onNext(true)
+                        addTaskSubject.onComplete()
                     }
 
                 }, {
-                    subject.onNext(false)
-                    subject.onComplete()
+                    addTaskSubject.onNext(false)
+                    addTaskSubject.onComplete()
                 })
 
-        return subject.flatMapCompletable { success ->
-            if (success) {
-                Completable.complete()
+        return addFileSubject.flatMapCompletable { addFileSuccess ->
+            if(addFileSuccess) {
+                addTaskSubject.flatMapCompletable {addTaskSuccess ->
+                    if(addTaskSuccess) {
+                        Completable.complete()
+                    } else {
+                        Completable.error(Exception())
+                    }
+                }
             } else {
                 Completable.error(Exception())
             }
         }
-    }
-
-
-    private fun sendFile(uploadTaskRequest: UploadTaskRequest, fileModel: FileModel?): Completable {
-        fileModel?.fileType?.let { fileType ->
-            fileModel.file?.let { file ->
-                val fBody = RequestBody.create(MediaType.parse(fileModel.fileType.orEmpty()), file)
-                val multipartFile = MultipartBody.Part.createFormData("file", fileModel.fileName, fBody)
-
-                val courseId = RequestBody.create(MediaType.parse("text/plain"), uploadTaskRequest.courseID.orEmpty())
-                val taskId = RequestBody.create(MediaType.parse("text/plain"), uploadTaskRequest.taskID.orEmpty())
-                val idToken = RequestBody.create(MediaType.parse("text/plain"), uploadTaskRequest.idToken.orEmpty())
-
-                return apiRequest.uploadTaskCompletable(
-                        multipartFile,
-                        courseId,
-                        taskId,
-                        idToken
-                )
-            }
-        }
-
-        return Completable.error(Exception())
     }
 }

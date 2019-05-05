@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import com.itis.android.mvpapp.data.network.NetworkModule
 import com.itis.android.mvpapp.data.util.CredentialStorage
 import com.itis.android.mvpapp.data.util.PreferencesCredentialStorage
@@ -37,5 +38,11 @@ class DataModule {
     @Singleton
     fun provideFirebaseDatabase(): FirebaseDatabase {
         return FirebaseDatabase.getInstance()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseStorage(): FirebaseStorage {
+        return FirebaseStorage.getInstance()
     }
 }

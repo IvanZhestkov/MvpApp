@@ -1,13 +1,13 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.newtask
 
 import com.arellomobile.mvp.InjectViewState
-import com.google.firebase.storage.FirebaseStorage
 import com.itis.android.mvpapp.data.repository.DisciplinesRepository
 import com.itis.android.mvpapp.data.repository.TasksRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.FileModel
 import com.itis.android.mvpapp.presentation.model.UploadTaskModel
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
+import com.itis.android.mvpapp.router.MainRouter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -20,6 +20,9 @@ class NewTaskPresenter @Inject constructor() : BasePresenter<NewTaskView>() {
 
     @Inject
     lateinit var tasksRepository: TasksRepository
+
+    @Inject
+    lateinit var router: MainRouter
 
     private var taskName: String? = null
     private var taskDescription: String? = null
@@ -35,11 +38,11 @@ class NewTaskPresenter @Inject constructor() : BasePresenter<NewTaskView>() {
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.showTaskGroup(taskGroup.orEmpty())
-        getDesciplines()
+        getDisciplines()
         checkButtonState()
     }
 
-    private fun getDesciplines() {
+    private fun getDisciplines() {
         disciplinesRepository
                 .getDisciplinesSingle()
                 .compose(PresentationSingleTransformer())
@@ -61,7 +64,7 @@ class NewTaskPresenter @Inject constructor() : BasePresenter<NewTaskView>() {
     }
 
     fun onRetry() {
-        getDesciplines()
+        getDisciplines()
     }
 
     fun onFileChoose() {
@@ -115,17 +118,18 @@ class NewTaskPresenter @Inject constructor() : BasePresenter<NewTaskView>() {
                                 taskDeadline,
                                 taskGroup,
                                 taskDiscipline,
-                                taskFile
+                                taskFile?.file
                         )
                 )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { viewState.showWaitDialog() }
-                .doAfterTerminate { viewState.hideWaitDialog() }
                 .subscribe({
-                    viewState.showErrorDialog("УСПЕШНО")
+                    viewState.hideWaitDialog()
+                    router.goBack()
                 }, {
-                    viewState.showErrorDialog("ОШИБКА")
+                    viewState.hideWaitDialog()
+                    viewState.showErrorDialog("Ошибка при создании таска")
                 }).disposeWhenDestroy()
     }
 }

@@ -6,5 +6,5 @@ data class UploadTaskModel(
         val deadLine: String? = null,
         val group: String? = null,
         val discipline: String? = null,
-        val file: FileModel? = null
+        val file: ByteArray? = null
 )
