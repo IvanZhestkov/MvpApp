@@ -1,4 +1,4 @@
-package com.itis.android.mvpapp.presentation.utils.extensions
+package com.itis.android.mvpapp.presentation.util.extensions
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

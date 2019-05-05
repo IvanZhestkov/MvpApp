@@ -1,12 +1,27 @@
-package com.itis.android.mvpapp.presentation.utils.extensions
+package com.itis.android.mvpapp.presentation.util.extensions
 
 import android.content.Context
 import android.os.Build
 import android.support.design.widget.Snackbar
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.itis.android.mvpapp.presentation.util.simple.TextWatcherAdapter
+
+fun EditText.addTextChangedListener(
+        isSkipInitialValue: Boolean = false,
+        listener: (String) -> Unit
+) {
+    if (!isSkipInitialValue)
+        listener(text.toString())
+    addTextChangedListener(object : TextWatcherAdapter() {
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            listener(s.toString())
+        }
+    })
+}
 
 fun View.showKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

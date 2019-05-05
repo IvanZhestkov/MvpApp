@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_group_task_row_header.view.*
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.model.table.GroupTaskCell
 import com.itis.android.mvpapp.presentation.model.table.GroupTaskRowHeader
-import com.itis.android.mvpapp.presentation.utils.extensions.setTextStyle
+import com.itis.android.mvpapp.presentation.util.extensions.setTextStyle
 
 class GroupTaskTableAdapter(val context: Context) : AbstractTableAdapter<GroupTaskColumnHeader, GroupTaskRowHeader, GroupTaskCell>(context) {
 

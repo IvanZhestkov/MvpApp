@@ -13,8 +13,8 @@ import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.presentation.model.UserSolutionModel
 import com.itis.android.mvpapp.presentation.model.table.GroupTaskCell
 import com.itis.android.mvpapp.presentation.model.table.GroupTaskRowHeader
-import com.itis.android.mvpapp.presentation.utils.extensions.extractInitParams
-import com.itis.android.mvpapp.presentation.utils.extensions.putInitParams
+import com.itis.android.mvpapp.presentation.util.extensions.extractInitParams
+import com.itis.android.mvpapp.presentation.util.extensions.putInitParams
 import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
 import kotlinx.android.synthetic.main.fragment_group_task.*
 import kotlinx.android.synthetic.main.layout_progress_error.*

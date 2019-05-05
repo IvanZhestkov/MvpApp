@@ -1,8 +1,10 @@
 package com.itis.android.mvpapp.presentation.model
 
 data class UploadTaskModel(
-        val taskId: String? = null,
-        val disciplineId: String? = null,
-        val teacherId: String? = null,
-        val commentary: String? = null
+        val name: String? = null,
+        val description: String? = null,
+        val deadLine: String? = null,
+        val group: String? = null,
+        val discipline: String? = null,
+        val file: FileModel? = null
 )

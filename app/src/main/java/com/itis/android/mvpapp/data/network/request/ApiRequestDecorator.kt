@@ -1,8 +1,9 @@
 package com.itis.android.mvpapp.data.network.request
 
-import com.itis.android.mvpapp.data.network.pojo.studapi.request.UploadTaskItem
+import com.itis.android.mvpapp.data.network.pojo.studapi.request.UploadTaskRequest
 import io.reactivex.*
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 
 class ApiRequestDecorator(val apiRequest: ApiRequest) : ApiRequest {
@@ -31,9 +32,9 @@ class ApiRequestDecorator(val apiRequest: ApiRequest) : ApiRequest {
         }
     }
 
-    override fun uploadTaskCompletable(file: MultipartBody.Part, uploadTask: UploadTaskItem): Completable {
+    override fun uploadTaskCompletable(file: MultipartBody.Part, courseId: RequestBody, taskId: RequestBody, idToken: RequestBody): Completable {
         return apiRequest
-            .uploadTaskCompletable(file, uploadTask)
-            .compose(ApiRequestErrorCompletableTransformer())
+                .uploadTaskCompletable(file, courseId, taskId, idToken)
+                .compose(ApiRequestErrorCompletableTransformer())
     }
 }
