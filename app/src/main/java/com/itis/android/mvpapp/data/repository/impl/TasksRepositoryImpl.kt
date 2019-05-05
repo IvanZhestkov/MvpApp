@@ -2,12 +2,17 @@ package com.itis.android.mvpapp.data.repository.impl
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
 import com.itis.android.mvpapp.data.network.pojo.firebase.request.UploadTaskItem
 import com.itis.android.mvpapp.data.network.pojo.firebase.response.TaskItem
+import com.itis.android.mvpapp.data.network.pojo.studapi.request.UploadTaskRequest
+import com.itis.android.mvpapp.data.network.request.ApiRequest
 import com.itis.android.mvpapp.data.repository.DisciplinesRepository
 import com.itis.android.mvpapp.data.repository.TasksRepository
 import com.itis.android.mvpapp.presentation.model.TaskModel
 import com.itis.android.mvpapp.presentation.model.TaskModelMapper
+import com.itis.android.mvpapp.presentation.model.UploadTaskModel
+import com.itis.android.mvpapp.presentation.util.extensions.getFileName
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -24,7 +29,13 @@ class TasksRepositoryImpl @Inject constructor() : TasksRepository {
     lateinit var firebaseDB: FirebaseDatabase
 
     @Inject
+    lateinit var firebaseStorage: FirebaseStorage
+
+    @Inject
     lateinit var disciplinesRepository: DisciplinesRepository
+
+    @Inject
+    lateinit var apiRequest: ApiRequest
 
     override fun getTasks(): Single<List<TaskModel>> {
         val ref = firebaseDB.getReference("tasks")
@@ -75,23 +86,54 @@ class TasksRepositoryImpl @Inject constructor() : TasksRepository {
         }
     }
 
-    override fun uploadTask(task: TaskModel): Completable {
-        val subject = AsyncSubject.create<Boolean>()
+    override fun addTask(task: UploadTaskModel): Completable {
+        val addTaskSubject = AsyncSubject.create<Boolean>()
+        val addFileSubject = AsyncSubject.create<Boolean>()
 
-        val ref = firebaseDB.getReference("tasks").child("someCourseId").push()
-
-        val key = ref.key
-
-        val uploadTaskItem = UploadTaskItem(key, "some description")
-
-        ref.setValue(uploadTaskItem).addOnCompleteListener {
-            subject.onNext(it.isSuccessful)
-            subject.onComplete()
+        val filename = getFileName()
+        task.file?.let {
+            val ref = firebaseStorage.reference
+            ref.child(filename).putBytes(it).addOnCompleteListener {
+                addFileSubject.onNext(it.isSuccessful)
+                addFileSubject.onComplete()
+            }.addOnCanceledListener {
+                addFileSubject.onNext(false)
+                addFileSubject.onComplete()
+            }
         }
 
-        return subject.flatMapCompletable { success ->
-            if (success) {
-                Completable.complete()
+        val d = disciplinesRepository
+                .getDisciplineByNameAndGroup(task.discipline.orEmpty(), task.group.orEmpty())
+                .subscribe({ discipline ->
+                    val ref = firebaseDB.getReference("tasks").child(discipline.id.orEmpty()).push()
+
+                    val uploadTaskItem = UploadTaskItem(
+                            task.name,
+                            task.description,
+                            task.deadLine,
+                            System.currentTimeMillis().toString(),
+                            filename
+                            )
+
+                    ref.setValue(uploadTaskItem).addOnCompleteListener {
+                        addTaskSubject.onNext(true)
+                        addTaskSubject.onComplete()
+                    }
+
+                }, {
+                    addTaskSubject.onNext(false)
+                    addTaskSubject.onComplete()
+                })
+
+        return addFileSubject.flatMapCompletable { addFileSuccess ->
+            if(addFileSuccess) {
+                addTaskSubject.flatMapCompletable {addTaskSuccess ->
+                    if(addTaskSuccess) {
+                        Completable.complete()
+                    } else {
+                        Completable.error(Exception())
+                    }
+                }
             } else {
                 Completable.error(Exception())
             }

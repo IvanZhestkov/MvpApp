@@ -7,8 +7,8 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.presentation.model.User
-import com.itis.android.mvpapp.presentation.utils.extensions.extractInitParams
-import com.itis.android.mvpapp.presentation.utils.extensions.putInitParams
+import com.itis.android.mvpapp.presentation.util.extensions.extractInitParams
+import com.itis.android.mvpapp.presentation.util.extensions.putInitParams
 import com.itis.android.mvpapp.router.initparams.TaskSolutionInitParams
 import kotlinx.android.synthetic.main.fragment_task_solution.*
 import javax.inject.Inject

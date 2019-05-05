@@ -1,10 +1,8 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.newtask
 
-import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
@@ -12,22 +10,19 @@ import com.itis.android.mvpapp.presentation.base.BaseFragment
 import javax.inject.Inject
 import javax.inject.Provider
 import kotlinx.android.synthetic.main.fragment_new_task.*
-import com.itis.android.mvpapp.presentation.utils.extensions.toast
-import pub.devrel.easypermissions.EasyPermissions
-import pub.devrel.easypermissions.AfterPermissionGranted
-import pub.devrel.easypermissions.AppSettingsDialog
-import android.app.Activity.RESULT_OK
-import com.itis.android.mvpapp.presentation.utils.extensions.extractInitParams
-import com.itis.android.mvpapp.presentation.utils.extensions.putInitParams
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import com.itis.android.mvpapp.presentation.model.FileModel
 import com.itis.android.mvpapp.router.initparams.NewTaskInitParams
+import kotlinx.android.synthetic.main.layout_progress_error.*
+import com.itis.android.mvpapp.presentation.util.extensions.*
+import com.redmadrobot.inputmask.MaskedTextChangedListener
 
-class NewTaskFragment : BaseFragment(), NewTaskView, EasyPermissions.PermissionCallbacks {
 
-    private var docPaths: ArrayList<String> = ArrayList()
+class NewTaskFragment : BaseFragment(), NewTaskView {
 
     companion object {
-        const val RC_FILE_PICKER_PERM = 321
-        const val MAX_ATTACHMENT_COUNT = 10
+        private const val REQUEST_CODE_PICK_FILE = 1
 
         fun getInstance(initParams: NewTaskInitParams): NewTaskFragment {
             return NewTaskFragment().also {
@@ -61,58 +56,88 @@ class NewTaskFragment : BaseFragment(), NewTaskView, EasyPermissions.PermissionC
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initActionView()
+        MaskedTextChangedListener.installOn(
+            edt_deadline,
+            "[00].[00].[0000]",
+            null
+        )
+
+        edt_task_name.addTextChangedListener { presenter.onNameChange(it.trim()) }
+        edt_description_task.addTextChangedListener { presenter.onDescriptionChange(it.trim()) }
+        edt_deadline.addTextChangedListener { presenter.onDeadlineChange(it.trim()) }
+
+        btn_choose_file.setOnClickListener { presenter.onFileChoose() }
+        btn_add_task.setOnClickListener { presenter.onAdd() }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_PICK_FILE) {
+            data?.data?.let { uri ->
+                val file = context?.contentResolver?.openInputStream(uri)?.readBytes()
+                val fileName = uri.getFilename(context)
+                val fileType = context?.contentResolver?.getType(uri)
 
-        baseActivity.toast("Picked file: ???", Toast.LENGTH_LONG)
-
-        if (requestCode == RC_FILE_PICKER_PERM && resultCode == RESULT_OK) {
-
-
+                presenter.onFileChange(FileModel(file, fileName, fileType))
+            }
         }
     }
 
     override fun showTaskGroup(name: String) {
-        tv_group.text = name
+        edt_group.setText(name)
     }
 
-    private fun initActionView() {
-        btn_load_task.setOnClickListener {
-            pickDocClicked()
+    override fun setSpinnerAdapter(items: List<String>) {
+        val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner, items)
+        spinnerAdapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
+
+        spinner_discipline.adapter = spinnerAdapter
+        spinner_discipline.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if (position in 0 until items.size) {
+                    presenter.onDisciplineChange(items[position])
+                } else {
+                    presenter.onDisciplineChange(null)
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                presenter.onDisciplineChange(null)
+            }
         }
     }
 
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-            AppSettingsDialog.Builder(this).build().show()
-        }
+    override fun showProgress() {
+        progress.visibility = View.VISIBLE
     }
 
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun hideProgress() {
+        progress.visibility = View.GONE
     }
 
-    @AfterPermissionGranted(RC_FILE_PICKER_PERM)
-    fun pickDocClicked() {
-        if (EasyPermissions.hasPermissions(baseActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            onPickDoc()
-        } else {
-            // Ask for one permission
-            EasyPermissions.requestPermissions(
-                    this, getString(R.string.rationale_doc_picker),
-                    RC_FILE_PICKER_PERM, Manifest.permission.WRITE_EXTERNAL_STORAGE
-            )
-        }
+    override fun showRetry(errorText: String) {
+        progress_error.visibility = View.VISIBLE
+
+        text_retry.text = errorText
+        btn_retry.setOnClickListener { presenter.onRetry() }
     }
 
-    private fun onPickDoc() {
-        if (docPaths.size == MAX_ATTACHMENT_COUNT) {
-            baseActivity.toast("Cannot select more than $MAX_ATTACHMENT_COUNT items", Toast.LENGTH_SHORT)
-        } else {
+    override fun hideRetry() {
+        progress_error.visibility = View.GONE
+    }
 
-        }
+    override fun openFileChoose() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "*/*"
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        startActivityForResult(intent, REQUEST_CODE_PICK_FILE)
+    }
+
+    override fun setButtonEnabled(enabled: Boolean) {
+        btn_add_task.isEnabled = enabled
+    }
+
+    override fun showChoosedFile(fileName: String) {
+        container_picked_file.visibility = View.VISIBLE
+        tv_picked_file_name.text = fileName
     }
 }

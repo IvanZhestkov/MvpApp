@@ -1,4 +1,4 @@
-package com.itis.android.mvpapp.presentation.utils.validation
+package com.itis.android.mvpapp.presentation.util.validation
 
 import java.util.regex.Pattern
 

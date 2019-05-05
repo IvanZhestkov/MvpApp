@@ -8,4 +8,6 @@ interface DisciplinesRepository {
     fun getDisciplinesSingle(): Single<List<TeacherDisciplineItem>>
 
     fun getDisciplineById(id: String): Single<TeacherDisciplineItem>
+
+    fun getDisciplineByNameAndGroup(name: String, group: String): Single<TeacherDisciplineItem>
 }

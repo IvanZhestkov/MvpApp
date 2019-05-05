@@ -25,7 +25,6 @@ class ProfilePresenter
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        test()
         loadProfile()
     }
 
@@ -52,17 +51,6 @@ class ProfilePresenter
                     viewState.showProfile(it)
                 }, {
                     viewState.showRetry("Ошибка")
-                })
-                .disposeWhenDestroy()
-    }
-
-    fun test() {
-        tasksRepository
-                .uploadTask(TaskModel())
-                .subscribe({
-                    val result = "asd"
-                },{
-                    it.printStackTrace()
                 })
                 .disposeWhenDestroy()
     }

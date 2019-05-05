@@ -17,7 +17,9 @@
     <!--Hints-->
     <string name="hint_email">E-mail</string>
     <string name="hint_password">Пароль</string>
-    <string name="hint_enter_description">Введите описание…</string>
+    <string name="hint_enter_description">Введите описание</string>
+    <string name="hint_enter_deadline">Введите дату дедлайна</string>
+    <string name="hint_enter_name">Введите название</string>
 
     <!--Buttons-->
     <string name="login">Войти</string>
@@ -91,4 +93,9 @@
     <string name="download_error">Ошибка</string>
     <string name="repeat">Повторить</string>
     <string name="no_available_task">Нет доступных заданий</string>
+    <string name="choose_task">Выбрать файл</string>
+    <string name="add">Добавить</string>
+    <string name="choose_discipline">Выберите предмет</string>
+    <string name="deadline_date">Дата дедлайна:</string>
+    <string name="task_name">Название задания:</string>
 </resources>
