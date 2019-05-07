@@ -1,5 +1,6 @@
 package com.itis.android.mvpapp.router
 
+import com.itis.android.mvpapp.presentation.model.DialogModel
 import com.itis.android.mvpapp.presentation.ui.Screens
 import com.itis.android.mvpapp.router.initparams.NewTaskInitParams
 import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
@@ -16,8 +17,8 @@ class MainRouterImpl : MainRouter, Router() {
         newRootScreen(Screens.getGroupListScreen())
     }
 
-    override fun openMessagesScreen() {
-        newRootScreen(Screens.getMessagesScreen())
+    override fun openDialogListScreen() {
+        newRootScreen(Screens.getDialogListScreen())
     }
 
     override fun openNewTaskScreen(newTaskInitParams: NewTaskInitParams) {
@@ -30,6 +31,10 @@ class MainRouterImpl : MainRouter, Router() {
 
     override fun openTaskSolutionScreen(taskSolutionInitParams: TaskSolutionInitParams) {
         navigateTo(Screens.getTaskSolutionScreen(taskSolutionInitParams))
+    }
+
+    override fun openDialogScreen(dialog: DialogModel) {
+        navigateTo(Screens.getDialogScreen(dialog))
     }
 
     override fun goBack() {

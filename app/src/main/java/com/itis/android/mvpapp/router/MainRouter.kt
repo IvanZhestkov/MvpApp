@@ -1,5 +1,6 @@
 package com.itis.android.mvpapp.router
 
+import com.itis.android.mvpapp.presentation.model.DialogModel
 import com.itis.android.mvpapp.router.initparams.NewTaskInitParams
 import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
 import com.itis.android.mvpapp.router.initparams.TaskSolutionInitParams
@@ -15,7 +16,9 @@ interface MainRouter {
 
     fun openTaskSolutionScreen(taskSolutionInitParams: TaskSolutionInitParams)
 
-    fun openMessagesScreen()
+    fun openDialogScreen(dialog: DialogModel)
+
+    fun openDialogListScreen()
 
     fun goBack()
 }

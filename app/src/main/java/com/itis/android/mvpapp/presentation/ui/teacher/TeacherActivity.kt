@@ -2,6 +2,7 @@ package com.itis.android.mvpapp.presentation.ui.teacher
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
@@ -65,5 +66,9 @@ class TeacherActivity : BaseActivity(), TeacherView {
 
     override fun signedIn() {
         presenter.onGroups()
+    }
+
+    fun setBottomBarEnabled(isEnabled: Boolean) {
+        menu_bottom_bar.visibility = if (isEnabled) View.VISIBLE else View.GONE
     }
 }

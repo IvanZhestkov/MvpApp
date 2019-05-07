@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.itis.android.mvpapp.R
+import com.itis.android.mvpapp.presentation.ui.teacher.TeacherActivity
 import dagger.android.support.AndroidSupportInjection
 
 abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
@@ -34,11 +35,14 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar).also {it?.title = getString(R.string.empty)}
         toolbar?.findViewById<TextView>(R.id.toolbar_title)?.text = getString(toolbarTitle ?: R.string.app_name)
 
         baseActivity.setSupportActionBar(toolbar)
         baseActivity.setBackArrow(enableBackArrow)
+
+        (baseActivity as? TeacherActivity)?.setBottomBarEnabled(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

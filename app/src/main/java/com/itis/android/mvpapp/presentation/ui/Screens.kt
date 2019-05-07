@@ -1,10 +1,12 @@
 package com.itis.android.mvpapp.presentation.ui
 
+import com.itis.android.mvpapp.presentation.model.DialogModel
 import com.itis.android.mvpapp.presentation.ui.auth.login.LoginFragment
+import com.itis.android.mvpapp.presentation.ui.teacher.dialogs.DialogListScreen
+import com.itis.android.mvpapp.presentation.ui.teacher.dialogs.selected.DialogScreen
 import com.itis.android.mvpapp.presentation.ui.teacher.groups.GroupsScreen
 import com.itis.android.mvpapp.presentation.ui.teacher.grouptask.GroupTaskScreen
 import com.itis.android.mvpapp.presentation.ui.teacher.newtask.NewTaskScreen
-import com.itis.android.mvpapp.presentation.ui.teacher.messages.MessagesScreen
 import com.itis.android.mvpapp.presentation.ui.teacher.profile.ProfileScreen
 import com.itis.android.mvpapp.presentation.ui.teacher.tasksolution.TaskSolutionScreen
 import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
@@ -32,5 +34,7 @@ object Screens {
 
     fun getTaskSolutionScreen(initParams: TaskSolutionInitParams): TaskSolutionScreen = TaskSolutionScreen(initParams)
 
-    fun getMessagesScreen(): MessagesScreen = MessagesScreen()
+    fun getDialogListScreen(): DialogListScreen = DialogListScreen()
+
+    fun getDialogScreen(dialog: DialogModel): DialogScreen = DialogScreen(dialog)
 }
