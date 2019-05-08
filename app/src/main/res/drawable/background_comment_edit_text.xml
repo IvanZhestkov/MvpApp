@@ -3,5 +3,7 @@
     <solid android:color="@color/colorScreenBackground" />
     <corners android:radius="5dp" />
 
-    <stroke android:color="@color/colorMain" android:width="0.5dp"/>
+    <stroke
+        android:width="0.5dp"
+        android:color="@color/colorMain" />
 </shape>

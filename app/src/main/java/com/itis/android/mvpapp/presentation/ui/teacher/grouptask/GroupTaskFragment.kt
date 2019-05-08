@@ -1,6 +1,10 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.grouptask
 
+import android.app.DownloadManager
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -60,25 +64,11 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initTable()
+        initActionView()
     }
 
-    override fun showProgress() {
-        progress.visibility = View.VISIBLE
-    }
-
-    override fun hideProgress() {
-        progress.visibility = View.GONE
-    }
-
-    override fun showRetry(errorText: String) {
-        text_retry.text = errorText
-        btn_retry.setOnClickListener { presenter.onRetry() }
-
-        progress_error.visibility = View.VISIBLE
-    }
-
-    override fun hideRetry() {
-        progress_error.visibility = View.GONE
+    override fun showTaskDescription(description: String) {
+        tv_task_description.text = description
     }
 
     override fun showTable(solutions: List<UserSolutionModel>) {
@@ -101,6 +91,37 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
         adapter?.setAllItems(columnItems, rowItems, cellItems)
     }
 
+    override fun downloadFile(fileName: String, fileExtension: String, url: String) {
+        val downloadManager = baseActivity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        val downloadUri = Uri.parse(url)
+
+        val request = DownloadManager.Request(downloadUri)
+
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        request.setDestinationInExternalFilesDir(baseActivity, Environment.DIRECTORY_DOWNLOADS, fileName)
+
+        downloadManager.enqueue(request)
+    }
+
+    override fun showProgress() {
+        progress.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        progress.visibility = View.GONE
+    }
+
+    override fun showRetry(errorText: String) {
+        text_retry.text = errorText
+        btn_retry.setOnClickListener { presenter.onRetry() }
+
+        progress_error.visibility = View.VISIBLE
+    }
+
+    override fun hideRetry() {
+        progress_error.visibility = View.GONE
+    }
+
     private fun initTable() {
         context?.let { adapter = GroupTaskTableAdapter(it) }
         table_group_task.adapter = adapter
@@ -115,6 +136,12 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
                     }
                 }
             }
+        }
+    }
+
+    private fun initActionView() {
+        btn_task_download.setOnClickListener {
+            presenter.dowloadTask()
         }
     }
 }

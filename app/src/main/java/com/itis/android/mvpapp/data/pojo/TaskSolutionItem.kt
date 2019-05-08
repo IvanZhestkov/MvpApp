@@ -4,34 +4,34 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class TaskSolutionItem(
-    var id: String? = null,
-    var checking_date: String? = null,
-    var commentary: String? = null,
-    var score: Int = 0,
-    var solution_file_link: String? = null,
-    var status: String? = null,
-    var uploading_date: String? = null,
-    var taskId: String? = null,
-    var disciplineId: String? = null,
-    var userId: String? = null
+        var id: String? = null,
+        var checking_date: String? = null,
+        var comment: String? = null,
+        var score: Int = 0,
+        var solution_file_link: String? = null,
+        var status: String? = null,
+        var uploading_date: String? = null,
+        var taskId: String? = null,
+        var disciplineId: String? = null,
+        var userId: String? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readInt(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readInt(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
         parcel.writeString(checking_date)
-        parcel.writeString(commentary)
+        parcel.writeString(comment)
         parcel.writeInt(score)
         parcel.writeString(solution_file_link)
         parcel.writeString(status)

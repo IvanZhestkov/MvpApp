@@ -115,15 +115,7 @@ class GroupTaskTableAdapter(val context: Context) : AbstractTableAdapter<GroupTa
 
         fun bindView(item: GroupTaskCell?, row: Int, column: Int) = with(itemView) {
             cellItem = item
-            val rand = (Math.random() * 2).toInt()
 
-            /*if (rand == 1) {
-                cell_answer_text.text = context.getString(R.string.task_status_show)
-                cell_answer_text.setTextStyle(context, R.style.Text_Small_Link)
-            } else {
-                cell_answer_text.text = context.getString(R.string.task_status_now_downloaded)
-                cell_answer_text.setTextStyle(context, R.style.Text_Small_Disable)
-            }*/
             if (cellItem?.solution != null) {
                 cell_answer_text.text = context.getString(R.string.task_status_show)
                 cell_answer_text.setTextStyle(context, R.style.Text_Small_Link)
@@ -137,11 +129,11 @@ class GroupTaskTableAdapter(val context: Context) : AbstractTableAdapter<GroupTa
     inner class CellMarkViewHolder(itemView: View) : AbstractViewHolder(itemView) {
 
         fun bindView(item: GroupTaskCell?, row: Int, column: Int) = with(itemView) {
-            val rand = (Math.random() * 2).toInt()
-
             image_group_task_mark.setImageResource(
-                    if (rand == 1) R.drawable.ic_check_mark_done
-                    else R.drawable.ic_check_mark_close
+                    when (item?.solution?.status) {
+                        "accepted" -> R.drawable.ic_check_mark_done
+                        else -> R.drawable.ic_check_mark_close
+                    }
             )
         }
     }

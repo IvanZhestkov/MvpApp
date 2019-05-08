@@ -79,9 +79,13 @@ class LoginFragment : BaseFragment(), LoginView {
         }
     }
 
-    override fun openMainScreen() {
+    override fun openTeacherScreen() {
         val intent = Intent(baseActivity, TeacherActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
+    }
+
+    override fun openStudentScreen() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

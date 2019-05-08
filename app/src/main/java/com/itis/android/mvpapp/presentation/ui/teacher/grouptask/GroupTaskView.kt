@@ -8,7 +8,13 @@ import com.itis.android.mvpapp.presentation.model.UserSolutionModel
 interface GroupTaskView: BaseView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showTaskDescription(description: String)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
     fun showTable(solutions: List<UserSolutionModel>)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun downloadFile(fileName: String, fileExtension: String, url: String)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showProgress()

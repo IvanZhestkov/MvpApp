@@ -7,5 +7,7 @@ import io.reactivex.Single
 interface TaskSolutionRepository {
     fun getTaskSolutions(disciplineId: String?, taskId: String?, groupId: String?): Single<List<UserSolutionModel>>
 
-    fun updateSolutionStatus(solution: TaskSolutionItem, status: String)
+    fun updateSolutionStatus(solution: TaskSolutionItem)
+
+    fun addSolutionCommnet(solution: TaskSolutionItem)
 }

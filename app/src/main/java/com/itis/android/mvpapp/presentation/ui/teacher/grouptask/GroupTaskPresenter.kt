@@ -1,6 +1,7 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.grouptask
 
 import com.arellomobile.mvp.InjectViewState
+import com.google.firebase.storage.FirebaseStorage
 import com.itis.android.mvpapp.data.repository.TaskSolutionRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.TaskModel
@@ -20,6 +21,9 @@ class GroupTaskPresenter
     @Inject
     lateinit var taskSolutionRepository: TaskSolutionRepository
 
+    @Inject
+    lateinit var firebaseStorage: FirebaseStorage
+
     private var task: TaskModel? = null
 
     fun init(task: TaskModel) {
@@ -28,6 +32,7 @@ class GroupTaskPresenter
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+        showTaskDescription()
         loadDataForTable()
     }
 
@@ -39,21 +44,37 @@ class GroupTaskPresenter
         groupTaskRouter.openTaskSolutionScreen(TaskSolutionInitParams(userSolution))
     }
 
+    fun dowloadTask() {
+        val storageRef = firebaseStorage.reference
+        val ref = task?.filePath?.let { storageRef.child(it) }
+
+        ref?.downloadUrl
+                ?.addOnSuccessListener {
+                    viewState.downloadFile(task?.filePath.toString(), ".pdf", it.toString())
+                }
+                ?.addOnFailureListener {
+                }
+    }
+
+    private fun showTaskDescription() {
+        task?.description?.let { viewState.showTaskDescription(it) }
+    }
+
     private fun loadDataForTable() {
         taskSolutionRepository
-            .getTaskSolutions(task?.disciplineId, task?.taskId, task?.groupNumber)
-            .compose(PresentationSingleTransformer())
-            .doOnSubscribe {
-                viewState.showProgress()
-                viewState.hideRetry()
-            }
-            .doAfterTerminate {
-                viewState.hideProgress()
-            }
-            .subscribe({
-                viewState.showTable(it)
-            }, {
-                viewState.showRetry("Ошибка")
-            }).disposeWhenDestroy()
+                .getTaskSolutions(task?.disciplineId, task?.taskId, task?.groupNumber)
+                .compose(PresentationSingleTransformer())
+                .doOnSubscribe {
+                    viewState.showProgress()
+                    viewState.hideRetry()
+                }
+                .doAfterTerminate {
+                    viewState.hideProgress()
+                }
+                .subscribe({
+                    viewState.showTable(it)
+                }, {
+                    viewState.showRetry("Ошибка")
+                }).disposeWhenDestroy()
     }
 }

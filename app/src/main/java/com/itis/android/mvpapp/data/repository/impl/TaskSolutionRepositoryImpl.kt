@@ -47,9 +47,9 @@ class TaskSolutionRepositoryImpl @Inject constructor() : TaskSolutionRepository 
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.children.forEach { userSnapshot ->
-                    userSnapshot.children.filter { it.key == taskId }.forEach { taskSnapshot ->
-                        taskSnapshot.children.mapNotNullTo(solutions) { solutionSnapshot ->
+                snapshot.children.filter { it.key == taskId }.forEach { taskSnapshot ->
+                    taskSnapshot.children.forEach { userSnapshot ->
+                        userSnapshot.children.mapNotNullTo(solutions) { solutionSnapshot ->
                             solutionSnapshot.getValue<TaskSolutionItem>(TaskSolutionItem::class.java).also {
                                 it?.id = solutionSnapshot.key
                                 it?.taskId = taskSnapshot.key
@@ -100,13 +100,23 @@ class TaskSolutionRepositoryImpl @Inject constructor() : TaskSolutionRepository 
         }
     }
 
-    override fun updateSolutionStatus(solution: TaskSolutionItem, status: String) {
-        val disciplineId = solution.disciplineId ?: ""
-        val userId = solution.userId ?: ""
-        val taskId = solution.taskId ?: ""
-        val solutionId = solution.id ?: ""
+    override fun updateSolutionStatus(solution: TaskSolutionItem) {
+        firebaseDB.getReference("solutions")
+                .child(solution.disciplineId.toString())
+                .child(solution.taskId.toString())
+                .child(solution.userId.toString())
+                .child(solution.id.toString())
+                .child("status")
+                .setValue(solution.status)
+    }
 
-        val ref = firebaseDB.getReference("solutions")
-        ref.child(disciplineId).child(userId).child(taskId).child(solutionId).child("status").setValue(status)
+    override fun addSolutionCommnet(solution: TaskSolutionItem) {
+        firebaseDB.getReference("solutions")
+                .child(solution.disciplineId.toString())
+                .child(solution.taskId.toString())
+                .child(solution.userId.toString())
+                .child(solution.id.toString())
+                .child("comment")
+                .setValue(solution.comment)
     }
 }
