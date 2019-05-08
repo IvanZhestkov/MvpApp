@@ -62,10 +62,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/task_description_example"
                 android:textAppearance="@style/Text.Small.Thin" />
 
             <Button
+                android:id="@+id/btn_task_download"
                 style="@style/AccentButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

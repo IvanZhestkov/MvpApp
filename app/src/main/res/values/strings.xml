@@ -82,8 +82,8 @@
 
     <!--Bottom Bar-->
     <string name="test_name">%s\n%s\n%s</string>
-    <string name="main_menu_rasp">Расписание</string>
-    <string name="main_menu_messages">Сообщения</string>
+    <string name="main_menu_tasks">Задания</string>
+    <string name="main_menu_chat">Чат</string>
     <string name="main_menu_profile">Профиль</string>
 
     <string name="rationale_doc_picker">We need this pemission to read documents from device.</string>

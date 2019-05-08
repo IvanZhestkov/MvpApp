@@ -31,4 +31,7 @@
     <color name="colorTableDivider">#959393</color>
 
     <color name="colorGrey">#737A80</color>
+    <color name="colorRed">#FF1717</color>
+    <color name="colorGreen">#25C12D</color>
+    <color name="colorYellow">#FFD700</color>
 </resources>

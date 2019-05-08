@@ -6,7 +6,7 @@ import com.itis.android.mvpapp.data.repository.LoginRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.UserRole
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
-import com.itis.android.mvpapp.presentation.utils.validation.Validator
+import com.itis.android.mvpapp.presentation.util.validation.Validator
 import javax.inject.Inject
 
 @InjectViewState

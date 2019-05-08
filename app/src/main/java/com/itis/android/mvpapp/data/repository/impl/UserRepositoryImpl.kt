@@ -1,12 +1,12 @@
 package com.itis.android.mvpapp.data.repository.impl
 
+import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.itis.android.mvpapp.data.repository.LoginRepository
+import com.itis.android.mvpapp.data.network.isOnline
 import com.itis.android.mvpapp.data.repository.UserRepository
 import com.itis.android.mvpapp.presentation.model.*
-import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.subjects.AsyncSubject
 import java.lang.Exception
@@ -20,6 +20,9 @@ class UserRepositoryImpl @Inject constructor() : UserRepository {
 
     @Inject
     lateinit var firebaseDB: FirebaseDatabase
+
+    @Inject
+    lateinit var context: Context
 
     private var firebaseUser: FirebaseUser? = null
 
@@ -44,10 +47,16 @@ class UserRepositoryImpl @Inject constructor() : UserRepository {
                     }
                 })
 
-        return subject.singleOrError().flatMap { (errorMessage, user) ->
-            when {
-                errorMessage.isEmpty() -> Single.just(user)
-                else -> Single.error(Exception())
+        return Single.just(isOnline(context)).flatMap { isConnected ->
+            if (isConnected) {
+                subject.singleOrError().flatMap { (errorMessage, user) ->
+                    when {
+                        errorMessage.isEmpty() -> Single.just(user)
+                        else -> Single.error(Exception())
+                    }
+                }
+            } else {
+                Single.error(Exception())
             }
         }
     }

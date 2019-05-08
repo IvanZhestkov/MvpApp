@@ -44,6 +44,13 @@ class AuthPresenter
             userRepository
                     .getUser()
                     .compose(PresentationSingleTransformer())
+                    .doOnSubscribe {
+                        viewState.showProgress()
+                        viewState.hideRetry()
+                    }
+                    .doAfterTerminate {
+                        viewState.hideProgress()
+                    }
                     .subscribe({ user ->
                         when (user.role) {
                             UserRole.PROFESSOR -> viewState.openTeacherScreen()
@@ -52,10 +59,14 @@ class AuthPresenter
                             }
                         }
                     }, {
-                        viewState.showErrorDialog("Ошибка входа")
+                        viewState.showRetry("Ошибка входа. Проверьте подключение к интернету!")
                     })
                     .disposeWhenDestroy()
         }
+    }
+
+    fun onRetry() {
+        checkAuth()
     }
 
     fun openLoginScreen() {
