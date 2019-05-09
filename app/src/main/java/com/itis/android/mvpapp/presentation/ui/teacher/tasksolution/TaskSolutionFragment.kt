@@ -11,7 +11,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.base.BaseFragment
-import com.itis.android.mvpapp.presentation.model.User
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.UserItem
 import com.itis.android.mvpapp.presentation.util.extensions.extractInitParams
 import com.itis.android.mvpapp.presentation.util.extensions.hide
 import com.itis.android.mvpapp.presentation.util.extensions.putInitParams
@@ -55,10 +55,11 @@ class TaskSolutionFragment : BaseFragment(), TaskSolutionView, View.OnClickListe
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initActionView()
     }
 
-    override fun showStudentName(user: User) {
+    override fun showStudentName(user: UserItem) {
         tv_task_solution_stud.text = "${user.last_name} ${user.first_name}"
     }
 
@@ -103,6 +104,9 @@ class TaskSolutionFragment : BaseFragment(), TaskSolutionView, View.OnClickListe
             R.id.btn_task_solution_download -> {
                 presenter.downloadTaskSolution()
             }
+            R.id.tv_task_solution_stud -> {
+                presenter.onCreateDialog()
+            }
         }
     }
 
@@ -110,5 +114,6 @@ class TaskSolutionFragment : BaseFragment(), TaskSolutionView, View.OnClickListe
         btn_task_solution_confirm.setOnClickListener(this)
         btn_task_solution_reject.setOnClickListener(this)
         btn_task_solution_download.setOnClickListener(this)
+        tv_task_solution_stud.setOnClickListener(this)
     }
 }

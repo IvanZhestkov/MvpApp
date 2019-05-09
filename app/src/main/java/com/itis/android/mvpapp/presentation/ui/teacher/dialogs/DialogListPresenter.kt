@@ -1,8 +1,15 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.dialogs
 
 import com.arellomobile.mvp.InjectViewState
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.google.firebase.database.FirebaseDatabase
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.MessageItem
+import com.itis.android.mvpapp.data.repository.DialogsRepository
+import com.itis.android.mvpapp.data.repository.MessagesRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.DialogModel
+import com.itis.android.mvpapp.presentation.rx.transformer.PresentationObservableTransformer
+import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
 import com.itis.android.mvpapp.presentation.ui.teacher.dialogs.DialogListView
 import com.itis.android.mvpapp.router.MainRouter
 import javax.inject.Inject
@@ -13,7 +20,36 @@ class DialogListPresenter @Inject constructor() : BasePresenter<DialogListView>(
     @Inject
     lateinit var router: MainRouter
 
+    @Inject
+    lateinit var dialogsRepository: DialogsRepository
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        update()
+    }
+
     fun onDialog(dialog: DialogModel) {
-        router.openDialogScreen(dialog)
+        router.openDialogScreen(dialog.dialogId.orEmpty())
+    }
+
+    fun onRetry() {
+        update()
+    }
+
+    private fun update() {
+        dialogsRepository
+                .getDialogs()
+                .toList()
+                .compose(PresentationSingleTransformer())
+                .doOnSubscribe {
+                    viewState.showProgress()
+                    viewState.hideRetry()
+                }.doAfterTerminate { viewState.hideProgress() }
+                .subscribe({
+                    viewState.setDialogs(it)
+                }, {
+                    viewState.showRetry("Ошибка при загрузке данных")
+                })
+                .disposeWhenDestroy()
     }
 }

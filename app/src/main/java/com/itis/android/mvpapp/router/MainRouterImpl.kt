@@ -33,8 +33,8 @@ class MainRouterImpl : MainRouter, Router() {
         navigateTo(Screens.getTaskSolutionScreen(taskSolutionInitParams))
     }
 
-    override fun openDialogScreen(dialog: DialogModel) {
-        navigateTo(Screens.getDialogScreen(dialog))
+    override fun openDialogScreen(dialogId: String) {
+        navigateTo(Screens.getDialogScreen(dialogId))
     }
 
     override fun goBack() {

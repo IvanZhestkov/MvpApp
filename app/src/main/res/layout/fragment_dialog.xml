@@ -68,11 +68,12 @@
 
         <ImageView
             android:id="@+id/btn_send_msg"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_send_msg" />
+            android:background="@drawable/background_send_message" />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

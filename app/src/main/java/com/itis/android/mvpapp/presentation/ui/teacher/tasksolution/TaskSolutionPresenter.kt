@@ -1,11 +1,15 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.tasksolution
 
 import com.arellomobile.mvp.InjectViewState
+import com.itis.android.mvpapp.data.repository.DialogsRepository
 import com.google.firebase.storage.FirebaseStorage
 import com.itis.android.mvpapp.R
+import com.itis.android.mvpapp.data.repository.MessagesRepository
 import com.itis.android.mvpapp.data.repository.TaskSolutionRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.UserSolutionModel
+import com.itis.android.mvpapp.presentation.rx.transformer.PresentationObservableTransformer
+import com.itis.android.mvpapp.router.MainRouter
 import javax.inject.Inject
 
 @InjectViewState
@@ -18,6 +22,12 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
 
     @Inject
     lateinit var firebaseStorage: FirebaseStorage
+
+    @Inject
+    lateinit var dialogsRepository: DialogsRepository
+
+    @Inject
+    lateinit var router: MainRouter
 
     fun init(userSolution: UserSolutionModel) {
         this.userSolution = userSolution
@@ -80,5 +90,18 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
                 }
                 .addOnFailureListener {
                 }
+    }
+
+    fun onCreateDialog() {
+        dialogsRepository
+                .createDialog(userSolution?.solution?.userId.orEmpty())
+                .compose(PresentationObservableTransformer())
+                .subscribe({ dialogId ->
+                    router.openDialogScreen(dialogId)
+                }, {
+                    it.printStackTrace()
+                })
+                .disposeWhenDestroy()
+
     }
 }

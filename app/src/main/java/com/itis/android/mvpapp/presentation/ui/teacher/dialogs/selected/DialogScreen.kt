@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment
 import com.itis.android.mvpapp.presentation.model.DialogModel
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
-class DialogScreen(val dialog: DialogModel): SupportAppScreen() {
+class DialogScreen(val dialogId: String): SupportAppScreen() {
 
     override fun getFragment(): Fragment {
-        return DialogFragment.getInstance(dialog)
+        return DialogFragment.getInstance(dialogId)
     }
 
     override fun getScreenKey(): String {

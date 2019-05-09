@@ -1,16 +1,13 @@
 package com.itis.android.mvpapp.data.repository.impl
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.UserItem
 import com.itis.android.mvpapp.data.repository.LoginRepository
 import com.itis.android.mvpapp.data.repository.UserRepository
-import com.itis.android.mvpapp.presentation.model.*
-import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.subjects.AsyncSubject
 import java.lang.Exception
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 class LoginRepositoryImpl @Inject constructor() : LoginRepository {
@@ -24,8 +21,8 @@ class LoginRepositoryImpl @Inject constructor() : LoginRepository {
     @Inject
     lateinit var userRepository: UserRepository
 
-    override fun login(email: String, password: String): Single<User> {
-        val subject = AsyncSubject.create<Pair<Boolean, Single<User>>>()
+    override fun login(email: String, password: String): Single<UserItem> {
+        val subject = AsyncSubject.create<Pair<Boolean, Single<UserItem>>>()
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
@@ -33,7 +30,7 @@ class LoginRepositoryImpl @Inject constructor() : LoginRepository {
                         subject.onNext(Pair(it.isSuccessful, userRepository.getUser()))
                         subject.onComplete()
                     } else {
-                        subject.onNext(Pair(it.isSuccessful, Single.just(User())))
+                        subject.onNext(Pair(it.isSuccessful, Single.just(UserItem())))
                         subject.onComplete()
                     }
                 }

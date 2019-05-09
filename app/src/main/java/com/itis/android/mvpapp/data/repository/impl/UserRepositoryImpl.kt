@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.UserItem
 import com.itis.android.mvpapp.data.network.isOnline
 import com.itis.android.mvpapp.data.repository.UserRepository
 import com.itis.android.mvpapp.presentation.model.*
@@ -26,23 +27,23 @@ class UserRepositoryImpl @Inject constructor() : UserRepository {
 
     private var firebaseUser: FirebaseUser? = null
 
-    override fun getUser(): Single<User> {
+    override fun getUser(): Single<UserItem> {
         firebaseUser = firebaseAuth.currentUser
         val ref = firebaseDB.getReference("users")
 
-        val subject = AsyncSubject.create<Pair<String, User>>()
+        val subject = AsyncSubject.create<Pair<String, UserItem>>()
 
         firebaseUser?.uid.let { ref.child(it.toString()) }
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        val user = dataSnapshot.getValue(User::class.java)
+                        val user = dataSnapshot.getValue(UserItem::class.java)
                         subject.onNext(Pair("", user
                                 ?: throw IllegalArgumentException("firebase user is null")))
                         subject.onComplete()
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        subject.onNext(Pair(error.message, User()))
+                        subject.onNext(Pair(error.message, UserItem()))
                         subject.onComplete()
                     }
                 })
@@ -61,22 +62,22 @@ class UserRepositoryImpl @Inject constructor() : UserRepository {
         }
     }
 
-    override fun getUserById(id: String): Single<User> {
+    override fun getUserById(id: String): Single<UserItem> {
         firebaseUser = firebaseAuth.currentUser
         val ref = firebaseDB.getReference("users").child(id)
 
-        val subject = AsyncSubject.create<Pair<String, User>>()
+        val subject = AsyncSubject.create<Pair<String, UserItem>>()
 
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val user = dataSnapshot.getValue(User::class.java)
-                subject.onNext(Pair("", user
-                        ?: throw IllegalArgumentException("firebase user is null")))
+                val user = dataSnapshot.getValue(UserItem::class.java)
+                subject.onNext(Pair("", user ?: UserItem()))
+
                 subject.onComplete()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                subject.onNext(Pair(error.message, User()))
+                subject.onNext(Pair(error.message, UserItem()))
                 subject.onComplete()
             }
         })

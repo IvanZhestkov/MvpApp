@@ -40,4 +40,12 @@ abstract class RepositoryBuilder {
     @Binds
     @Singleton
     abstract fun bindStudentsRepository(repositoryImpl: StudentsRepositoryImpl): StudentsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindDialogsRepository(repositoryImpl: DialogsRepositoryImpl): DialogsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindMessagesRepository(repositoryImpl: MessagesRepositoryImpl): MessagesRepository
 }

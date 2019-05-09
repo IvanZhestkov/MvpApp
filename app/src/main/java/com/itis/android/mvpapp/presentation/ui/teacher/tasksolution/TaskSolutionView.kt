@@ -1,12 +1,12 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.tasksolution
 
 import com.itis.android.mvpapp.presentation.base.BaseView
-import com.itis.android.mvpapp.presentation.model.User
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.UserItem
 import java.security.cert.Extension
 
 interface TaskSolutionView : BaseView {
 
-    fun showStudentName(user: User)
+    fun showStudentName(user: UserItem)
 
     fun setColorStatus(color: Int)
 

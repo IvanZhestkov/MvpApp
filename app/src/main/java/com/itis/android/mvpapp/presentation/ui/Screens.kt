@@ -36,5 +36,5 @@ object Screens {
 
     fun getDialogListScreen(): DialogListScreen = DialogListScreen()
 
-    fun getDialogScreen(dialog: DialogModel): DialogScreen = DialogScreen(dialog)
+    fun getDialogScreen(dialogId: String): DialogScreen = DialogScreen(dialogId)
 }
