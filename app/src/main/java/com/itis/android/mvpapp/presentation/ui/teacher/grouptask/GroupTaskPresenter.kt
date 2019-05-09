@@ -32,28 +32,13 @@ class GroupTaskPresenter
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+        showTaskName()
         showTaskDescription()
         loadDataForTable()
     }
 
-    fun onRetry() {
-        loadDataForTable()
-    }
-
-    fun openTaskSolutionScreen(userSolution: UserSolutionModel) {
-        groupTaskRouter.openTaskSolutionScreen(TaskSolutionInitParams(userSolution))
-    }
-
-    fun dowloadTask() {
-        val storageRef = firebaseStorage.reference
-        val ref = task?.filePath?.let { storageRef.child(it) }
-
-        ref?.downloadUrl
-                ?.addOnSuccessListener {
-                    viewState.downloadFile(task?.filePath.toString(), ".pdf", it.toString())
-                }
-                ?.addOnFailureListener {
-                }
+    private fun showTaskName() {
+        task?.name?.let { viewState.showTaskName(it) }
     }
 
     private fun showTaskDescription() {
@@ -72,9 +57,34 @@ class GroupTaskPresenter
                     viewState.hideProgress()
                 }
                 .subscribe({
-                    viewState.showTable(it)
+                    if (it.isEmpty()) {
+                        viewState.hideTable()
+                    } else {
+                        viewState.showTable()
+                        viewState.showTableSolutions(it)
+                    }
                 }, {
                     viewState.showRetry("Ошибка")
                 }).disposeWhenDestroy()
+    }
+
+    fun onRetry() {
+        loadDataForTable()
+    }
+
+    fun openTaskSolutionScreen(userSolution: UserSolutionModel) {
+        groupTaskRouter.openTaskSolutionScreen(TaskSolutionInitParams(userSolution, task?.expiration_date))
+    }
+
+    fun dowloadTask() {
+        val storageRef = firebaseStorage.reference
+        val ref = task?.filePath?.let { storageRef.child(it) }
+
+        ref?.downloadUrl
+                ?.addOnSuccessListener {
+                    viewState.downloadFile(task?.filePath.toString(), ".pdf", it.toString())
+                }
+                ?.addOnFailureListener {
+                }
     }
 }

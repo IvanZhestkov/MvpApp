@@ -22,6 +22,8 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
     protected val baseActivity
         get() = activity as BaseActivity
 
+    var toolbar: Toolbar? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
@@ -35,9 +37,8 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        val toolbar = view.findViewById<Toolbar>(R.id.toolbar).also {it?.title = getString(R.string.empty)}
-        toolbar?.findViewById<TextView>(R.id.toolbar_title)?.text = getString(toolbarTitle ?: R.string.app_name)
+        toolbar = view.findViewById<Toolbar>(R.id.toolbar).also { it?.title = getString(R.string.empty) }
+        setToolbarTitle(toolbarTitle)
 
         baseActivity.setSupportActionBar(toolbar)
         baseActivity.setBackArrow(enableBackArrow)
@@ -64,5 +65,14 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
 
     override fun showErrorDialog(text: String) {
         (activity as? BaseActivity)?.showErrorDialog(text)
+    }
+
+    fun setToolbarTitle(title: Int?) {
+        toolbar?.findViewById<TextView>(R.id.toolbar_title)?.text = getString(title
+                ?: R.string.app_name)
+    }
+
+    fun setToolbarTitle(title: String?) {
+        toolbar?.findViewById<TextView>(R.id.toolbar_title)?.text = title
     }
 }
