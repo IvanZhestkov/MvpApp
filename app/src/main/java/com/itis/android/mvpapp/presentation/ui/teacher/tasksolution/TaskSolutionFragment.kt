@@ -49,7 +49,8 @@ class TaskSolutionFragment : BaseFragment(), TaskSolutionView, View.OnClickListe
     @ProvidePresenter
     fun providePresenter(): TaskSolutionPresenter {
         return presenterProvider.get().apply {
-            init(extractInitParams<TaskSolutionInitParams>().userSolution)
+            init(extractInitParams<TaskSolutionInitParams>().userSolution,
+                    extractInitParams<TaskSolutionInitParams>().taskDeadline)
         }
     }
 

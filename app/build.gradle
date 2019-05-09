@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 28
@@ -108,15 +109,21 @@ dependencies {
     //EasyPermissions
     implementation 'pub.devrel:easypermissions:2.0.1'
 
-    //Test
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //Fabric
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.6@aar') {
+        transitive = true
+    }
 
     //MaterialSpinner
     implementation 'com.github.ganfra:material-spinner:2.0.0'
 
     implementation 'com.redmadrobot:inputmask:4.0.0'
+
+    //Test
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

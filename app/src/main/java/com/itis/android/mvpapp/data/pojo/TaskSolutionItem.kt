@@ -12,6 +12,7 @@ data class TaskSolutionItem(
         var status: String? = null,
         var uploading_date: String? = null,
         var taskId: String? = null,
+        var taskDeadline: String? = null,
         var disciplineId: String? = null,
         var userId: String? = null
 ) : Parcelable {
@@ -20,6 +21,7 @@ data class TaskSolutionItem(
             parcel.readString(),
             parcel.readString(),
             parcel.readInt(),
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -37,6 +39,7 @@ data class TaskSolutionItem(
         parcel.writeString(status)
         parcel.writeString(uploading_date)
         parcel.writeString(taskId)
+        parcel.writeString(taskDeadline)
         parcel.writeString(disciplineId)
         parcel.writeString(userId)
     }

@@ -18,7 +18,9 @@ import com.itis.android.mvpapp.presentation.model.UserSolutionModel
 import com.itis.android.mvpapp.presentation.model.table.GroupTaskCell
 import com.itis.android.mvpapp.presentation.model.table.GroupTaskRowHeader
 import com.itis.android.mvpapp.presentation.util.extensions.extractInitParams
+import com.itis.android.mvpapp.presentation.util.extensions.hide
 import com.itis.android.mvpapp.presentation.util.extensions.putInitParams
+import com.itis.android.mvpapp.presentation.util.extensions.show
 import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
 import kotlinx.android.synthetic.main.fragment_group_task.*
 import kotlinx.android.synthetic.main.layout_progress_error.*
@@ -67,11 +69,15 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
         initActionView()
     }
 
+    override fun showTaskName(name: String) {
+        tv_task_name.text = name
+    }
+
     override fun showTaskDescription(description: String) {
         tv_task_description.text = description
     }
 
-    override fun showTable(solutions: List<UserSolutionModel>) {
+    override fun showTableSolutions(solutions: List<UserSolutionModel>) {
         userSolutions = solutions
 
         val columnItems = mutableListOf(
@@ -101,6 +107,14 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
         request.setDestinationInExternalFilesDir(baseActivity, Environment.DIRECTORY_DOWNLOADS, fileName)
 
         downloadManager.enqueue(request)
+    }
+
+    override fun showTable() {
+        container_table.show()
+    }
+
+    override fun hideTable() {
+        container_table.visibility = View.GONE
     }
 
     override fun showProgress() {

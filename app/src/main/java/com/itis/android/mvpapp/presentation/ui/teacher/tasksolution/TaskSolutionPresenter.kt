@@ -1,5 +1,7 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.tasksolution
 
+import android.util.Log
+import android.widget.Toast
 import com.arellomobile.mvp.InjectViewState
 import com.itis.android.mvpapp.data.repository.DialogsRepository
 import com.google.firebase.storage.FirebaseStorage
@@ -10,12 +12,16 @@ import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.UserSolutionModel
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationObservableTransformer
 import com.itis.android.mvpapp.router.MainRouter
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @InjectViewState
 class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionView>() {
 
     private var userSolution: UserSolutionModel? = null
+
+    private var taskDeadline: String? = null
 
     @Inject
     lateinit var taskSolutionRepository: TaskSolutionRepository
@@ -30,7 +36,9 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
     lateinit var router: MainRouter
 
     fun init(userSolution: UserSolutionModel) {
+    fun init(userSolution: UserSolutionModel, taskDeadline: String?) {
         this.userSolution = userSolution
+        this.taskDeadline = taskDeadline
     }
 
     override fun onFirstViewAttach() {
@@ -44,7 +52,12 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
         when (userSolution?.solution?.status) {
             "accepted" -> viewState.hideButtons()
             "rejected" -> viewState.hideButtons()
-            else -> viewState.showButtons()
+            else -> {
+                viewState.showButtons()
+                if (checkTaskDeadline()) {
+                    viewState.hideButtons()
+                }
+            }
         }
     }
 
@@ -67,8 +80,21 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
             else -> {
                 viewState.updateStatus("Не проверено")
                 viewState.setColorStatus(R.color.colorYellow)
+                if (checkTaskDeadline()) {
+                    viewState.updateStatus("Просрочено")
+                    viewState.setColorStatus(R.color.colorRed)
+                }
             }
         }
+    }
+
+    private fun checkTaskDeadline(): Boolean {
+        val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        val solutionUploadingDate = userSolution?.solution?.uploading_date?.toLong() ?: 0
+        val dateTask = formatter.parse(taskDeadline)
+        val dateSolution = Date(solutionUploadingDate * 1000)
+
+        return dateSolution.after(dateTask)
     }
 
     fun updateSolutionStatus(status: String, comment: String) {

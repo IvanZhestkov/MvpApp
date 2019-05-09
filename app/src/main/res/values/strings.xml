@@ -62,7 +62,7 @@
     <string name="toobar_new_task">Новое задание</string>
 
     <string name="empty" />
-
+    
     <string name="task_description">Описание задания:</string>
     <string name="task_description_example">
         Что необходимо делать в этом задании.\nПодробное описание в файле.

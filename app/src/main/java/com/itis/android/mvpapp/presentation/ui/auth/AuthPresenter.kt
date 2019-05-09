@@ -55,7 +55,7 @@ class AuthPresenter
                         when (user.role) {
                             UserRole.PROFESSOR -> viewState.openTeacherScreen()
                             else -> {
-                                viewState.openStudentScreen()
+                                //viewState.openStudentScreen()
                             }
                         }
                     }, {
