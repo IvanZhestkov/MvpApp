@@ -38,10 +38,6 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
         super.onViewCreated(view, savedInstanceState)
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
-        val toolbar = view.findViewById<Toolbar>(R.id.toolbar).also { it?.title = getString(R.string.empty) }
-        toolbar?.findViewById<TextView>(R.id.toolbar_title)?.text = getString(toolbarTitle
-                ?: R.string.app_name)
-
         toolbar = view.findViewById<Toolbar>(R.id.toolbar).also { it?.title = getString(R.string.empty) }
         setToolbarTitle(toolbarTitle)
 

@@ -35,7 +35,6 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
     @Inject
     lateinit var router: MainRouter
 
-    fun init(userSolution: UserSolutionModel) {
     fun init(userSolution: UserSolutionModel, taskDeadline: String?) {
         this.userSolution = userSolution
         this.taskDeadline = taskDeadline
