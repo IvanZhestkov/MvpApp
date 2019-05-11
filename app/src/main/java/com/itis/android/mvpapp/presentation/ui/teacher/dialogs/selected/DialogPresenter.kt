@@ -24,6 +24,7 @@ class DialogPresenter @Inject constructor() : BasePresenter<DialogView>() {
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         checkButtonState()
+        viewState.showProgress()
     }
 
     override fun attachView(view: DialogView?) {
@@ -55,5 +56,10 @@ class DialogPresenter @Inject constructor() : BasePresenter<DialogView>() {
 
     private fun checkButtonState() {
         viewState.setButtonEnabled(message != null)
+    }
+
+    fun onDataChange(items: MutableList<String>) {
+        viewState.setItemDecorationItems(items)
+        viewState.hideProgress()
     }
 }

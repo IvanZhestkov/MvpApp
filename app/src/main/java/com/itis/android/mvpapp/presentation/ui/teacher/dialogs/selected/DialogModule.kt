@@ -31,7 +31,7 @@ class DialogModule {
             MessageModelMapper.map(item, firebaseAuth.currentUser?.uid.orEmpty())
         }
 
-        val ref = firebaseDb.getReference("messages").child(fragment.getDialogId())
+        val ref = firebaseDb.getReference("messages").child(fragment.getDialogId()).orderByChild("created_date")
 
         return FirebaseRecyclerOptions.Builder<MessageModel>()
             .setQuery(ref, parser)

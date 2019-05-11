@@ -12,6 +12,7 @@ import com.itis.android.mvpapp.presentation.adapter.DialogAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.presentation.ui.teacher.TeacherActivity
 import com.itis.android.mvpapp.presentation.util.extensions.addTextChangedListener
+import com.itis.android.mvpapp.presentation.util.itemdecoration.DialogItemDecoration
 import kotlinx.android.synthetic.main.fragment_dialog.*
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
@@ -50,8 +51,10 @@ class DialogFragment : BaseFragment(), DialogView {
     @ProvidePresenter
     fun providePresenter(): DialogPresenter = presenterProvider.get()
 
+    private val itemDecoration = DialogItemDecoration()
+
     fun getDialogId() = arguments?.getString(KEY_DIALOG_ID)
-            ?: throw IllegalArgumentException("dialog id is null")
+        ?: throw IllegalArgumentException("dialog id is null")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -74,8 +77,13 @@ class DialogFragment : BaseFragment(), DialogView {
             }
         })
 
-        rv_messages.adapter = adapter
+        rv_messages.adapter = adapter.also {
+            it.onDataChangeListener = { items ->
+                presenter.onDataChange(items)
+            }
+        }
         rv_messages.layoutManager = layoutManager
+        rv_messages.addItemDecoration(itemDecoration)
 
         et_message_text.addTextChangedListener { presenter.onMessageChange(it.trim()) }
 
@@ -96,5 +104,17 @@ class DialogFragment : BaseFragment(), DialogView {
 
     override fun clearMessageField() {
         et_message_text.text = null
+    }
+
+    override fun showProgress() {
+        progress.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        progress.visibility = View.GONE
+    }
+
+    override fun setItemDecorationItems(items: MutableList<String>) {
+        itemDecoration.data = items
     }
 }

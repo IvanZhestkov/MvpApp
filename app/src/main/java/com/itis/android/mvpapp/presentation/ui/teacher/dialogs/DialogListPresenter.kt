@@ -2,12 +2,17 @@ package com.itis.android.mvpapp.presentation.ui.teacher.dialogs
 
 import com.arellomobile.mvp.InjectViewState
 import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.firebase.ui.database.SnapshotParser
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.itis.android.mvpapp.data.network.pojo.firebase.response.MessageItem
 import com.itis.android.mvpapp.data.repository.DialogsRepository
 import com.itis.android.mvpapp.data.repository.MessagesRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.DialogModel
+import com.itis.android.mvpapp.presentation.model.MessageModel
+import com.itis.android.mvpapp.presentation.model.MessageModelMapper
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationObservableTransformer
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
 import com.itis.android.mvpapp.presentation.ui.teacher.dialogs.DialogListView
@@ -22,6 +27,12 @@ class DialogListPresenter @Inject constructor() : BasePresenter<DialogListView>(
 
     @Inject
     lateinit var dialogsRepository: DialogsRepository
+
+    @Inject
+    lateinit var firebaseDb: FirebaseDatabase
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

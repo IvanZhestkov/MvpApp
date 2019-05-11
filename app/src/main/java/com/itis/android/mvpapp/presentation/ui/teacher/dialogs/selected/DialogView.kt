@@ -20,4 +20,13 @@ interface DialogView: BaseView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun clearMessageField()
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showProgress()
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun hideProgress()
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun setItemDecorationItems(items: MutableList<String>)
 }

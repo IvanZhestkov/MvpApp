@@ -50,7 +50,6 @@ class DialogListAdapter : RecyclerView.Adapter<DialogListAdapter.DialogViewHolde
             when (item.lastMessageFrom) {
                 MessageFromType.ME -> dialog_you.visibility = View.VISIBLE
                 else -> dialog_you.visibility = View.GONE
-
             }
 
             tv_dialog_avatar.text = item.username?.getDialogAvatar()

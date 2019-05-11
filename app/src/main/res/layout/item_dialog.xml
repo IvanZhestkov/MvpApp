@@ -100,7 +100,7 @@
                         android:textSize="14sp"
                         android:textStyle="normal"
                         android:visibility="gone"
-                        tools:text="Вы: " />
+                        android:text="Вы: " />
 
                     <TextView
                         android:id="@+id/dialog_last_message"

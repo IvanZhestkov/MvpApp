@@ -50,7 +50,8 @@ class MessagesRepositoryImpl @Inject constructor() : MessagesRepository {
 
         return asyncSubject.flatMap { (success, messages) ->
             if (success) {
-                Observable.fromIterable(messages).map { MessageModelMapper.map(it, firebaseAuth.currentUser?.uid.orEmpty()) }
+                Observable.fromIterable(messages)
+                    .map { MessageModelMapper.map(it, firebaseAuth.currentUser?.uid.orEmpty()) }
             } else {
                 Observable.error(Exception())
             }
@@ -62,20 +63,24 @@ class MessagesRepositoryImpl @Inject constructor() : MessagesRepository {
 
         val ref = firebaseDB.getReference("messages")
 
-        ref.child(chatId).orderByKey().limitToLast(1).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val sp = snapshot.children.lastOrNull()
-                val item = sp?.getValue(MessageItem::class.java)
+        ref
+            .child(chatId)
+            .orderByChild("created_date")
+            .limitToLast(1)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val sp = snapshot.children.lastOrNull()
+                    val item = sp?.getValue(MessageItem::class.java)
 
-                asyncSubject.onNext(Pair(true, item ?: MessageItem()))
-                asyncSubject.onComplete()
-            }
+                    asyncSubject.onNext(Pair(true, item ?: MessageItem()))
+                    asyncSubject.onComplete()
+                }
 
-            override fun onCancelled(p0: DatabaseError) {
-                asyncSubject.onNext(Pair(false, MessageItem()))
-                asyncSubject.onComplete()
-            }
-        })
+                override fun onCancelled(p0: DatabaseError) {
+                    asyncSubject.onNext(Pair(false, MessageItem()))
+                    asyncSubject.onComplete()
+                }
+            })
 
         return asyncSubject.flatMap { (success, message) ->
             if (success) {
@@ -90,11 +95,12 @@ class MessagesRepositoryImpl @Inject constructor() : MessagesRepository {
         val asyncSubject = AsyncSubject.create<Boolean>()
 
         val ref = firebaseDB.getReference("messages")
-        ref.child(addMessageModel.chatId.orEmpty()).push().setValue(MessageItem(
+        ref.child(addMessageModel.chatId.orEmpty()).push().setValue(
+            MessageItem(
                 addMessageModel.content,
                 System.currentTimeMillis(),
                 firebaseAuth.currentUser?.uid.orEmpty()
-        )
+            )
         ).addOnCompleteListener {
             asyncSubject.onNext(it.isSuccessful)
             asyncSubject.onComplete()
