@@ -57,7 +57,11 @@ class DialogListPresenter @Inject constructor() : BasePresenter<DialogListView>(
                     viewState.hideRetry()
                 }.doAfterTerminate { viewState.hideProgress() }
                 .subscribe({
-                    viewState.setDialogs(it)
+                    if (it.isEmpty()) {
+                        viewState.showEmptyState()
+                    } else {
+                        viewState.setDialogs(it)
+                    }
                 }, {
                     viewState.showRetry("Ошибка при загрузке данных")
                 })

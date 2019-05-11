@@ -42,13 +42,14 @@ class DialogsRepositoryImpl @Inject constructor() : DialogsRepository {
                 .subscribe({ chatId ->
                     if (chatId.isEmpty()) {
                         val ref = firebaseDB.getReference("chats").push()
-                        ref.setValue(CreateDialogItem(firebaseAuth.uid, studentId)).addOnCompleteListener {
-                            asyncSubject.onNext(Pair(true, ref.key.orEmpty()))
-                            asyncSubject.onComplete()
-                        }.addOnCanceledListener {
-                            asyncSubject.onNext(Pair(false, ""))
-                            asyncSubject.onComplete()
-                        }
+                        ref.setValue(CreateDialogItem(firebaseAuth.uid, studentId))
+                                .addOnCompleteListener {
+                                    asyncSubject.onNext(Pair(true, ref.key.orEmpty()))
+                                    asyncSubject.onComplete()
+                                }.addOnCanceledListener {
+                                    asyncSubject.onNext(Pair(false, ""))
+                                    asyncSubject.onComplete()
+                                }
                     } else {
                         asyncSubject.onNext(Pair(true, chatId))
                         asyncSubject.onComplete()

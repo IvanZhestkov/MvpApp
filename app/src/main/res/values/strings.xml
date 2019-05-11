@@ -92,7 +92,7 @@
     <string name="enter_subject_name">Введите название предмета</string>
     <string name="download_error">Ошибка</string>
     <string name="repeat">Повторить</string>
-    <string name="no_available_task">Нет доступных заданий</string>
+    <string name="no_available_tasks">Нет доступных заданий</string>
     <string name="choose_task">Выбрать файл</string>
     <string name="add">Добавить</string>
     <string name="choose_discipline">Выберите предмет</string>
@@ -102,5 +102,5 @@
     <string name="no_messages_yet">Список сообщений пуст</string>
     <string name="toolbar_dialog_list">Сообщения</string>
     <string name="toolbar_dialog">Иван Иванов</string>
-    <string name="messages_empty">Ваш список сообщений пуст</string>
+    <string name="dialogs_empty">Ваш список диалогов пуст</string>
 </resources>

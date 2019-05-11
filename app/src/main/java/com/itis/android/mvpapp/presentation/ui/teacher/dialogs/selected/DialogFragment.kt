@@ -28,7 +28,6 @@ class DialogFragment : BaseFragment(), DialogView {
                 putString(KEY_DIALOG_ID, dialogId)
             }
         }
-
     }
 
     override val toolbarTitle: Int? = R.string.toolbar_dialog

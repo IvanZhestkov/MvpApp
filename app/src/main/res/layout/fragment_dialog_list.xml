@@ -24,9 +24,10 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_dialogs_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/messages_empty"
+        android:text="@string/dialogs_empty"
         android:textAppearance="@style/Text.Medium.Primary"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,22 +35,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <include layout="@layout/layout_progress"
+    <include
         android:id="@+id/progress"
+        layout="@layout/layout_progress"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <include layout="@layout/layout_progress_error"
+    <include
         android:id="@+id/progress_error"
+        layout="@layout/layout_progress_error"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 </android.support.constraint.ConstraintLayout>

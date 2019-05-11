@@ -24,4 +24,10 @@ interface DialogListView : BaseView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun setDialogs(dialogs: List<DialogModel>)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showEmptyState()
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun hideEmptyState()
 }

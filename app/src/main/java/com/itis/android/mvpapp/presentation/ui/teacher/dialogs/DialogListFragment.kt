@@ -9,6 +9,8 @@ import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.adapter.DialogListAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.presentation.model.DialogModel
+import com.itis.android.mvpapp.presentation.util.extensions.hide
+import com.itis.android.mvpapp.presentation.util.extensions.show
 import kotlinx.android.synthetic.main.fragment_dialog_list.*
 import kotlinx.android.synthetic.main.layout_progress_error.*
 import javax.inject.Inject
@@ -72,5 +74,13 @@ class DialogListFragment : BaseFragment(), DialogListView {
 
     override fun setDialogs(dialogs: List<DialogModel>) {
         adapter.items = dialogs
+    }
+
+    override fun showEmptyState() {
+        text_dialogs_empty.show()
+    }
+
+    override fun hideEmptyState() {
+        text_dialogs_empty.hide()
     }
 }
