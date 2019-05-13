@@ -1,12 +1,9 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.tasksolution
 
-import android.util.Log
-import android.widget.Toast
 import com.arellomobile.mvp.InjectViewState
 import com.itis.android.mvpapp.data.repository.DialogsRepository
 import com.google.firebase.storage.FirebaseStorage
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.data.repository.MessagesRepository
 import com.itis.android.mvpapp.data.repository.TaskSolutionRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.UserSolutionModel
@@ -18,10 +15,6 @@ import javax.inject.Inject
 
 @InjectViewState
 class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionView>() {
-
-    private var userSolution: UserSolutionModel? = null
-
-    private var taskDeadline: String? = null
 
     @Inject
     lateinit var taskSolutionRepository: TaskSolutionRepository
@@ -35,6 +28,12 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
     @Inject
     lateinit var router: MainRouter
 
+    private var userSolution: UserSolutionModel? = null
+
+    private var username: String? = null
+
+    private var taskDeadline: String? = null
+
     fun init(userSolution: UserSolutionModel, taskDeadline: String?) {
         this.userSolution = userSolution
         this.taskDeadline = taskDeadline
@@ -42,12 +41,12 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        checkStateButtons()
+        checkButtonsState()
         userSolution?.solution?.status?.let { updateSolutionStatus(it) }
-        userSolution?.user?.let { viewState.showStudentName(it) }
+        viewState.showStudentName(getUsername(userSolution))
     }
 
-    private fun checkStateButtons() {
+    private fun checkButtonsState() {
         when (userSolution?.solution?.status) {
             "accepted" -> viewState.hideButtons()
             "rejected" -> viewState.hideButtons()
@@ -96,6 +95,8 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
         return dateSolution.after(dateTask)
     }
 
+    private fun getUsername(userSolution: UserSolutionModel?) = userSolution?.user?.last_name + userSolution?.user?.first_name
+
     fun updateSolutionStatus(status: String, comment: String) {
         val solution = userSolution?.solution
         solution?.status = status
@@ -122,7 +123,7 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
                 .createDialog(userSolution?.solution?.userId.orEmpty())
                 .compose(PresentationObservableTransformer())
                 .subscribe({ dialogId ->
-                    router.openDialogScreen(dialogId)
+                    router.openDialogScreen(dialogId, getUsername(userSolution))
                 }, {
                     it.printStackTrace()
                 })

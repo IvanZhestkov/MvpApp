@@ -22,10 +22,12 @@ class DialogFragment : BaseFragment(), DialogView {
 
     companion object {
         private const val KEY_DIALOG_ID = "KEY_DIALOG_ID"
+        private const val KEY_DIALOG_USERNAME = "KEY_DIALOG_USERNAME"
 
-        fun getInstance(dialogId: String) = DialogFragment().also {
+        fun getInstance(dialogId: String, username: String) = DialogFragment().also {
             it.arguments = Bundle().apply {
                 putString(KEY_DIALOG_ID, dialogId)
+                putString(KEY_DIALOG_USERNAME, username)
             }
         }
     }
@@ -48,7 +50,11 @@ class DialogFragment : BaseFragment(), DialogView {
     lateinit var adapter: DialogAdapter
 
     @ProvidePresenter
-    fun providePresenter(): DialogPresenter = presenterProvider.get()
+    fun providePresenter(): DialogPresenter {
+        return presenterProvider.get().apply {
+            init(arguments?.getString(KEY_DIALOG_USERNAME).toString())
+        }
+    }
 
     private val itemDecoration = DialogItemDecoration()
 
@@ -103,6 +109,10 @@ class DialogFragment : BaseFragment(), DialogView {
 
     override fun clearMessageField() {
         et_message_text.text = null
+    }
+
+    override fun showToolbarTitle(username: String) {
+        setToolbarTitle(username)
     }
 
     override fun showProgress() {

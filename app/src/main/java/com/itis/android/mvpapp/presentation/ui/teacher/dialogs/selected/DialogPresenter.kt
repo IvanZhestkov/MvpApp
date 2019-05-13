@@ -21,9 +21,16 @@ class DialogPresenter @Inject constructor() : BasePresenter<DialogView>() {
 
     private var message: String? = null
 
+    private var username: String? = null
+
+    fun init(username: String) {
+        this.username = username
+    }
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         checkButtonState()
+        viewState.showToolbarTitle(username.toString())
         viewState.showProgress()
     }
 

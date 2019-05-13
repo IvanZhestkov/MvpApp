@@ -60,8 +60,8 @@ class TaskSolutionFragment : BaseFragment(), TaskSolutionView, View.OnClickListe
         initActionView()
     }
 
-    override fun showStudentName(user: UserItem) {
-        tv_task_solution_stud.text = "${user.last_name} ${user.first_name}"
+    override fun showStudentName(username: String) {
+        tv_task_solution_stud.text = username
     }
 
     override fun downloadFile(fileName: String, fileExtension: String, url: String) {

@@ -1,10 +1,12 @@
 package com.itis.android.mvpapp.data.repository.impl
 
+import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.itis.android.mvpapp.data.network.isOnline
 import com.itis.android.mvpapp.data.network.pojo.firebase.response.CreateDialogItem
 import com.itis.android.mvpapp.data.network.pojo.firebase.response.UserItem
 import com.itis.android.mvpapp.data.repository.DialogsRepository
@@ -34,6 +36,9 @@ class DialogsRepositoryImpl @Inject constructor() : DialogsRepository {
 
     @Inject
     lateinit var usersRepository: UserRepository
+
+    @Inject
+    lateinit var context: Context
 
     override fun createDialog(studentId: String): Observable<String> {
         val asyncSubject = AsyncSubject.create<Pair<Boolean, String>>()
@@ -150,9 +155,14 @@ class DialogsRepositoryImpl @Inject constructor() : DialogsRepository {
                     }
                 })
 
-        return asyncSubject.singleOrError().flatMap { (success, items) ->
-            if (success) {
-                Single.just(items)
+        return Single.just(isOnline(context)).flatMap { isConnected ->
+            if (isConnected) {
+                asyncSubject.singleOrError().flatMap { (success, items) ->
+                    when {
+                        success -> Single.just(items)
+                        else -> Single.error(Exception())
+                    }
+                }
             } else {
                 Single.error(Exception())
             }

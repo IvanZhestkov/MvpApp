@@ -28,7 +28,7 @@ class DialogListFragment : BaseFragment(), DialogListView {
 
     override val menu: Int? = null
 
-    override val toolbarTitle: Int? = R.string.toolbar_dialog_list
+    override val toolbarTitle: Int? = R.string.screen_name_chat
 
     @InjectPresenter
     lateinit var presenter: DialogListPresenter

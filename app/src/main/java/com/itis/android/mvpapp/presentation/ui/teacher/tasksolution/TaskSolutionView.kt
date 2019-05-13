@@ -6,7 +6,7 @@ import java.security.cert.Extension
 
 interface TaskSolutionView : BaseView {
 
-    fun showStudentName(user: UserItem)
+    fun showStudentName(username: String)
 
     fun setColorStatus(color: Int)
 

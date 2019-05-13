@@ -40,7 +40,7 @@ class DialogListPresenter @Inject constructor() : BasePresenter<DialogListView>(
     }
 
     fun onDialog(dialog: DialogModel) {
-        router.openDialogScreen(dialog.dialogId.orEmpty())
+        router.openDialogScreen(dialog.dialogId.orEmpty(), dialog.username.orEmpty())
     }
 
     fun onRetry() {

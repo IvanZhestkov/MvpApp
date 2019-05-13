@@ -22,6 +22,9 @@ interface DialogView: BaseView {
     fun clearMessageField()
 
     @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showToolbarTitle(username: String)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
     fun showProgress()
 
     @StateStrategyType(AddToEndSingleStrategy::class)

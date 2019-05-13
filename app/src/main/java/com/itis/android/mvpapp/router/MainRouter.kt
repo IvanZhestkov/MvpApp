@@ -16,7 +16,7 @@ interface MainRouter {
 
     fun openTaskSolutionScreen(taskSolutionInitParams: TaskSolutionInitParams)
 
-    fun openDialogScreen(dialogId: String)
+    fun openDialogScreen(dialogId: String, username: String)
 
     fun openDialogListScreen()
 

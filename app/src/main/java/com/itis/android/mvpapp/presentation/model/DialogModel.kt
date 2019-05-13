@@ -17,7 +17,7 @@ object DialogModelMapper {
     fun map(message: MessageModel, user: UserItem, dialogId: String): DialogModel {
         return DialogModel(
                 dialogId,
-                "${user.first_name} ${user.last_name}",
+                "${user.last_name} ${user.first_name}",
                 message.content,
                 message.createdDate,
                 message.messageFrom
