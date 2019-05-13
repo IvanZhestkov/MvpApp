@@ -1,6 +1,8 @@
 package com.itis.android.mvpapp.presentation.ui.student.profile
 
+import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -8,6 +10,9 @@ import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.adapter.DisciplineAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.presentation.model.TeacherInfoModel
+import com.itis.android.mvpapp.presentation.ui.auth.AuthActivity
+import kotlinx.android.synthetic.main.fragment_student_profile.*
+import kotlinx.android.synthetic.main.layout_progress_error.*
 import javax.inject.Inject
 import javax.inject.Provider
 

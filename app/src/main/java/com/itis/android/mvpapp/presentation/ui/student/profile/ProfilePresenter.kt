@@ -1,6 +1,7 @@
-package com.itis.android.mvpapp.presentation.ui.student.profile
+package com.itis.android.mvpapp.presentation.ui.student.profile 
 
 import com.arellomobile.mvp.InjectViewState
+import com.google.firebase.auth.FirebaseAuth
 import com.itis.android.mvpapp.data.repository.TeacherRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationObservableTransformer

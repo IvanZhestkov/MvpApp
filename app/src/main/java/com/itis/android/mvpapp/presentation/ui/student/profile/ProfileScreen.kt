@@ -1,5 +1,6 @@
 package com.itis.android.mvpapp.presentation.ui.student.profile
 
+import android.support.v4.app.Fragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 class ProfileScreen : SupportAppScreen() {
