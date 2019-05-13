@@ -35,7 +35,7 @@ object Screens {
 
     fun getTaskSolutionScreen(initParams: TaskSolutionInitParams): TaskSolutionScreen = TaskSolutionScreen(initParams)
 
-    fun getMessagesScreen(): MessagesScreen = MessagesScreen()
+    //fun getMessagesScreen(): MessagesScreen = MessagesScreen()
 
     fun getTasksListScreen(): StudentTasksScreen = StudentTasksScreen()
     fun getDialogListScreen(): DialogListScreen = DialogListScreen()

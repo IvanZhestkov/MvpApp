@@ -63,7 +63,7 @@ class StudentPresenter
     }
 
     fun onMessages() {
-        mainRouter.openMessagesScreen()
+        //mainRouter.openMessagesScreen()
     }
 
     fun onProfile() {
