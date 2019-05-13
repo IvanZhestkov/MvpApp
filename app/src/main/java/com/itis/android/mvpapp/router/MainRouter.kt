@@ -1,19 +1,24 @@
 package com.itis.android.mvpapp.router
 
-import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams
+import com.itis.android.mvpapp.presentation.model.DialogModel
+import com.itis.android.mvpapp.router.initparams.NewTaskInitParams
+import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
+import com.itis.android.mvpapp.router.initparams.TaskSolutionInitParams
 
 interface MainRouter {
     fun openProfileScreen()
 
     fun openGroupListScreen()
 
-    fun openLoadTaskScreen(loadTaskInitParams: LoadTaskInitParams)
+    fun openNewTaskScreen(newTaskInitParams: NewTaskInitParams)
 
-    fun openGroupTaskScreen()
+    fun openGroupTaskScreen(groupTaskInitParams: GroupTaskInitParams)
 
-    fun openTaskSolutionScreen()
+    fun openTaskSolutionScreen(taskSolutionInitParams: TaskSolutionInitParams)
 
-    fun openMessagesScreen()
+    fun openDialogScreen(dialogId: String, username: String)
+
+    fun openDialogListScreen()
 
     fun openTaskListScreen()
 

@@ -1,8 +1,7 @@
 package com.itis.android.mvpapp.presentation.model
 
-import com.google.firebase.auth.FirebaseAuth
-import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
-import com.itis.android.mvpapp.data.pojo.TeacherInfoItem
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.TeacherDisciplineItem
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.TeacherInfoItem
 
 data class TeacherInfoModel(
         var id: Int? = null,

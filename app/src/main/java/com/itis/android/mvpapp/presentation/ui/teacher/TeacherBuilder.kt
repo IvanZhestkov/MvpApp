@@ -1,14 +1,18 @@
 package com.itis.android.mvpapp.presentation.ui.teacher
 
+import com.itis.android.mvpapp.presentation.model.DialogModel
+import com.itis.android.mvpapp.presentation.ui.teacher.dialogs.DialogListFragment
+import com.itis.android.mvpapp.presentation.ui.teacher.dialogs.DialogListModule
+import com.itis.android.mvpapp.presentation.ui.teacher.dialogs.selected.DialogFragment
+import com.itis.android.mvpapp.presentation.ui.teacher.dialogs.selected.DialogModule
 import com.itis.android.mvpapp.presentation.ui.teacher.groups.GroupsFragment
 import com.itis.android.mvpapp.presentation.ui.teacher.groups.GroupsModule
 import com.itis.android.mvpapp.presentation.ui.teacher.groups.tasks.TasksFragment
 import com.itis.android.mvpapp.presentation.ui.teacher.groups.tasks.TasksModule
 import com.itis.android.mvpapp.presentation.ui.teacher.grouptask.GroupTaskFragment
 import com.itis.android.mvpapp.presentation.ui.teacher.grouptask.GroupTaskModule
-import com.itis.android.mvpapp.presentation.ui.teacher.loadtask.LoadTaskFragment
-import com.itis.android.mvpapp.presentation.ui.teacher.loadtask.LoadTaskModule
-import com.itis.android.mvpapp.presentation.ui.teacher.messages.MessagesFragment
+import com.itis.android.mvpapp.presentation.ui.teacher.newtask.NewTaskFragment
+import com.itis.android.mvpapp.presentation.ui.teacher.newtask.NewTaskModule
 import com.itis.android.mvpapp.presentation.ui.teacher.profile.ProfileFragment
 import com.itis.android.mvpapp.presentation.ui.teacher.profile.ProfileModule
 import com.itis.android.mvpapp.presentation.ui.teacher.tasksolution.TaskSolutionFragment
@@ -28,8 +32,8 @@ abstract class TeacherBuilder {
     @ContributesAndroidInjector(modules = [TasksModule::class])
     abstract fun buildTasksFragment(): TasksFragment
 
-    @ContributesAndroidInjector(modules = [LoadTaskModule::class])
-    abstract fun buildLoadTaskFragment(): LoadTaskFragment
+    @ContributesAndroidInjector(modules = [NewTaskModule::class])
+    abstract fun buildNewTaskFragment(): NewTaskFragment
 
     @ContributesAndroidInjector(modules = [GroupTaskModule::class])
     abstract fun buildGroupTaskFragment(): GroupTaskFragment
@@ -37,6 +41,9 @@ abstract class TeacherBuilder {
     @ContributesAndroidInjector(modules = [TaskSolutionModule::class])
     abstract fun buildTaskSolutionFragment(): TaskSolutionFragment
 
-    @ContributesAndroidInjector
-    abstract fun buildMessagesFragment(): MessagesFragment
+    @ContributesAndroidInjector(modules = [DialogListModule::class])
+    abstract fun buildDialogListFragment(): DialogListFragment
+
+    @ContributesAndroidInjector(modules = [DialogModule::class])
+    abstract fun buildDialogFragment(): DialogFragment
 }

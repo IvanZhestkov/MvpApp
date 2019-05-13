@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
 import com.itis.android.mvpapp.presentation.model.TeacherDisciplineModel
 import kotlinx.android.synthetic.main.item_discipline.view.*
 

@@ -5,8 +5,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.itis.android.mvpapp.data.network.isOnline
 import com.itis.android.mvpapp.data.repository.TeacherRepository
-import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
-import com.itis.android.mvpapp.data.pojo.TeacherInfoItem
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.TeacherDisciplineItem
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.TeacherInfoItem
 import com.itis.android.mvpapp.data.repository.DisciplinesRepository
 import com.itis.android.mvpapp.presentation.model.TeacherInfoModel
 import com.itis.android.mvpapp.presentation.model.TeacherInfoModelMapper
