@@ -95,7 +95,7 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
         return dateSolution.after(dateTask)
     }
 
-    private fun getUsername(userSolution: UserSolutionModel?) = userSolution?.user?.last_name + userSolution?.user?.first_name
+    private fun getUsername(userSolution: UserSolutionModel?) = "${userSolution?.user?.last_name} ${userSolution?.user?.first_name}"
 
     fun updateSolutionStatus(status: String, comment: String) {
         val solution = userSolution?.solution
