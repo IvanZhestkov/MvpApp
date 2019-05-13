@@ -1,11 +1,15 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.profile
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.adapter.DisciplineAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
@@ -55,32 +59,26 @@ class ProfileFragment : BaseFragment(), ProfileView {
         initActionViews()
     }
 
+    override fun showUserPhoto(url: String) {
+        Glide.with(baseActivity)
+                .load(url)
+                .apply(RequestOptions()
+                        .placeholder(ColorDrawable(Color.BLACK))
+                        .error(ColorDrawable(Color.RED))
+                        .centerCrop())
+                .into(civ_profile)
+    }
+
     override fun showProfile(teacherInfoModel: TeacherInfoModel) {
-        //createList()
         tv_name.text = getString(
                 R.string.test_name,
-                teacherInfoModel.firstName, teacherInfoModel.lastName, teacherInfoModel.middleName
+                teacherInfoModel.lastName, teacherInfoModel.firstName, teacherInfoModel.middleName
         )
         tv_birthday.text = teacherInfoModel.birthDate
         tv_email.text = teacherInfoModel.email
         tv_phone.text = teacherInfoModel.phone
 
         adapter.items = teacherInfoModel.disciplines.toMutableList()
-    }
-
-    private fun initList() {
-        rv_disciplines.adapter = adapter
-        rv_disciplines.layoutManager = LinearLayoutManager(context)
-        rv_disciplines.isNestedScrollingEnabled = false
-    }
-
-    private fun initActionViews() {
-        btn_logout.setOnClickListener {
-            presenter.onLogout()
-            val intent = Intent(baseActivity, AuthActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            startActivity(intent)
-        }
     }
 
     override fun showProgress() {
@@ -100,5 +98,20 @@ class ProfileFragment : BaseFragment(), ProfileView {
 
     override fun hideRetry() {
         progress_error.visibility = View.GONE
+    }
+
+    private fun initList() {
+        rv_disciplines.adapter = adapter
+        rv_disciplines.layoutManager = LinearLayoutManager(context)
+        rv_disciplines.isNestedScrollingEnabled = false
+    }
+
+    private fun initActionViews() {
+        btn_logout.setOnClickListener {
+            presenter.onLogout()
+            val intent = Intent(baseActivity, AuthActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
+        }
     }
 }

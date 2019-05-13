@@ -24,7 +24,6 @@ class ProfilePresenter
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-
         loadProfile()
     }
 
@@ -48,6 +47,7 @@ class ProfilePresenter
                     viewState.hideProgress()
                 }
                 .subscribe({
+                    viewState.showUserPhoto(it.photo.toString())
                     viewState.showProfile(it)
                 }, {
                     viewState.showRetry("Ошибка")
