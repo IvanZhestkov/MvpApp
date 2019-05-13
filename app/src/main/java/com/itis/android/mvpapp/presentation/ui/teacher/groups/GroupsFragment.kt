@@ -25,7 +25,7 @@ class GroupsFragment : BaseFragment(), GroupsView {
 
     override val enableBackArrow = false
 
-    override val toolbarTitle = R.string.toolbar_task
+    override val toolbarTitle = R.string.screen_name_tasks
 
     override val menu: Int?
         get() = null
@@ -84,5 +84,13 @@ class GroupsFragment : BaseFragment(), GroupsView {
 
     override fun hideTabs() {
         tabGroup.visibility = View.GONE
+    }
+
+    override fun showFAB() {
+        btn_add_task.show()
+    }
+
+    override fun hideFAB() {
+        btn_add_task.hide()
     }
 }

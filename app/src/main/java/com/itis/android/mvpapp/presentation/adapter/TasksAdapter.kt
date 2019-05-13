@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.data.pojo.TaskItem
 import com.itis.android.mvpapp.presentation.model.TaskModel
 import kotlinx.android.synthetic.main.item_task.view.*
 
@@ -17,7 +16,7 @@ class TasksAdapter : RecyclerView.Adapter<TasksAdapter.TasksViewHolder>() {
             notifyDataSetChanged()
         }
 
-    var onItemClickListener: ((Int) -> Unit)? = null
+    var onItemClickListener: ((TaskModel) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false)
@@ -42,7 +41,7 @@ class TasksAdapter : RecyclerView.Adapter<TasksAdapter.TasksViewHolder>() {
             tv_task_description.text = item.description
 
             itemView.setOnClickListener {
-                onItemClickListener?.invoke(adapterPosition)
+                onItemClickListener?.invoke(item)
             }
         }
     }

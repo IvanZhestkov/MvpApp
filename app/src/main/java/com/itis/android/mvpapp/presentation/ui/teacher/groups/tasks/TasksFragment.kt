@@ -3,13 +3,11 @@ package com.itis.android.mvpapp.presentation.ui.teacher.groups.tasks
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.adapter.TasksAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
-import com.itis.android.mvpapp.presentation.utils.extensions.toast
 import kotlinx.android.synthetic.main.fragment_tasks.*
 import javax.inject.Inject
 import javax.inject.Provider
@@ -64,9 +62,8 @@ class TasksFragment : BaseFragment(), TasksView {
     }
 
     private fun initList() {
-        adapter.onItemClickListener = { id ->
-            baseActivity.toast("TaskItem position: $id", Toast.LENGTH_SHORT)
-            presenter.openGroupTaskScreen()
+        adapter.onItemClickListener = { task ->
+            presenter.openGroupTaskScreen(task)
         }
 
         rv_tasks.adapter = adapter

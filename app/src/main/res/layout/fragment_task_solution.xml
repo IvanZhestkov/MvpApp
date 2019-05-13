@@ -2,7 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <include
         android:id="@+id/toolbar"
@@ -40,7 +41,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Иван Иванов"
+                tools:text="Иван Иванов"
                 android:textAppearance="@style/Text.Medium.Link"
                 app:layout_constraintBottom_toBottomOf="@id/tv_task_solution_stud_title"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +59,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_task_solution_stud_title" />
 
             <EditText
-                android:id="@+id/et_comment_field"
+                android:id="@+id/edt_comment_field"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="8dp"
@@ -79,7 +80,7 @@
                 android:text="@string/task_solution_status"
                 android:textAppearance="@style/Text.Medium.Title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_comment_field" />
+                app:layout_constraintTop_toBottomOf="@id/edt_comment_field" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_task_solution_status"
@@ -87,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="На рассмотрении"
-                android:textAppearance="@style/Text.Medium.Thin"
+                android:textAllCaps="true"
+                android:textAppearance="@style/Text.Large.Title"
                 app:layout_constraintBottom_toBottomOf="@id/tv_task_solution_status_title"
                 app:layout_constraintStart_toEndOf="@id/tv_task_solution_status_title"
                 app:layout_constraintTop_toTopOf="@id/tv_task_solution_status_title" />

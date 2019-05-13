@@ -1,6 +1,6 @@
 package com.itis.android.mvpapp.data.repository
 
-import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.TeacherDisciplineItem
 import io.reactivex.Single
 
 interface DisciplinesRepository {
@@ -8,4 +8,6 @@ interface DisciplinesRepository {
     fun getDisciplinesSingle(): Single<List<TeacherDisciplineItem>>
 
     fun getDisciplineById(id: String): Single<TeacherDisciplineItem>
+
+    fun getDisciplineByNameAndGroup(name: String, group: String): Single<TeacherDisciplineItem>
 }

@@ -3,7 +3,9 @@ package com.itis.android.mvpapp.presentation.ui.teacher.groups.tasks
 import com.arellomobile.mvp.InjectViewState
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.GroupModel
+import com.itis.android.mvpapp.presentation.model.TaskModel
 import com.itis.android.mvpapp.router.MainRouter
+import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
 import javax.inject.Inject
 
 @InjectViewState
@@ -26,7 +28,7 @@ class TasksPresenter
         }
     }
 
-    fun openGroupTaskScreen() {
-        tasksRouter.openGroupTaskScreen()
+    fun openGroupTaskScreen(task: TaskModel) {
+        tasksRouter.openGroupTaskScreen(GroupTaskInitParams(task))
     }
 }

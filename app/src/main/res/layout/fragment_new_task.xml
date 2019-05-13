@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d8"
+                android:text="@string/group_title"
+                android:textAppearance="@style/Text.Medium.Title" />
+
+            <EditText
+                android:id="@+id/edt_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d8"
+                android:layout_marginEnd="@dimen/d16"
+                android:background="@drawable/background_comment_edit_text"
+                android:clickable="false"
+                android:focusable="false"
+                android:gravity="top"
+                android:padding="8dp"
+                android:textAppearance="@style/Text.Medium.Thin" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d16"
+                android:text="@string/task_name"
+                android:textAppearance="@style/Text.Medium.Title" />
+
+            <EditText
+                android:id="@+id/edt_task_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d8"
+                android:layout_marginEnd="@dimen/d16"
+                android:background="@drawable/background_comment_edit_text"
+                android:gravity="top"
+                android:hint="@string/hint_enter_name"
+                android:padding="8dp"
+                android:textAppearance="@style/Text.Medium.Thin" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d16"
+                android:text="@string/deadline_date"
+                android:textAppearance="@style/Text.Medium.Title" />
+
+            <EditText
+                android:id="@+id/edt_deadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d8"
+                android:layout_marginEnd="@dimen/d16"
+                android:digits="0123456789."
+                android:maxLength="10"
+                android:inputType="date"
+                android:background="@drawable/background_comment_edit_text"
+                android:gravity="top"
+                android:hint="@string/hint_enter_deadline"
+                android:padding="8dp"
+                android:textAppearance="@style/Text.Medium.Thin" />
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/spinner_discipline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d8"
+                android:layout_marginEnd="@dimen/d16"
+                android:padding="0dp"
+                android:paddingEnd="@dimen/d16"
+                android:paddingRight="@dimen/d16"
+                android:spinnerMode="dropdown"
+                app:ms_alignLabels="false"
+                app:ms_baseColor="@color/colorSecondary"
+                app:ms_floatingLabelColor="@color/colorSecondary"
+                app:ms_hint="@string/choose_discipline"
+                app:ms_hintColor="@color/colorSecondary"
+                app:ms_hintView="@layout/item_spinner_hint" />
+
+            <Button
+                android:id="@+id/btn_choose_file"
+                style="@style/AccentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/d8"
+                android:text="@string/choose_task" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/container_picked_file"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/d16"
+                android:visibility="gone"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="@dimen/d8">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_picked_file_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/d4"
+                    android:textAppearance="@style/Text.Small.Primary" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d16"
+                android:text="@string/task_description_title"
+                android:textAppearance="@style/Text.Medium.Title" />
+
+            <EditText
+                android:id="@+id/edt_description_task"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d8"
+                android:layout_marginEnd="@dimen/d16"
+                android:background="@drawable/background_comment_edit_text"
+                android:gravity="top"
+                android:hint="@string/hint_enter_description"
+                android:padding="8dp"
+                android:textAppearance="@style/Text.Medium.Thin">
+
+            </EditText>
+
+            <Button
+                android:id="@+id/btn_add_task"
+                style="@style/AccentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/d16"
+                android:layout_marginBottom="@dimen/d16"
+                android:text="@string/add" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <include
+        android:id="@+id/progress"
+        layout="@layout/layout_progress"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <include
+        android:id="@+id/progress_error"
+        layout="@layout/layout_progress_error"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+</android.support.constraint.ConstraintLayout>

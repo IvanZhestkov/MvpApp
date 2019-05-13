@@ -27,4 +27,10 @@ interface GroupsView: BaseView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun hideTabs()
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showFAB()
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun hideFAB()
 }

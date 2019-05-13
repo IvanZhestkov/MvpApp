@@ -29,4 +29,18 @@
 
     <color name="colorBorder">#000000</color>
     <color name="colorTableDivider">#959393</color>
+    <color name="colorRed">#FF1717</color>
+    <color name="colorGreen">#25C12D</color>
+    <color name="colorYellow">#FFD700</color>
+    <color name="colorGrey">#737A80</color>
+
+    <!-- Avatar Colors -->
+    <color name="colorAvatarDarkBlue">#3b64a5</color>
+    <color name="colorAvatarRed">#82382e</color>
+    <color name="colorAvatarOrange">#ad7327</color>
+    <color name="colorAvatarYellow">#ccbb4b</color>
+    <color name="colorAvatarGreen">#73933e</color>
+    <color name="colorAvatarBlue">#3d9292</color>
+    <color name="colorAvatarPurple">#625599</color>
+    <color name="colorAvatarPink">#a03d75</color>
 </resources>

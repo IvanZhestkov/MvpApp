@@ -6,12 +6,12 @@
     <item
         android:id="@+id/main_menu_groups"
         android:icon="@drawable/ic_menu_main_rasp"
-        android:title="@string/main_menu_rasp" />
+        android:title="@string/main_menu_tasks" />
 
     <item
         android:id="@+id/main_menu_messages"
         android:icon="@drawable/ic_menu_main_chat"
-        android:title="@string/main_menu_messages" />
+        android:title="@string/main_menu_chat" />
 
     <item
         android:id="@+id/main_menu_projects"
