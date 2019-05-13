@@ -35,6 +35,7 @@ class DialogAdapter(options: FirebaseRecyclerOptions<MessageModel>) :
         }
 
         onDataChangeListener?.invoke(items)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

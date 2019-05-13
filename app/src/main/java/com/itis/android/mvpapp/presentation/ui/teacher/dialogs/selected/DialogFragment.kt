@@ -1,6 +1,7 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.dialogs.selected
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -53,6 +54,8 @@ class DialogFragment : BaseFragment(), DialogView {
 
     private val itemDecoration = DialogItemDecoration()
 
+    private var adapterObserver: RecyclerView.AdapterDataObserver? = null
+
     fun getDialogId() = arguments?.getString(KEY_DIALOG_ID)
         ?: throw IllegalArgumentException("dialog id is null")
 
@@ -61,10 +64,17 @@ class DialogFragment : BaseFragment(), DialogView {
         (baseActivity as? TeacherActivity)?.setBottomBarEnabled(false)
         (baseActivity as? TeacherActivity)?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
-        val layoutManager = LinearLayoutManager(requireContext()).also {
-            it.stackFromEnd = true
-        }
-        adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+        initRecyclerView()
+
+        et_message_text.addTextChangedListener { presenter.onMessageChange(it.trim()) }
+
+        btn_send_msg.setOnClickListener { presenter.onAddMessage() }
+    }
+
+    private fun initRecyclerView() {
+        val layoutManager = LinearLayoutManager(requireContext()).also { it.stackFromEnd = true }
+
+        adapterObserver = object : RecyclerView.AdapterDataObserver() {
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 super.onItemRangeInserted(positionStart, itemCount)
                 val friendlyMessageCount = adapter.itemCount
@@ -75,7 +85,9 @@ class DialogFragment : BaseFragment(), DialogView {
                     rv_messages.scrollToPosition(positionStart)
                 }
             }
-        })
+        }
+        adapterObserver?.let { adapter.registerAdapterDataObserver(it) }
+
 
         rv_messages.adapter = adapter.also {
             it.onDataChangeListener = { items ->
@@ -84,10 +96,11 @@ class DialogFragment : BaseFragment(), DialogView {
         }
         rv_messages.layoutManager = layoutManager
         rv_messages.addItemDecoration(itemDecoration)
+    }
 
-        et_message_text.addTextChangedListener { presenter.onMessageChange(it.trim()) }
-
-        btn_send_msg.setOnClickListener { presenter.onAddMessage() }
+    override fun onDestroyView() {
+        adapterObserver?.let { adapter.unregisterAdapterDataObserver(it) }
+        super.onDestroyView()
     }
 
     override fun startListeningAdapter() {

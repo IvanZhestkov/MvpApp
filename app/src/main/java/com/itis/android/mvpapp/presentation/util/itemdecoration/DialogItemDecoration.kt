@@ -64,7 +64,7 @@ class DialogItemDecoration : RecyclerView.ItemDecoration() {
         val adapterPosition = parent.getChildAdapterPosition(view)
         val previous = adapterPosition - 1
 
-        if (previous >= 0) {
+        if (previous >= 0 && data.isNotEmpty()) {
             if (data[adapterPosition].isNotEmpty() && data[previous].isNotEmpty()&& data [adapterPosition] != data[previous]) {
                 outRect.top = 70
             } else {
