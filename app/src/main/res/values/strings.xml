@@ -96,5 +96,7 @@
     <string name="downloading">Загрузка</string>
 
     <string name="Tasks_list">Список заданий</string>
+    <string name="stydent_title">Студент</string>
+    <string name="average_ball">Срелний балл</string>
 
 </resources>

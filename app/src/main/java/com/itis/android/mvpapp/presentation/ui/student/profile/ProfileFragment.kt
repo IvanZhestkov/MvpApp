@@ -9,6 +9,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.adapter.DisciplineAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
+import com.itis.android.mvpapp.presentation.model.StudentInfoModel
 import com.itis.android.mvpapp.presentation.model.TeacherInfoModel
 import com.itis.android.mvpapp.presentation.ui.auth.AuthActivity
 import kotlinx.android.synthetic.main.fragment_student_profile.*
@@ -51,27 +52,20 @@ class ProfileFragment : BaseFragment(), ProfileView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initList()
         initActionViews()
     }
 
-    override fun showProfile(teacherInfoModel: TeacherInfoModel) {
+    override fun showProfile(studentInfoModel: StudentInfoModel) {
         //createList()
         tv_name.text = getString(
             R.string.test_name,
-            teacherInfoModel.firstName, teacherInfoModel.lastName, teacherInfoModel.middleName
+            studentInfoModel.firstName, studentInfoModel.lastName, studentInfoModel.middleName
         )
-        tv_birthday.text = teacherInfoModel.birthDate
-        tv_email.text = teacherInfoModel.email
-        tv_phone.text = teacherInfoModel.phone
-
-        adapter.items = teacherInfoModel.disciplines.toMutableList()
-    }
-
-    private fun initList() {
-        rv_disciplines.adapter = adapter
-        rv_disciplines.layoutManager = LinearLayoutManager(context)
-        rv_disciplines.isNestedScrollingEnabled = false
+        tv_birthday.text = studentInfoModel.birthDate
+        tv_email.text = studentInfoModel.email
+        tv_phone.text = studentInfoModel.phone
+        tv_group.text = studentInfoModel.groupId.toString()
+        tv_average_ball.text = studentInfoModel.averageScore.toString()
     }
 
     private fun initActionViews() {

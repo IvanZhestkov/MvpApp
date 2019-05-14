@@ -15,6 +15,7 @@ import javax.inject.Inject
 @InjectViewState
 class StudentPresenter
 @Inject constructor() : BasePresenter<StudentView>() {
+
     lateinit var navigatorHolder: NavigatorHolder
 
     @Inject

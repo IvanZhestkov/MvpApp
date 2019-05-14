@@ -48,7 +48,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rv_disciplines"/>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_average_ball_title"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civ_profile"
@@ -89,7 +89,7 @@
                     android:layout_marginStart="@dimen/d8"
                     android:layout_marginTop="@dimen/d8"
                     android:layout_marginEnd="@dimen/d8"
-                    android:text="@string/teacher_title"
+                    android:text="@string/stydent_title"
                     app:layout_constraintEnd_toEndOf="@+id/civ_profile"
                     app:layout_constraintStart_toStartOf="@+id/guideline"
                     app:layout_constraintTop_toBottomOf="@+id/civ_profile"/>
@@ -125,26 +125,26 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline"
                     app:layout_constraintTop_toBottomOf="@+id/tv_personal_info"/>
 
+
             <TextView
-                    android:id="@+id/tv_disciplines_title"
+                    android:id="@+id/tv_group_title"
                     style="@style/Text.Medium.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/d8"
-                    android:text="@string/disciplines_title"
+                    android:layout_width="wrap_content"
+                    android:text="@string/group_title"
                     app:layout_constraintStart_toStartOf="@+id/guideline"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_birthday_title"/>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_birthday_title"
+                    android:layout_height="wrap_content"/>
 
-            <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_disciplines"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
+            <TextView
+                    android:id="@+id/tv_average_ball_title"
+                    style="@style/Text.Medium.Title"
+                    android:layout_marginTop="@dimen/d8"
+                    android:layout_width="wrap_content"
+                    android:text="@string/average_ball"
                     app:layout_constraintStart_toStartOf="@+id/guideline"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_disciplines_title">
-
-            </android.support.v7.widget.RecyclerView>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_group_title"
+                    android:layout_height="wrap_content"/>
 
             <TextView
                     android:id="@+id/tv_birthday"
@@ -155,6 +155,26 @@
                     app:layout_constraintBaseline_toBaselineOf="@+id/tv_birthday_title"
                     app:layout_constraintStart_toEndOf="@+id/tv_birthday_title"
                     tools:text="05.10.98"/>
+
+            <TextView
+                    android:id="@+id/tv_group"
+                    style="@style/Text.Medium.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="@dimen/d8"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tv_group_title"
+                    app:layout_constraintStart_toEndOf="@+id/tv_group_title"
+                    android:layout_height="wrap_content"
+                    tools:text="11-605"/>
+
+            <TextView
+                    android:id="@+id/tv_average_ball"
+                    style="@style/Text.Medium.Secondary"
+                    android:layout_marginStart="@dimen/d8"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tv_average_ball_title"
+                    app:layout_constraintStart_toEndOf="@+id/tv_average_ball_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="82"/>
 
             <TextView
                     android:id="@+id/tv_email_title"
