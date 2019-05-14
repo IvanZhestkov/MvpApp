@@ -3,6 +3,7 @@ package com.itis.android.mvpapp.presentation.ui.auth.login
 import com.arellomobile.mvp.InjectViewState
 import com.google.firebase.auth.FirebaseAuth
 import com.itis.android.mvpapp.data.repository.LoginRepository
+import com.itis.android.mvpapp.data.util.CredentialStorage
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.UserRole
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
@@ -15,6 +16,9 @@ class LoginPresenter
 
     @Inject
     lateinit var loginRepository: LoginRepository
+
+    @Inject
+    lateinit var credentialStorage: CredentialStorage
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
@@ -34,6 +38,7 @@ class LoginPresenter
                     viewState.hideWaitDialog()
                 }
                 .subscribe({ user ->
+                    credentialStorage.saveUserRole(user.role?.name)
                     when (user.role) {
                         UserRole.PROFESSOR -> viewState.openTeacherScreen()
                         else -> {

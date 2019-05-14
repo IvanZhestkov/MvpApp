@@ -1,7 +1,10 @@
 package com.itis.android.mvpapp.presentation.ui
 
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.UserItem
+import com.itis.android.mvpapp.data.pojo.TaskSolutionItem
 import com.itis.android.mvpapp.presentation.model.DialogModel
 import com.itis.android.mvpapp.presentation.model.TaskModel
+import com.itis.android.mvpapp.presentation.model.UserSolutionModel
 import com.itis.android.mvpapp.presentation.ui.auth.login.LoginFragment
 import com.itis.android.mvpapp.presentation.ui.student.loadtask.LoadStudentTaskFragment
 import com.itis.android.mvpapp.presentation.ui.student.loadtask.LoadStudentTaskScreen
@@ -37,7 +40,11 @@ object Screens {
 
     fun getGroupTaskScreen(initParams: GroupTaskInitParams): GroupTaskScreen = GroupTaskScreen(initParams)
 
-    fun getTaskSolutionScreen(initParams: TaskSolutionInitParams): TaskSolutionScreen = TaskSolutionScreen(initParams)
+    fun getTaskSolutionScreen(initParams: TaskSolutionInitParams): TaskSolutionScreen =
+            TaskSolutionScreen(UserItem(), TaskSolutionItem(),"")
+
+    fun getTaskSolutionScreen2(user: UserItem?, solution: TaskSolutionItem?, taskDeadline: String?):
+            TaskSolutionScreen = TaskSolutionScreen(user, solution, taskDeadline)
 
     //fun getMessagesScreen(): MessagesScreen = MessagesScreen()
 

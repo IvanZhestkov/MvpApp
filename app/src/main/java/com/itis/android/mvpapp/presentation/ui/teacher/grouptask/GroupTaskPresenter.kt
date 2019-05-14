@@ -73,7 +73,8 @@ class GroupTaskPresenter
     }
 
     fun openTaskSolutionScreen(userSolution: UserSolutionModel) {
-        groupTaskRouter.openTaskSolutionScreen(TaskSolutionInitParams(userSolution, task?.expiration_date))
+        //groupTaskRouter.openTaskSolutionScreen(TaskSolutionInitParams(userSolution, task?.expiration_date))
+        groupTaskRouter.openTaskSolutionScreen2(userSolution.user, userSolution.solution, task?.expiration_date)
     }
 
     fun dowloadTask() {

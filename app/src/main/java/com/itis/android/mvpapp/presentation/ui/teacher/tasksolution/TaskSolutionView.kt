@@ -8,6 +8,8 @@ interface TaskSolutionView : BaseView {
 
     fun showStudentName(username: String)
 
+    fun showCommentary(text: String)
+
     fun setColorStatus(color: Int)
 
     fun showButtons()

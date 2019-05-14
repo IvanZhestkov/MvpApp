@@ -4,6 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.google.firebase.auth.FirebaseAuth
 import com.itis.android.mvpapp.data.repository.TasksRepository
 import com.itis.android.mvpapp.data.repository.TeacherRepository
+import com.itis.android.mvpapp.data.util.CredentialStorage
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.TaskModel
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationObservableTransformer
@@ -17,6 +18,9 @@ class ProfilePresenter
     lateinit var teacherRepository: TeacherRepository
 
     @Inject
+    lateinit var credentialStorage: CredentialStorage
+
+    @Inject
     lateinit var firebaseAuth: FirebaseAuth
 
     @Inject
@@ -28,6 +32,7 @@ class ProfilePresenter
     }
 
     fun onLogout() {
+        credentialStorage.clear()
         firebaseAuth.signOut()
     }
 

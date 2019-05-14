@@ -116,7 +116,7 @@ class TaskSolutionRepositoryImpl @Inject constructor() : TaskSolutionRepository 
                 .child(solution.taskId.toString())
                 .child(solution.userId.toString())
                 .child(solution.id.toString())
-                .child("comment")
-                .setValue(solution.comment)
+                .child("commentary")
+                .setValue(solution.commentary)
     }
 }

@@ -1,5 +1,6 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.tasksolution
 
+import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.itis.android.mvpapp.data.repository.DialogsRepository
 import com.google.firebase.storage.FirebaseStorage
@@ -44,6 +45,7 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
         checkButtonsState()
         userSolution?.solution?.status?.let { updateSolutionStatus(it) }
         viewState.showStudentName(getUsername(userSolution))
+        viewState.showCommentary(userSolution?.solution?.commentary.toString())
     }
 
     private fun checkButtonsState() {
@@ -61,7 +63,7 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
 
     private fun addSolutionComment(comment: String) {
         val solution = userSolution?.solution
-        solution?.comment = comment
+        solution?.commentary = comment
         solution?.let { taskSolutionRepository.addSolutionCommnet(it) }
     }
 
@@ -88,11 +90,14 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
 
     private fun checkTaskDeadline(): Boolean {
         val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-        val solutionUploadingDate = userSolution?.solution?.uploading_date?.toLong() ?: 0
+        val solutionUploadingDate = userSolution?.solution?.uploading_date ?: 0
         val dateTask = formatter.parse(taskDeadline)
         val dateSolution = Date(solutionUploadingDate * 1000)
 
-        return dateSolution.after(dateTask)
+        Log.d("dateTask TAG", taskDeadline)
+        Log.d("dateSolution TAG", formatter.format(dateSolution))
+
+        return dateSolution.after(dateTask) && taskDeadline != formatter.format(dateSolution)
     }
 
     private fun getUsername(userSolution: UserSolutionModel?) = "${userSolution?.user?.last_name} ${userSolution?.user?.first_name}"
@@ -108,11 +113,12 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
 
     fun downloadTaskSolution() {
         val storageRef = firebaseStorage.reference
-        val ref = storageRef.child("test_storage")
+        val fileName = userSolution?.solution?.solution_file_link.toString()
+        val ref = storageRef.child(fileName)
 
         ref.downloadUrl
                 .addOnSuccessListener {
-                    viewState.downloadFile("Mobile", ".mpeg", it.toString())
+                    viewState.downloadFile(fileName, ".pdf", it.toString())
                 }
                 .addOnFailureListener {
                 }

@@ -1,7 +1,10 @@
 package com.itis.android.mvpapp.router
 
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.UserItem
+import com.itis.android.mvpapp.data.pojo.TaskSolutionItem
 import com.itis.android.mvpapp.presentation.model.DialogModel
 import com.itis.android.mvpapp.presentation.model.TaskModel
+import com.itis.android.mvpapp.presentation.model.UserSolutionModel
 import com.itis.android.mvpapp.presentation.ui.Screens
 import com.itis.android.mvpapp.presentation.ui.student.loadtask.TaskModelInitParam
 import com.itis.android.mvpapp.router.initparams.NewTaskInitParams
@@ -40,6 +43,10 @@ class MainRouterImpl : MainRouter, Router() {
 
     override fun openTaskSolutionScreen(taskSolutionInitParams: TaskSolutionInitParams) {
         navigateTo(Screens.getTaskSolutionScreen(taskSolutionInitParams))
+    }
+
+    override fun openTaskSolutionScreen2(user: UserItem?, solution: TaskSolutionItem?, taskDeadline: String?) {
+        navigateTo(Screens.getTaskSolutionScreen2(user, solution, taskDeadline))
     }
 
     override fun openDialogScreen(dialogId: String, username: String) {

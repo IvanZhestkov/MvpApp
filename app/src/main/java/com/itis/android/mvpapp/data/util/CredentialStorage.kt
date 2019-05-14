@@ -9,5 +9,9 @@ interface CredentialStorage {
 
     fun getSaveTokenSingle(): Single<String>
 
+    fun saveUserRole(role: String?)
+
+    fun getUserRole(): String?
+
     fun clear()
 }
