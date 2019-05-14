@@ -6,11 +6,11 @@ import android.os.Parcelable
 data class TaskSolutionItem(
         var id: String? = null,
         var checking_date: String? = null,
-        var comment: String? = null,
+        var commentary: String? = null,
         var score: Int = 0,
         var solution_file_link: String? = null,
         var status: String? = null,
-        var uploading_date: String? = null,
+        var uploading_date: Long? = null,
         var taskId: String? = null,
         var taskDeadline: String? = null,
         var disciplineId: String? = null,
@@ -23,7 +23,7 @@ data class TaskSolutionItem(
             parcel.readInt(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readString(),
+            parcel.readLong(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -33,11 +33,11 @@ data class TaskSolutionItem(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
         parcel.writeString(checking_date)
-        parcel.writeString(comment)
+        parcel.writeString(commentary)
         parcel.writeInt(score)
         parcel.writeString(solution_file_link)
         parcel.writeString(status)
-        parcel.writeString(uploading_date)
+        uploading_date?.let { parcel.writeLong(it) }
         parcel.writeString(taskId)
         parcel.writeString(taskDeadline)
         parcel.writeString(disciplineId)

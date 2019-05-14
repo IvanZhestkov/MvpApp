@@ -114,13 +114,17 @@ class DialogsRepositoryImpl @Inject constructor() : DialogsRepository {
         }
     }
 
-    override fun getDialogs(): Observable<DialogModel> {
-        return getAllDialogs().flatMapObservable {
+    override fun getDialogs(child: String): Observable<DialogModel> {
+        return getAllDialogs(child).flatMapObservable {
             Observable.fromIterable(it)
                     .flatMap { dialog ->
+                        val id = when (child) {
+                            "professor_id" -> dialog.studentId.orEmpty()
+                            else -> dialog.teacherId.orEmpty()
+                        }
                         Observable.zip(
                                 messagesRepository.getLastMessage(dialog.id.orEmpty()),
-                                usersRepository.getUserById(dialog.studentId.orEmpty()).toObservable(),
+                                usersRepository.getUserById(id).toObservable(),
                                 BiFunction<MessageModel, UserItem, DialogModel> { t1, t2 ->
                                     DialogModelMapper.map(t1, t2, dialog.id.orEmpty())
                                 })
@@ -128,13 +132,13 @@ class DialogsRepositoryImpl @Inject constructor() : DialogsRepository {
         }
     }
 
-    private fun getAllDialogs(): Single<List<CreateDialogModel>> {
+    private fun getAllDialogs(child: String): Single<List<CreateDialogModel>> {
         val asyncSubject = AsyncSubject.create<Pair<Boolean, List<CreateDialogModel>>>()
 
         val ref = firebaseDB.getReference("chats")
 
         ref
-                .orderByChild("professor_id")
+                .orderByChild(child)
                 .equalTo(firebaseAuth.currentUser?.uid.orEmpty())
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {

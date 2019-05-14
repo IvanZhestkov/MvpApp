@@ -13,6 +13,7 @@ class PreferencesCredentialStorage(
 
     companion object {
         private const val KEY_TOKEN = "PREF_KEY_ACCESS_TOKEN"
+        private const val KEY_USER_ROLE = "PREF_KEY_USER_ROLE"
     }
 
     @SuppressLint("ApplySharedPref")
@@ -30,6 +31,16 @@ class PreferencesCredentialStorage(
             preferences.getString(KEY_TOKEN, null)
                     ?: throw IllegalArgumentException("token is null")
         }
+    }
+
+    override fun saveUserRole(role: String?) {
+        preferences.edit()
+                .putString(KEY_USER_ROLE, role)
+                .apply()
+    }
+
+    override fun getUserRole(): String? {
+        return preferences.getString(KEY_USER_ROLE, null)
     }
 
     override fun clear() {

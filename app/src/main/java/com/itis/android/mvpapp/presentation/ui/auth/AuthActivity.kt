@@ -83,5 +83,6 @@ class AuthActivity : BaseActivity(), AuthView {
     override fun openStudentScreen() {
         val intent = Intent(this, StudentActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        startActivity(intent)    }
+        startActivity(intent)
+    }
 }

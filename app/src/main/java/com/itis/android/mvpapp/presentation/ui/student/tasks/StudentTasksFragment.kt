@@ -10,6 +10,7 @@ import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.adapter.TasksAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.presentation.model.TaskModel
+import kotlinx.android.synthetic.main.fragment_student_tasks.*
 import com.itis.android.mvpapp.presentation.ui.student.loadtask.TaskModelInitParam
 import com.itis.android.mvpapp.presentation.util.extensions.extractInitParams
 import kotlinx.android.synthetic.main.fragment_tasks.*
@@ -30,7 +31,7 @@ class StudentTasksFragment : BaseFragment(), StudentTasksView {
         text_no_available_tasks.visibility = View.VISIBLE
     }
 
-    override val mainContentLayout = R.layout.fragment_tasks
+    override val mainContentLayout = R.layout.fragment_student_tasks
 
     override val enableBackArrow = false
 

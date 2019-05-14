@@ -1,9 +1,11 @@
 package com.itis.android.mvpapp.presentation.ui.auth
 
+import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.itis.android.mvpapp.data.repository.UserRepository
+import com.itis.android.mvpapp.data.util.CredentialStorage
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.UserRole
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
@@ -24,6 +26,9 @@ class AuthPresenter
 
     @Inject
     lateinit var userRepository: UserRepository
+
+    @Inject
+    lateinit var credentialStorage: CredentialStorage
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
@@ -52,6 +57,7 @@ class AuthPresenter
                         viewState.hideProgress()
                     }
                     .subscribe({ user ->
+                        credentialStorage.saveUserRole(user.role?.name)
                         when (user.role) {
                             UserRole.PROFESSOR -> viewState.openTeacherScreen()
                             UserRole.STUDENT -> viewState.openStudentScreen()

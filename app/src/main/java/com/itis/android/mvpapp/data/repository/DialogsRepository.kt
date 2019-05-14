@@ -7,5 +7,5 @@ interface DialogsRepository {
 
     fun createDialog(studentId: String): Observable<String>
 
-    fun getDialogs(): Observable<DialogModel>
+    fun getDialogs(child: String): Observable<DialogModel>
 }

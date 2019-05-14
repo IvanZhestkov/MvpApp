@@ -12,6 +12,8 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.data.network.pojo.firebase.response.UserItem
+import com.itis.android.mvpapp.data.pojo.TaskSolutionItem
+import com.itis.android.mvpapp.presentation.model.UserSolutionModel
 import com.itis.android.mvpapp.presentation.util.extensions.extractInitParams
 import com.itis.android.mvpapp.presentation.util.extensions.hide
 import com.itis.android.mvpapp.presentation.util.extensions.putInitParams
@@ -24,9 +26,17 @@ import javax.inject.Provider
 class TaskSolutionFragment : BaseFragment(), TaskSolutionView, View.OnClickListener {
 
     companion object {
-        fun getInstance(initParams: TaskSolutionInitParams): TaskSolutionFragment {
+        private const val KEY_USER = "KEY_USER"
+        private const val KEY_SOLUTION = "KEY_SOLUTION"
+        private const val KEY_TASK_DEADLINE = "KEY_TASK_DEADLINE"
+
+        fun getInstance(user: UserItem?, solution: TaskSolutionItem?, taskDeadline: String?): TaskSolutionFragment {
             return TaskSolutionFragment().also {
-                it.putInitParams(initParams)
+                it.arguments = Bundle().apply {
+                    putSerializable(KEY_USER, user)
+                    putParcelable(KEY_SOLUTION, solution)
+                    putString(KEY_TASK_DEADLINE, taskDeadline)
+                }
             }
         }
     }
@@ -49,8 +59,10 @@ class TaskSolutionFragment : BaseFragment(), TaskSolutionView, View.OnClickListe
     @ProvidePresenter
     fun providePresenter(): TaskSolutionPresenter {
         return presenterProvider.get().apply {
-            init(extractInitParams<TaskSolutionInitParams>().userSolution,
-                    extractInitParams<TaskSolutionInitParams>().taskDeadline)
+            val userSolutionModel = UserSolutionModel(arguments?.getSerializable(KEY_USER) as UserItem,
+                    arguments?.getParcelable(KEY_SOLUTION))
+            init(userSolutionModel,
+                    arguments?.getString(KEY_TASK_DEADLINE))
         }
     }
 
@@ -58,6 +70,10 @@ class TaskSolutionFragment : BaseFragment(), TaskSolutionView, View.OnClickListe
         super.onViewCreated(view, savedInstanceState)
 
         initActionView()
+    }
+
+    override fun showCommentary(text: String) {
+        edt_comment_field.setText(text)
     }
 
     override fun showStudentName(username: String) {

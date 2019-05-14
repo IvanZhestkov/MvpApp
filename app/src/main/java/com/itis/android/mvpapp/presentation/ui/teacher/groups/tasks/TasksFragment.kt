@@ -8,7 +8,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.adapter.TasksAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_tasks.*
+import kotlinx.android.synthetic.main.fragment_student_tasks.*
 import javax.inject.Inject
 import javax.inject.Provider
 import android.support.v7.widget.DividerItemDecoration
@@ -30,7 +30,7 @@ class TasksFragment : BaseFragment(), TasksView {
         }
     }
 
-    override val mainContentLayout = R.layout.fragment_tasks
+    override val mainContentLayout = R.layout.fragment_teacher_tasks
 
     override val enableBackArrow = false
 

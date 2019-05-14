@@ -1,5 +1,6 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.dialogs
 
+import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
@@ -9,6 +10,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.itis.android.mvpapp.data.network.pojo.firebase.response.MessageItem
 import com.itis.android.mvpapp.data.repository.DialogsRepository
 import com.itis.android.mvpapp.data.repository.MessagesRepository
+import com.itis.android.mvpapp.data.util.CredentialStorage
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.DialogModel
 import com.itis.android.mvpapp.presentation.model.MessageModel
@@ -27,6 +29,9 @@ class DialogListPresenter @Inject constructor() : BasePresenter<DialogListView>(
 
     @Inject
     lateinit var dialogsRepository: DialogsRepository
+
+    @Inject
+    lateinit var credentialStorage: CredentialStorage
 
     @Inject
     lateinit var firebaseDb: FirebaseDatabase
@@ -48,8 +53,13 @@ class DialogListPresenter @Inject constructor() : BasePresenter<DialogListView>(
     }
 
     private fun update() {
+        Log.d("DOALOG TAG", credentialStorage.getUserRole().orEmpty())
+        val child = when (credentialStorage.getUserRole().orEmpty()) {
+            "PROFESSOR" -> "professor_id"
+            else -> "student_id"
+        }
         dialogsRepository
-                .getDialogs()
+                .getDialogs(child)
                 .toList()
                 .compose(PresentationSingleTransformer())
                 .doOnSubscribe {

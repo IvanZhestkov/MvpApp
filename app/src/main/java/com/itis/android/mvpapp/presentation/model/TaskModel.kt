@@ -22,7 +22,7 @@ object TaskModelMapper {
                 taskItem.expiration_date,
                 taskItem.description,
                 taskItem.name,
-                taskItem.filePath,
+                taskItem.task_file_link,
                 taskItem.taskId,
                 taskItem.disciplineId,
                 disciplineItem.group_id,
