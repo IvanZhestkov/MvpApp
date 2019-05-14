@@ -86,6 +86,52 @@ class TasksRepositoryImpl @Inject constructor() : TasksRepository {
         }
     }
 
+    override fun getTasksForStudent(): Single<List<TaskModel>> {
+        val ref = firebaseDB.getReference("tasks")
+
+        val subject = AsyncSubject.create<Pair<String, List<TaskModel>>>()
+        val tasks: MutableList<TaskItem> = mutableListOf()
+
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+                subject.onNext(Pair(error.message, emptyList()))
+                subject.onComplete()
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach { disciplineSnapShot ->
+                    disciplineSnapShot.children.mapNotNullTo(tasks) { taskSnapShot ->
+                        taskSnapShot.getValue<TaskItem>(TaskItem::class.java).also {
+                            it?.taskId = taskSnapShot.key
+                            it?.disciplineId = disciplineSnapShot.key
+                        }
+                    }
+                }
+
+                val d = Observable
+                    .fromIterable(tasks)
+                    .flatMap { task ->
+                        disciplinesRepository
+                            .getDisciplineById(task.disciplineId ?: "")
+                            .toObservable()
+                            .map { TaskModelMapper.map(task, it) }
+                    }.toList()
+                    .subscribe({
+                        subject.onNext(Pair("", it))
+                        subject.onComplete()
+                    }, {
+                        subject.onNext(Pair(it.message ?: "error", emptyList()))
+                        subject.onComplete()
+                    })
+            }
+        })
+
+        return subject.singleOrError().flatMap { (errorMessage, tasks) ->
+            when {
+                errorMessage.isEmpty() -> Single.just(tasks)
+                else -> Single.error(Exception())
+            }
+        }    }
     override fun addTask(task: UploadTaskModel): Completable {
         val addTaskSubject = AsyncSubject.create<Boolean>()
         val addFileSubject = AsyncSubject.create<Boolean>()

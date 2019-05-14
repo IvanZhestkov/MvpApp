@@ -1,7 +1,11 @@
 package com.itis.android.mvpapp.presentation.ui
 
 import com.itis.android.mvpapp.presentation.model.DialogModel
+import com.itis.android.mvpapp.presentation.model.TaskModel
 import com.itis.android.mvpapp.presentation.ui.auth.login.LoginFragment
+import com.itis.android.mvpapp.presentation.ui.student.loadtask.LoadStudentTaskFragment
+import com.itis.android.mvpapp.presentation.ui.student.loadtask.LoadStudentTaskScreen
+import com.itis.android.mvpapp.presentation.ui.student.loadtask.TaskModelInitParam
 import com.itis.android.mvpapp.presentation.ui.teacher.dialogs.DialogListScreen
 import com.itis.android.mvpapp.presentation.ui.teacher.dialogs.selected.DialogScreen
 import com.itis.android.mvpapp.presentation.ui.student.tasks.StudentTasksScreen
@@ -45,4 +49,6 @@ object Screens {
     fun getStudentTasksListScreen(): StudentTasksScreen = StudentTasksScreen()
 
     fun getStudentProfile() : com.itis.android.mvpapp.presentation.ui.student.profile.ProfileScreen = com.itis.android.mvpapp.presentation.ui.student.profile.ProfileScreen()
+
+    fun getStudentLoadTaskScreen(initParams: TaskModelInitParam) : LoadStudentTaskScreen = LoadStudentTaskScreen(initParams)
 }
