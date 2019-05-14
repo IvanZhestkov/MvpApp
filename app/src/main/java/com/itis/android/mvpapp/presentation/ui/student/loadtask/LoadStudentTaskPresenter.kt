@@ -15,14 +15,6 @@ class LoadStudentTaskPresenter
     @Inject
     lateinit var teacherRepository: TeacherRepository
 
-
-
-    private var filePath: String? = null
-
-    fun init(filepath: String) {
-        this.filePath = filepath
-    }
-
     fun setProfessor(uid: String) {
         teacherRepository.getTeacherByUID(uid)
             .subscribe { it ->

@@ -40,8 +40,6 @@ class LoadStudentTaskFragment : BaseFragment(), LoadStudentTaskView {
 
     override val toolbarTitle = R.string.zadanie
 
-    val taskModelInitParam =  arguments?.getParcelable<TaskModelInitParam>(".init.params")
-
     override val menu: Int?
         get() = null
 
@@ -64,17 +62,19 @@ class LoadStudentTaskFragment : BaseFragment(), LoadStudentTaskView {
         super.onViewCreated(view, savedInstanceState)
         setAllData()
 
+        val taskModelInitParam = arguments?.getParcelable<TaskModelInitParam>(".init.params")
+
         btn_task_download.setOnClickListener {
             val storageRef = firebaseStorage.reference
-            val ref = taskModelInitParam?.filePath.let { it?.let { it1 -> storageRef.child(it1) } }
+            val ref = taskModelInitParam?.filePath.let { storageRef.child(it!!) }
 
-            ref?.downloadUrl?.addOnSuccessListener {
+            ref.downloadUrl.addOnSuccessListener {
                 downloadFile(
                     arguments?.getParcelable<TaskModelInitParam>(".init.params")?.filePath.toString(),
                     ".pdf",
                     it.toString()
                 )
-            }?.addOnFailureListener {
+            }.addOnFailureListener {
             }
         }
     }
