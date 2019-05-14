@@ -13,6 +13,7 @@ import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.presentation.model.TaskModel
 import com.itis.android.mvpapp.presentation.ui.teacher.groups.GroupsFragment
 import com.itis.android.mvpapp.presentation.util.extensions.toast
+import com.itis.android.mvpapp.presentation.ui.teacher.groups.tasks.TasksPresenter
 import kotlinx.android.synthetic.main.fragment_tasks.*
 import javax.inject.Inject
 import javax.inject.Provider
@@ -55,6 +56,8 @@ class StudentTasksFragment : BaseFragment(), StudentTasksView {
         adapter.onItemClickListener = { id ->
             baseActivity.toast("TaskItem position: $id", Toast.LENGTH_SHORT)
            // TODO("INIT LIST")
+        adapter.onItemClickListener = { task ->
+            //presenter.openGroupTaskScreen(task)
         }
 
         rv_tasks.adapter = adapter
@@ -64,7 +67,7 @@ class StudentTasksFragment : BaseFragment(), StudentTasksView {
 
 
     override fun setTasks(items: List<TaskModel>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        adapter.items = items.toMutableList()
     }
 
     override fun hideEmptyState() {
@@ -74,4 +77,5 @@ class StudentTasksFragment : BaseFragment(), StudentTasksView {
     override fun showEmptyState() {
         text_no_available_tasks.visibility = View.VISIBLE
     }
+
 }
