@@ -7,7 +7,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.itis.android.mvpapp.data.network.isOnline
-import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.TeacherDisciplineItem
 import com.itis.android.mvpapp.data.repository.DisciplinesRepository
 import io.reactivex.Single
 import io.reactivex.subjects.AsyncSubject
@@ -40,7 +40,8 @@ class DisciplinesRepositoryImpl @Inject constructor() : DisciplinesRepository {
                         val disciplines: MutableList<TeacherDisciplineItem> = mutableListOf()
 
                         snapshot.children.mapNotNullTo(disciplines) { data ->
-                            data.getValue<TeacherDisciplineItem>(TeacherDisciplineItem::class.java).also { it?.id = data.key }
+                            data.getValue<TeacherDisciplineItem>(TeacherDisciplineItem::class.java)
+                                    .also { it?.id = data.key }
                         }
 
                         subject.onNext(Pair("", disciplines))
@@ -69,7 +70,8 @@ class DisciplinesRepositoryImpl @Inject constructor() : DisciplinesRepository {
 
         ref.child(id).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val item = snapshot.getValue<TeacherDisciplineItem>(TeacherDisciplineItem::class.java).also { it?.id = snapshot.key }
+                val item = snapshot.getValue<TeacherDisciplineItem>(TeacherDisciplineItem::class.java)
+                        .also { it?.id = snapshot.key }
                 subject.onNext(Pair("", item ?: TeacherDisciplineItem()))
                 subject.onComplete()
             }
@@ -79,6 +81,41 @@ class DisciplinesRepositoryImpl @Inject constructor() : DisciplinesRepository {
                 subject.onComplete()
             }
         })
+
+        return subject.singleOrError().flatMap { (errorMessage, discipline) ->
+            when {
+                errorMessage.isEmpty() -> Single.just(discipline)
+                else -> Single.error(Exception())
+            }
+        }
+    }
+
+    override fun getDisciplineByNameAndGroup(name: String, group: String): Single<TeacherDisciplineItem> {
+        val ref = firebaseDB.getReference("courses")
+
+        val subject = AsyncSubject.create<Pair<String, TeacherDisciplineItem>>()
+
+        ref
+                .orderByChild("subject_name")
+                .equalTo(name)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val disciplines = mutableListOf<TeacherDisciplineItem>()
+
+                        snapshot.children.mapNotNullTo(disciplines) { data ->
+                            data.getValue<TeacherDisciplineItem>(TeacherDisciplineItem::class.java)
+                                    .also { it?.id = data.key }
+                        }
+
+                        subject.onNext(Pair("", disciplines.filter { it.group_id == group }.first()))
+                        subject.onComplete()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        subject.onNext(Pair(error.message, TeacherDisciplineItem()))
+                        subject.onComplete()
+                    }
+                })
 
         return subject.singleOrError().flatMap { (errorMessage, discipline) ->
             when {

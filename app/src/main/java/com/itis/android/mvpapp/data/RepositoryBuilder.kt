@@ -11,10 +11,6 @@ abstract class RepositoryBuilder {
 
     @Binds
     @Singleton
-    abstract fun bindAuthRepository(repositoryImpl: AuthRepositoryImpl): AuthRepository
-
-    @Binds
-    @Singleton
     abstract fun bindLoginRepository(repositoryImpl: LoginRepositoryImpl): LoginRepository
 
     @Binds
@@ -32,4 +28,28 @@ abstract class RepositoryBuilder {
     @Binds
     @Singleton
     abstract fun bindGroupsRepository(repositoryImpl: GroupsRepositoryImpl): GroupsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindTaskSolutionRepository(repositoryImpl: TaskSolutionRepositoryImpl): TaskSolutionRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindUserRepository(repositoryImpl: UserRepositoryImpl): UserRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindStudentsRepository(repositoryImpl: StudentsRepositoryImpl): StudentsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindDialogsRepository(repositoryImpl: DialogsRepositoryImpl): DialogsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindMessagesRepository(repositoryImpl: MessagesRepositoryImpl): MessagesRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindStudentRepository(repositoryImpl: StudentRepositoryImpl): StudentRepository
 }

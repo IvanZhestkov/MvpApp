@@ -11,7 +11,8 @@ import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.adapter.TasksAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.presentation.model.TaskModel
-import com.itis.android.mvpapp.presentation.utils.extensions.toast
+import com.itis.android.mvpapp.presentation.ui.teacher.groups.GroupsFragment
+import com.itis.android.mvpapp.presentation.util.extensions.toast
 import kotlinx.android.synthetic.main.fragment_tasks.*
 import javax.inject.Inject
 import javax.inject.Provider
@@ -41,6 +42,9 @@ class StudentTasksFragment : BaseFragment(), StudentTasksView {
         return presenterProvider.get()
     }
 
+    companion object {
+        fun getInstance() = StudentTasksFragment()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

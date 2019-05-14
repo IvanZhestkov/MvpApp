@@ -1,13 +1,19 @@
 package com.itis.android.mvpapp.router
 
+import com.itis.android.mvpapp.presentation.model.DialogModel
 import com.itis.android.mvpapp.presentation.ui.Screens
-import com.itis.android.mvpapp.router.initparams.LoadTaskInitParams
+import com.itis.android.mvpapp.router.initparams.NewTaskInitParams
+import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
+import com.itis.android.mvpapp.router.initparams.TaskSolutionInitParams
 import ru.terrakok.cicerone.Router
 
 class MainRouterImpl : MainRouter, Router() {
 
+    override fun openStudentProfile() {
+        newRootScreen(Screens.getStudentProfile())
+    }
     override fun openTaskListScreen() {
-        newRootScreen(Screens.getTasksListScreen())
+        newRootScreen(Screens.getStudentTasksListScreen())
     }
 
     override fun openProfileScreen() {
@@ -18,20 +24,24 @@ class MainRouterImpl : MainRouter, Router() {
         newRootScreen(Screens.getGroupListScreen())
     }
 
-    override fun openMessagesScreen() {
-        newRootScreen(Screens.getMessagesScreen())
+    override fun openDialogListScreen() {
+        newRootScreen(Screens.getDialogListScreen())
     }
 
-    override fun openLoadTaskScreen(loadTaskInitParams: LoadTaskInitParams) {
-        navigateTo(Screens.getLoadTaskScreen(loadTaskInitParams))
+    override fun openNewTaskScreen(newTaskInitParams: NewTaskInitParams) {
+        navigateTo(Screens.getNewTaskScreen(newTaskInitParams))
     }
 
-    override fun openGroupTaskScreen() {
-        navigateTo(Screens.getGroupTaskScreen())
+    override fun openGroupTaskScreen(groupTaskInitParams: GroupTaskInitParams) {
+        navigateTo(Screens.getGroupTaskScreen(groupTaskInitParams))
     }
 
-    override fun openTaskSolutionScreen() {
-        navigateTo(Screens.getTaskSolutionScreen())
+    override fun openTaskSolutionScreen(taskSolutionInitParams: TaskSolutionInitParams) {
+        navigateTo(Screens.getTaskSolutionScreen(taskSolutionInitParams))
+    }
+
+    override fun openDialogScreen(dialogId: String, username: String) {
+        navigateTo(Screens.getDialogScreen(dialogId, username))
     }
 
     override fun goBack() {

@@ -1,9 +1,9 @@
 package com.itis.android.mvpapp.data.network.request
 
-import com.google.gson.JsonObject
-import com.itis.android.mvpapp.presentation.model.User
+import com.itis.android.mvpapp.data.network.pojo.studapi.request.UploadTaskRequest
 import io.reactivex.*
-import retrofit2.Response
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 
 class ApiRequestDecorator(val apiRequest: ApiRequest) : ApiRequest {
@@ -32,9 +32,9 @@ class ApiRequestDecorator(val apiRequest: ApiRequest) : ApiRequest {
         }
     }
 
-    override fun login(user: User): Single<Response<JsonObject>> {
+    override fun uploadTaskCompletable(file: MultipartBody.Part, courseId: RequestBody, taskId: RequestBody, idToken: RequestBody): Completable {
         return apiRequest
-                .login(user)
-                .compose(ApiRequestErrorSingleTransformer())
+                .uploadTaskCompletable(file, courseId, taskId, idToken)
+                .compose(ApiRequestErrorCompletableTransformer())
     }
 }

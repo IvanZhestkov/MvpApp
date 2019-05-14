@@ -5,7 +5,5 @@ import com.itis.android.mvpapp.presentation.base.BaseView
 
 interface StudentView : MvpView {
 
-    fun startSignIn()
 
-    fun signedIn()
 }

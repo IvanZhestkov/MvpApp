@@ -1,6 +1,6 @@
 package com.itis.android.mvpapp.data.repository.impl
 
-import com.itis.android.mvpapp.data.pojo.TeacherDisciplineItem
+import com.itis.android.mvpapp.data.network.pojo.firebase.response.TeacherDisciplineItem
 import com.itis.android.mvpapp.data.repository.DisciplinesRepository
 import com.itis.android.mvpapp.data.repository.GroupsRepository
 import com.itis.android.mvpapp.data.repository.TasksRepository

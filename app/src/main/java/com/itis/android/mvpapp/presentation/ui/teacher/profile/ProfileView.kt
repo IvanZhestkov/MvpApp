@@ -8,6 +8,9 @@ import com.itis.android.mvpapp.presentation.model.TeacherInfoModel
 interface ProfileView: MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showUserPhoto(url: String)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
     fun showProfile(teacherInfoModel: TeacherInfoModel)
 
     @StateStrategyType(AddToEndSingleStrategy::class)

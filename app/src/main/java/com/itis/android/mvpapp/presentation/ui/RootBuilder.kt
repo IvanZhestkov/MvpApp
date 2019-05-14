@@ -12,12 +12,12 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class RootBuilder {
 
-    @ContributesAndroidInjector(modules = [StudentModule::class])
-    abstract fun buildStudentActivity(): StudentActivity
-
     @ContributesAndroidInjector(modules = [TeacherModule::class])
     abstract fun buildTeacherActivity(): TeacherActivity
 
     @ContributesAndroidInjector(modules = [AuthModule::class])
     abstract fun buildAuthActivity(): AuthActivity
+
+    @ContributesAndroidInjector(modules =[StudentModule::class])
+    abstract fun buildStudentActivity(): StudentActivity
 }

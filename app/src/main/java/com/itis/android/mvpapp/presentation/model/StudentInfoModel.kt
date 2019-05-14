@@ -10,6 +10,6 @@ data class StudentInfoModel(
     var phone: String? = null,
     var photo: String? = null,
     var role: UserRole? = null,
-    var averageScore : Int? = null,
-    var groupId : Int? = null
+    var averageScore : String? = null,
+    var groupId : String? = null
 )

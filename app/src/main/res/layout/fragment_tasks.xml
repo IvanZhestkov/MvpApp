@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone"
-        android:text="@string/no_available_task"
+        android:text="@string/no_available_tasks"
         android:textAppearance="@style/Text.Large.Title"/>
 
 </FrameLayout>

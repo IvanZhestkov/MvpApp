@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.evrencoskun.tableview.adapter.AbstractTableAdapter
 import com.evrencoskun.tableview.adapter.recyclerview.holder.AbstractViewHolder
-import com.itis.android.mvpapp.presentation.model.table.grouptask.GroupTaskCell
-import com.itis.android.mvpapp.presentation.model.table.grouptask.GroupTaskColumnHeader
-import com.itis.android.mvpapp.presentation.model.table.grouptask.GroupTaskRowHeader
+import com.itis.android.mvpapp.presentation.model.table.GroupTaskColumnHeader
 import kotlinx.android.synthetic.main.item_croup_task_cell_mark.view.*
 import kotlinx.android.synthetic.main.item_group_task_cell_answer.view.*
 import kotlinx.android.synthetic.main.item_group_task_column_header.view.*
 import kotlinx.android.synthetic.main.item_group_task_row_header.view.*
 import com.itis.android.mvpapp.R
-import com.itis.android.mvpapp.presentation.utils.extensions.setTextStyle
+import com.itis.android.mvpapp.presentation.model.table.GroupTaskCell
+import com.itis.android.mvpapp.presentation.model.table.GroupTaskRowHeader
+import com.itis.android.mvpapp.presentation.util.extensions.setTextStyle
 
 class GroupTaskTableAdapter(val context: Context) : AbstractTableAdapter<GroupTaskColumnHeader, GroupTaskRowHeader, GroupTaskCell>(context) {
 
@@ -104,7 +104,8 @@ class GroupTaskTableAdapter(val context: Context) : AbstractTableAdapter<GroupTa
     inner class RowHeaderViewHolder(itemView: View) : AbstractViewHolder(itemView) {
 
         fun bindView(item: GroupTaskRowHeader?) = with(itemView) {
-            header_row_text.text = item?.text
+            val user = item?.solution?.user
+            header_row_text.text = "${user?.last_name} ${user?.first_name}"
         }
     }
 
@@ -114,9 +115,8 @@ class GroupTaskTableAdapter(val context: Context) : AbstractTableAdapter<GroupTa
 
         fun bindView(item: GroupTaskCell?, row: Int, column: Int) = with(itemView) {
             cellItem = item
-            val rand = (Math.random() * 2).toInt()
 
-            if (rand == 1) {
+            if (cellItem?.solution != null) {
                 cell_answer_text.text = context.getString(R.string.task_status_show)
                 cell_answer_text.setTextStyle(context, R.style.Text_Small_Link)
             } else {
@@ -129,11 +129,11 @@ class GroupTaskTableAdapter(val context: Context) : AbstractTableAdapter<GroupTa
     inner class CellMarkViewHolder(itemView: View) : AbstractViewHolder(itemView) {
 
         fun bindView(item: GroupTaskCell?, row: Int, column: Int) = with(itemView) {
-            val rand = (Math.random() * 2).toInt()
-
             image_group_task_mark.setImageResource(
-                    if (rand == 1) R.drawable.ic_check_mark_done
-                    else R.drawable.ic_check_mark_close
+                    when (item?.solution?.status) {
+                        "accepted" -> R.drawable.ic_check_mark_done
+                        else -> R.drawable.ic_check_mark_close
+                    }
             )
         }
     }

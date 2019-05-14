@@ -21,7 +21,13 @@
         <activity
             android:name=".presentation.ui.teacher.TeacherActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan">
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name=".presentation.ui.auth.AuthActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,9 +35,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentation.ui.auth.AuthActivity" />
+        <activity android:name=".presentation.ui.student.StudentActivity"
+                  android:screenOrientation="portrait">
 
-        <activity android:name=".presentation.ui.student.StudentActivity"/>
+        </activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="84b43719c243f9703c84a3eca3db377dba58256e" />
+
     </application>
 
 </manifest>
