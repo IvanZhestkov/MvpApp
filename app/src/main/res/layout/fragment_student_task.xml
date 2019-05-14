@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:id="@+id/first_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginStart="10dp">
+
+        <TextView
+            android:id="@+id/tv_title_subject"
+            style="@style/Text.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="Предмет:"/>
+
+        <TextView
+            android:id="@+id/tv_teacher"
+            style="@style/Text.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title_subject"
+            android:layout_marginTop="4dp"
+            android:text="Преподаватель:"/>
+
+        <TextView
+            android:id="@+id/tv_deadline"
+            style="@style/Text.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_teacher"
+            android:layout_marginTop="4dp"
+            android:text="Дедлайн:"/>
+
+        <TextView
+            android:id="@+id/tv_task_description"
+            style="@style/Text.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_deadline"
+            android:layout_marginTop="4dp"
+            android:text="Описание задания:"/>
+
+        <TextView
+            android:id="@+id/tv_task_name"
+            style="@style/Text.Medium.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_title_subject"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/tv_title_subject"
+            android:textSize="20sp"
+            tools:text="Управление проектами"/>
+
+        <TextView
+            android:id="@+id/tv_teacher_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_teacher"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/tv_teacher"
+            android:textColor="#5998FE"
+            android:textSize="18sp"
+            tools:text="Кристина Расиэль"/>
+
+        <TextView
+            android:id="@+id/tv_deadline_description"
+            style="@style/Text.Large.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_deadline"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/tv_deadline"
+            android:textStyle="bold"
+            tools:text="20 марта"/>
+
+        <TextView
+            android:id="@+id/tv_task_description_text"
+            style="@style/Text.Medium.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_task_description"
+            android:layout_marginTop="4dp"
+            tools:text="Что необходимо сделать в этом задании. Подробное описание в файле."/>
+
+        <Button
+            android:id="@+id/btn_task_download"
+            style="@style/AccentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_task_description_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:text="Скачать задание"/>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/first_rl"
+        android:layout_marginTop="18dp"
+        android:background="@android:color/black"/>
+
+    <RelativeLayout
+        android:id="@+id/second_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider">
+
+        <TextView
+            android:id="@+id/tv_task_solution_title"
+            style="@style/Text.Large.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:text="Решение: "
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_comment_title"
+            style="@style/Text.Large.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_task_solution_title"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="Комментарий: "
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_comment_description"
+            style="@style/Text.Medium.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_comment_title"
+            android:layout_marginStart="32dp"
+            tools:text="описание комментария от преподавателя."/>
+
+        <TextView
+            android:id="@+id/tv_status_title"
+            style="@style/Text.Large.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_comment_description"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="Статус"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_status_accepted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_status_title"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/tv_status_title"
+            android:text="ПРИНЯТО"
+            android:textColor="#25C12D"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_status_denied"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_status_title"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/tv_status_title"
+            android:text="ОТКЛОНЕНО"
+            android:textColor="#FF1717"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_status_time_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_status_title"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/tv_status_title"
+            android:text="ПРОСРОЧЕНО"
+            android:textColor="#FF1717"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_status_on_rassmotrenie"
+            style="@style/Text.Medium.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_status_title"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/tv_status_title"
+            android:text="на рассмотрении"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/second_rl">-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btn_task_solution_download"-->
+            <!--style="@style/AccentButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/download"/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btn_task_solution_send"-->
+            <!--style="@style/AccentButton"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="загрузить"/>-->
+    <!--</LinearLayout>-->
+</RelativeLayout>
