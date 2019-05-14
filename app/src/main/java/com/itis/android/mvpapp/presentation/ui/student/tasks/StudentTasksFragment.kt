@@ -20,6 +20,17 @@ import javax.inject.Provider
 
 class StudentTasksFragment : BaseFragment(), StudentTasksView {
 
+    override fun setTasks(items: List<TaskModel>) {
+        adapter.items = items.toMutableList()
+    }
+
+    override fun showEmptyState() {
+        text_no_available_tasks.visibility = View.GONE    }
+
+    override fun hideEmptyState() {
+        text_no_available_tasks.visibility = View.VISIBLE
+    }
+
     override val mainContentLayout = R.layout.fragment_tasks
 
     override val enableBackArrow = false
@@ -55,27 +66,15 @@ class StudentTasksFragment : BaseFragment(), StudentTasksView {
     private fun initList() {
         adapter.onItemClickListener = { id ->
             baseActivity.toast("TaskItem position: $id", Toast.LENGTH_SHORT)
-           // TODO("INIT LIST")
-        adapter.onItemClickListener = { task ->
-            //presenter.openGroupTaskScreen(task)
+            // TODO("INIT LIST")
+            adapter.onItemClickListener = { task ->
+                //presenter.openGroupTaskScreen(task)
+            }
+
+            rv_tasks.adapter = adapter
+            rv_tasks.layoutManager = LinearLayoutManager(context)
+            rv_tasks.addItemDecoration(DividerItemDecoration(this.context, LinearLayoutManager.VERTICAL))
         }
 
-        rv_tasks.adapter = adapter
-        rv_tasks.layoutManager = LinearLayoutManager(context)
-        rv_tasks.addItemDecoration(DividerItemDecoration(this.context, LinearLayoutManager.VERTICAL))
     }
-
-
-    override fun setTasks(items: List<TaskModel>) {
-        adapter.items = items.toMutableList()
-    }
-
-    override fun hideEmptyState() {
-        text_no_available_tasks.visibility = View.GONE
-    }
-
-    override fun showEmptyState() {
-        text_no_available_tasks.visibility = View.VISIBLE
-    }
-
 }
