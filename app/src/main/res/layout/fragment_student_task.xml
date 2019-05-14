@@ -121,7 +121,8 @@
         android:id="@+id/second_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/divider">
+        android:layout_below="@id/divider"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv_task_solution_title"
@@ -215,25 +216,19 @@
             android:visibility="gone"/>
     </RelativeLayout>
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/second_rl">-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:layout_below="@id/second_rl"
+        android:orientation="vertical">
 
-        <!--<Button-->
-            <!--android:id="@+id/btn_task_solution_download"-->
-            <!--style="@style/AccentButton"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/download"/>-->
-
-        <!--<Button-->
-            <!--android:id="@+id/btn_task_solution_send"-->
-            <!--style="@style/AccentButton"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="загрузить"/>-->
-    <!--</LinearLayout>-->
+        <Button
+            android:id="@+id/btn_task_solution_send"
+            style="@style/AccentButton"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="загрузить решение"/>
+    </LinearLayout>
 </RelativeLayout>

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btn_send_task_student"
+        android:id="@+id/btn_add_file_student"
         style="@style/AccentButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/edt_description_task"
+        android:id="@+id/edt_description_task_student"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginStart="@dimen/d16"
@@ -43,7 +43,7 @@
         android:textAppearance="@style/Text.Medium.Thin" />
 
     <Button
-        android:id="@+id/btn_send_task"
+        android:id="@+id/btn_send_task_student"
         style="@style/AccentButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
