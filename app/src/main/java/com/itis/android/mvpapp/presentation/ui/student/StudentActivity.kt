@@ -2,6 +2,7 @@ package com.itis.android.mvpapp.presentation.ui.student
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
@@ -57,14 +58,8 @@ class StudentActivity : BaseActivity(), StudentView {
         super.onPause()
     }
 
-    override fun startSignIn() {
-        val intent = Intent(this, AuthActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        startActivity(intent)
-    }
-
-    override fun signedIn() {
-        presenter.onTasks()
+    fun setBottomBarEnabled(isEnabled: Boolean) {
+        menu_bottom_bar.visibility = if (isEnabled) View.VISIBLE else View.GONE
     }
 
 }

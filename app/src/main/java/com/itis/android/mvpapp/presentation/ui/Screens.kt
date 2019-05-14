@@ -39,5 +39,5 @@ object Screens {
 
     fun getDialogScreen(dialogId: String, username: String): DialogScreen = DialogScreen(dialogId, username)
 
-    fun getTasksListScreen(): StudentTasksScreen = StudentTasksScreen()
+    fun getStudentTasksListScreen(): StudentTasksScreen = StudentTasksScreen()
 }

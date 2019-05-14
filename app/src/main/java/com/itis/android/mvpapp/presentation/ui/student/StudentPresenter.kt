@@ -15,39 +15,19 @@ import javax.inject.Inject
 @InjectViewState
 class StudentPresenter
 @Inject constructor() : BasePresenter<StudentView>() {
+
+    @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
     @Inject
     lateinit var mainRouter: MainRouter
 
     @Inject
-    lateinit var preferences: CredentialStorage
-
-    @Inject
     lateinit var firebaseAuth: FirebaseAuth
-
-    @Inject
-    lateinit var firebaseDB: FirebaseDatabase
-
-    private var firebaseUser: FirebaseUser? = null
-
-    private lateinit var myRef: DatabaseReference
-
-    private var isProfessor: Boolean = false
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        checkAuth()
-    }
-
-    private fun checkAuth() {
-        firebaseUser = firebaseAuth.currentUser
-
-        if (firebaseUser == null) {
-            viewState.startSignIn()
-        } else {
-            viewState.signedIn()
-        }
+        onTasks()
     }
 
     fun setNavigator(navigator: Navigator) {
@@ -63,7 +43,7 @@ class StudentPresenter
     }
 
     fun onMessages() {
-        mainRouter.openMessagesScreen()
+        mainRouter.openDialogListScreen()
     }
 
     fun onProfile() {

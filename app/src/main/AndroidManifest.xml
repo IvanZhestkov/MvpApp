@@ -35,6 +35,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".presentation.ui.student.StudentActivity"
+                  android:screenOrientation="portrait">
+
+        </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="84b43719c243f9703c84a3eca3db377dba58256e" />

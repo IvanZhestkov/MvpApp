@@ -6,11 +6,11 @@ import ru.terrakok.cicerone.android.support.SupportAppScreen
 class StudentTasksScreen: SupportAppScreen() {
 
     override fun getFragment(): Fragment {
-        return super.getFragment()
+        return StudentTasksFragment.getInstance()
     }
 
     override fun getScreenKey(): String {
-        return super.getScreenKey()
+        return StudentTasksFragment::class.java.name
     }
 
 }

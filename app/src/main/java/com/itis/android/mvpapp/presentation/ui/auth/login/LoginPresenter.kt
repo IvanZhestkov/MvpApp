@@ -36,8 +36,8 @@ class LoginPresenter
                 .subscribe({ user ->
                     when (user.role) {
                         UserRole.PROFESSOR -> viewState.openTeacherScreen()
-                        UserRole.STUDENT -> viewState.openStudentMainScreen()
                         else -> {
+                            viewState.openStudentMainScreen()
                         }
                     }
                 }, {

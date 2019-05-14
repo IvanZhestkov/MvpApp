@@ -54,6 +54,7 @@ class AuthPresenter
                     .subscribe({ user ->
                         when (user.role) {
                             UserRole.PROFESSOR -> viewState.openTeacherScreen()
+                            UserRole.STUDENT -> viewState.openStudentScreen()
                             else -> {
                                 viewState.startSignIn()
                             }
