@@ -12,6 +12,7 @@ import com.itis.android.mvpapp.data.network.pojo.firebase.response.UserItem
 import com.itis.android.mvpapp.data.repository.DialogsRepository
 import com.itis.android.mvpapp.data.repository.MessagesRepository
 import com.itis.android.mvpapp.data.repository.UserRepository
+import com.itis.android.mvpapp.data.util.CredentialStorage
 import com.itis.android.mvpapp.presentation.model.CreateDialogModel
 import com.itis.android.mvpapp.presentation.model.DialogModel
 import com.itis.android.mvpapp.presentation.model.DialogModelMapper
@@ -33,6 +34,9 @@ class DialogsRepositoryImpl @Inject constructor() : DialogsRepository {
 
     @Inject
     lateinit var messagesRepository: MessagesRepository
+
+    @Inject
+    lateinit var credentialStorage: CredentialStorage
 
     @Inject
     lateinit var usersRepository: UserRepository
@@ -76,10 +80,13 @@ class DialogsRepositoryImpl @Inject constructor() : DialogsRepository {
 
     private fun checkIfExistsChat(studentId: String, teacherId: String): Observable<String> {
         val asyncSubject = AsyncSubject.create<Pair<Boolean, String>>()
-
+        val child = when (credentialStorage.getUserRole().orEmpty()) {
+            "PROFESSOR" -> "professor_id"
+            else -> "student_id"
+        }
         firebaseDB
                 .getReference("chats")
-                .orderByChild("professor_id")
+                .orderByChild(child)
                 .equalTo(teacherId)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -87,9 +94,19 @@ class DialogsRepositoryImpl @Inject constructor() : DialogsRepository {
 
                         snapshot.children.forEach { ds ->
                             val item = ds.getValue(CreateDialogItem::class.java)
-                            if (item?.student_id == studentId) {
-                                items.add(ds.key.orEmpty())
+                            when (child) {
+                                "PROFESSOR" -> {
+                                    if (item?.student_id == studentId) {
+                                        items.add(ds.key.orEmpty())
+                                    }
+                                }
+                                else -> {
+                                    if (item?.professor_id == studentId) {
+                                        items.add(ds.key.orEmpty())
+                                    }
+                                }
                             }
+
                         }
                         if (items.size == 0) {
                             asyncSubject.onNext(Pair(true, ""))

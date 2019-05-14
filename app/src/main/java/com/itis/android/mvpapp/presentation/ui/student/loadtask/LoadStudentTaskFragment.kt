@@ -77,6 +77,7 @@ class LoadStudentTaskFragment : BaseFragment(), LoadStudentTaskView {
             }.addOnFailureListener {
             }
         }
+        tv_teacher_name.setOnClickListener { presenter.onCreateDialog(taskModelInitParam!!.professorId!!) }
     }
 
     override fun setAllData() {
