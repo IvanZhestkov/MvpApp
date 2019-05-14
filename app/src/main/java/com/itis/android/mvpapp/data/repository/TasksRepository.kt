@@ -11,5 +11,5 @@ interface TasksRepository {
 
     fun addTask(task: UploadTaskModel): Completable
 
-    fun getTasksForStudent(): Single<List<TaskModel>>
+    fun getTasksForStudent(groupId: String): Single<List<TaskModel>>
 }

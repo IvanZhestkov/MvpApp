@@ -8,6 +8,7 @@ import com.itis.android.mvpapp.data.network.pojo.firebase.response.TaskItem
 import com.itis.android.mvpapp.data.network.pojo.studapi.request.UploadTaskRequest
 import com.itis.android.mvpapp.data.network.request.ApiRequest
 import com.itis.android.mvpapp.data.repository.DisciplinesRepository
+import com.itis.android.mvpapp.data.repository.StudentRepository
 import com.itis.android.mvpapp.data.repository.TasksRepository
 import com.itis.android.mvpapp.presentation.model.TaskModel
 import com.itis.android.mvpapp.presentation.model.TaskModelMapper
@@ -60,21 +61,21 @@ class TasksRepositoryImpl @Inject constructor() : TasksRepository {
                 }
 
                 val d = Observable
-                        .fromIterable(tasks)
-                        .flatMap { task ->
-                            disciplinesRepository
-                                    .getDisciplineById(task.disciplineId ?: "")
-                                    .toObservable()
-                                    .map { TaskModelMapper.map(task, it) }
-                                    .filter { it.professorId == firebaseAuth.currentUser?.uid }
-                        }.toList()
-                        .subscribe({
-                            subject.onNext(Pair("", it))
-                            subject.onComplete()
-                        }, {
-                            subject.onNext(Pair(it.message ?: "error", emptyList()))
-                            subject.onComplete()
-                        })
+                    .fromIterable(tasks)
+                    .flatMap { task ->
+                        disciplinesRepository
+                            .getDisciplineById(task.disciplineId ?: "")
+                            .toObservable()
+                            .map { TaskModelMapper.map(task, it) }
+                            .filter { it.professorId == firebaseAuth.currentUser?.uid }
+                    }.toList()
+                    .subscribe({
+                        subject.onNext(Pair("", it))
+                        subject.onComplete()
+                    }, {
+                        subject.onNext(Pair(it.message ?: "error", emptyList()))
+                        subject.onComplete()
+                    })
             }
         })
 
@@ -86,7 +87,7 @@ class TasksRepositoryImpl @Inject constructor() : TasksRepository {
         }
     }
 
-    override fun getTasksForStudent(): Single<List<TaskModel>> {
+    override fun getTasksForStudent(groupId: String): Single<List<TaskModel>> {
         val ref = firebaseDB.getReference("tasks")
 
         val subject = AsyncSubject.create<Pair<String, List<TaskModel>>>()
@@ -115,6 +116,9 @@ class TasksRepositoryImpl @Inject constructor() : TasksRepository {
                             .getDisciplineById(task.disciplineId ?: "")
                             .toObservable()
                             .map { TaskModelMapper.map(task, it) }
+                            .filter { it ->
+                                it.groupNumber == groupId
+                            }
                     }.toList()
                     .subscribe({
                         subject.onNext(Pair("", it))
@@ -131,7 +135,9 @@ class TasksRepositoryImpl @Inject constructor() : TasksRepository {
                 errorMessage.isEmpty() -> Single.just(tasks)
                 else -> Single.error(Exception())
             }
-        }    }
+        }
+    }
+
     override fun addTask(task: UploadTaskModel): Completable {
         val addTaskSubject = AsyncSubject.create<Boolean>()
         val addFileSubject = AsyncSubject.create<Boolean>()
@@ -149,32 +155,32 @@ class TasksRepositoryImpl @Inject constructor() : TasksRepository {
         }
 
         val d = disciplinesRepository
-                .getDisciplineByNameAndGroup(task.discipline.orEmpty(), task.group.orEmpty())
-                .subscribe({ discipline ->
-                    val ref = firebaseDB.getReference("tasks").child(discipline.id.orEmpty()).push()
+            .getDisciplineByNameAndGroup(task.discipline.orEmpty(), task.group.orEmpty())
+            .subscribe({ discipline ->
+                val ref = firebaseDB.getReference("tasks").child(discipline.id.orEmpty()).push()
 
-                    val uploadTaskItem = UploadTaskItem(
-                            task.name,
-                            task.description,
-                            task.deadLine,
-                            System.currentTimeMillis().toString(),
-                            filename
-                            )
+                val uploadTaskItem = UploadTaskItem(
+                    task.name,
+                    task.description,
+                    task.deadLine,
+                    System.currentTimeMillis().toString(),
+                    filename
+                )
 
-                    ref.setValue(uploadTaskItem).addOnCompleteListener {
-                        addTaskSubject.onNext(true)
-                        addTaskSubject.onComplete()
-                    }
-
-                }, {
-                    addTaskSubject.onNext(false)
+                ref.setValue(uploadTaskItem).addOnCompleteListener {
+                    addTaskSubject.onNext(true)
                     addTaskSubject.onComplete()
-                })
+                }
+
+            }, {
+                addTaskSubject.onNext(false)
+                addTaskSubject.onComplete()
+            })
 
         return addFileSubject.flatMapCompletable { addFileSuccess ->
-            if(addFileSuccess) {
-                addTaskSubject.flatMapCompletable {addTaskSuccess ->
-                    if(addTaskSuccess) {
+            if (addFileSuccess) {
+                addTaskSubject.flatMapCompletable { addTaskSuccess ->
+                    if (addTaskSuccess) {
                         Completable.complete()
                     } else {
                         Completable.error(Exception())

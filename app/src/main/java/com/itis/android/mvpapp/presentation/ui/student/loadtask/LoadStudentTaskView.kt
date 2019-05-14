@@ -12,4 +12,11 @@ interface LoadStudentTaskView: BaseView{
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun hideProgress()
 
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun setAllData()
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun setProfersor(name: String)
+
+    fun downloadFile(fileName: String, fileExtension: String, url: String)
 }

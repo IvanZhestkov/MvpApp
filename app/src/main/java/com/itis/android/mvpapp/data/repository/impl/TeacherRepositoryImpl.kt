@@ -43,6 +43,44 @@ class TeacherRepositoryImpl @Inject constructor() : TeacherRepository {
             }).toObservable()
     }
 
+    override fun getTeacherByUID(uid: String): Single<TeacherInfoItem> {
+        val ref = firebaseDB.getReference("users")
+
+        val subject = AsyncSubject.create<Pair<String, TeacherInfoItem>>()
+
+        ref.child(uid)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val user = dataSnapshot.getValue(TeacherInfoItem::class.java)
+                    subject.onNext(
+                        Pair(
+                            "", user
+                                ?: throw IllegalArgumentException("firebase user is null")
+                        )
+                    )
+                    subject.onComplete()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    subject.onNext(Pair(error.message, TeacherInfoItem()))
+                    subject.onComplete()
+                }
+            })
+
+        return Single.just(isOnline(context)).flatMap { isConnected ->
+            if (isConnected) {
+                subject.singleOrError().flatMap { (errorMessage, teacherInfo) ->
+                    when {
+                        errorMessage.isEmpty() -> Single.just(teacherInfo)
+                        else -> Single.error(Exception())
+                    }
+                }
+            } else {
+                Single.error(Exception())
+            }
+        }
+    }
+
     private fun getTeacherInfo(): Single<TeacherInfoItem> {
         val ref = firebaseDB.getReference("users").also { it.keepSynced(true) }
 

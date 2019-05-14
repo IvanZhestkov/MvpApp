@@ -1,6 +1,7 @@
 package com.itis.android.mvpapp.presentation.ui.student.tasks
 
 import com.arellomobile.mvp.InjectViewState
+import com.google.firebase.storage.FirebaseStorage
 import com.itis.android.mvpapp.data.repository.GroupsRepository
 import com.itis.android.mvpapp.data.repository.StudentRepository
 import com.itis.android.mvpapp.data.repository.TasksRepository
@@ -21,14 +22,23 @@ class StudentTasksPresenter @Inject constructor() : BasePresenter<StudentTasksVi
     @Inject
     lateinit var tasksRepository: TasksRepository
 
+    @Inject
+    lateinit var studentRepository: StudentRepository
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        tasksRepository.getTasksForStudent()
+        studentRepository.getGroupByUID()
             .subscribe { it ->
-                viewState.setTasks(it)
+                tasksRepository.getTasksForStudent(it)
+                    .subscribe { it ->
+                        viewState.setTasks(it)
+                    }
+                    .disposeWhenDestroy()
             }
             .disposeWhenDestroy()
+
+
     }
 
     fun onTaskClick(taskModel: TaskModel) {

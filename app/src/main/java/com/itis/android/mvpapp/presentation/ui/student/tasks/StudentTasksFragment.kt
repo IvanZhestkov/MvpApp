@@ -10,6 +10,8 @@ import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.adapter.TasksAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.presentation.model.TaskModel
+import com.itis.android.mvpapp.presentation.ui.student.loadtask.TaskModelInitParam
+import com.itis.android.mvpapp.presentation.util.extensions.extractInitParams
 import kotlinx.android.synthetic.main.fragment_tasks.*
 import javax.inject.Inject
 import javax.inject.Provider
