@@ -23,4 +23,6 @@ interface MainRouter {
     fun openTaskListScreen()
 
     fun goBack()
+
+    fun openStudentProfile()
 }

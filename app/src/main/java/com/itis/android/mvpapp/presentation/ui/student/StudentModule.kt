@@ -1,7 +1,5 @@
 package com.itis.android.mvpapp.presentation.ui.student
 
-import com.itis.android.mvpapp.presentation.ui.teacher.TeacherActivity
-import com.itis.android.mvpapp.presentation.ui.teacher.TeacherBuilder
 import com.itis.android.mvpapp.router.MainRouter
 import com.itis.android.mvpapp.router.MainRouterImpl
 import dagger.Module

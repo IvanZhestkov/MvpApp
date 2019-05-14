@@ -43,4 +43,6 @@ object Screens {
     fun getDialogScreen(dialogId: String, username: String): DialogScreen = DialogScreen(dialogId, username)
 
     fun getStudentTasksListScreen(): StudentTasksScreen = StudentTasksScreen()
+
+    fun getStudentProfile() : com.itis.android.mvpapp.presentation.ui.student.profile.ProfileScreen = com.itis.android.mvpapp.presentation.ui.student.profile.ProfileScreen()
 }

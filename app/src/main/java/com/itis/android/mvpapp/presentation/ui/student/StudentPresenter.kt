@@ -47,6 +47,6 @@ class StudentPresenter
     }
 
     fun onProfile() {
-        mainRouter.openProfileScreen()
+        mainRouter.openStudentProfile()
     }
 }

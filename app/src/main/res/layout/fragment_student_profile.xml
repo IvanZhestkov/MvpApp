@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:orientation="vertical">
+
+    <include
+            android:id="@+id/toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <android.support.v4.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:id="@+id/tv_contact_info"
+                    style="@style/Text.Large.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d8"
+                    android:text="@string/contact_info_title"
+                    android:textSize="@dimen/s18"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/divider2"/>
+
+            <View
+                    android:id="@+id/divider2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/colorDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_average_ball_title"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civ_profile"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="@dimen/d8"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_image"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <android.support.constraint.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/d16"/>
+
+            <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/d16"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="4dp"
+                    android:textAppearance="@style/Text.Medium.Title"
+                    app:layout_constraintBottom_toBottomOf="@+id/civ_profile"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/civ_profile"
+                    app:layout_constraintTop_toTopOf="@+id/civ_profile"/>
+
+            <TextView
+                    android:id="@+id/textView5"
+                    style="@style/Text.Small.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d8"
+                    android:layout_marginTop="@dimen/d8"
+                    android:layout_marginEnd="@dimen/d8"
+                    android:text="@string/stydent_title"
+                    app:layout_constraintEnd_toEndOf="@+id/civ_profile"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/civ_profile"/>
+
+            <View
+                    android:id="@+id/divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/d8"
+                    android:background="@color/colorDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5"/>
+
+            <TextView
+                    android:id="@+id/tv_personal_info"
+                    style="@style/Text.Large.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d8"
+                    android:text="@string/personal_info_title"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/divider"/>
+
+            <TextView
+                    android:id="@+id/tv_birthday_title"
+                    style="@style/Text.Medium.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d8"
+                    android:text="@string/birthday_title"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_personal_info"/>
+
+
+            <TextView
+                    android:id="@+id/tv_group_title"
+                    style="@style/Text.Medium.Title"
+                    android:layout_marginTop="@dimen/d8"
+                    android:layout_width="wrap_content"
+                    android:text="@string/group_title"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_birthday_title"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/tv_average_ball_title"
+                    style="@style/Text.Medium.Title"
+                    android:layout_marginTop="@dimen/d8"
+                    android:layout_width="wrap_content"
+                    android:text="@string/average_ball"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_group_title"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/tv_birthday"
+                    style="@style/Text.Medium.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d8"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tv_birthday_title"
+                    app:layout_constraintStart_toEndOf="@+id/tv_birthday_title"
+                    tools:text="05.10.98"/>
+
+            <TextView
+                    android:id="@+id/tv_group"
+                    style="@style/Text.Medium.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="@dimen/d8"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tv_group_title"
+                    app:layout_constraintStart_toEndOf="@+id/tv_group_title"
+                    android:layout_height="wrap_content"
+                    tools:text="11-605"/>
+
+            <TextView
+                    android:id="@+id/tv_average_ball"
+                    style="@style/Text.Medium.Secondary"
+                    android:layout_marginStart="@dimen/d8"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tv_average_ball_title"
+                    app:layout_constraintStart_toEndOf="@+id/tv_average_ball_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="82"/>
+
+            <TextView
+                    android:id="@+id/tv_email_title"
+                    style="@style/Text.Medium.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d8"
+                    android:text="@string/email_title"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_contact_info"/>
+
+            <TextView
+                    android:id="@+id/tv_phone_title"
+                    style="@style/Text.Medium.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d8"
+                    android:text="@string/phone_title"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_email_title"/>
+
+            <TextView
+                    android:id="@+id/tv_email"
+                    style="@style/Text.Medium.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d8"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tv_email_title"
+                    app:layout_constraintStart_toEndOf="@+id/tv_email_title"
+                    tools:text="person@email.com"/>
+
+            <TextView
+                    android:id="@+id/tv_phone"
+                    style="@style/Text.Medium.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d8"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tv_phone_title"
+                    app:layout_constraintStart_toEndOf="@+id/tv_phone_title"
+                    tools:text="+7 (900) 236 5489"/>
+
+            <Button
+                    android:id="@+id/btn_logout"
+                    style="@style/AccentButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/logout"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_phone_title"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <include
+            android:id="@+id/progress"
+            layout="@layout/layout_progress"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <include
+            android:id="@+id/progress_error"
+            layout="@layout/layout_progress_error"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

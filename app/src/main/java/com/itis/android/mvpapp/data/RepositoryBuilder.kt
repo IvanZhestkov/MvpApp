@@ -48,4 +48,8 @@ abstract class RepositoryBuilder {
     @Binds
     @Singleton
     abstract fun bindMessagesRepository(repositoryImpl: MessagesRepositoryImpl): MessagesRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindStudentRepository(repositoryImpl: StudentRepositoryImpl): StudentRepository
 }
