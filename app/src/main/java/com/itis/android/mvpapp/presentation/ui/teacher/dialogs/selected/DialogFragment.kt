@@ -11,6 +11,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.adapter.DialogAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
+import com.itis.android.mvpapp.presentation.ui.student.StudentActivity
 import com.itis.android.mvpapp.presentation.ui.teacher.TeacherActivity
 import com.itis.android.mvpapp.presentation.util.extensions.addTextChangedListener
 import com.itis.android.mvpapp.presentation.util.itemdecoration.DialogItemDecoration
@@ -67,7 +68,9 @@ class DialogFragment : BaseFragment(), DialogView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (baseActivity as? TeacherActivity)?.setBottomBarEnabled(false)
+        (baseActivity as? StudentActivity)?.setBottomBarEnabled(false)
         (baseActivity as? TeacherActivity)?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        (baseActivity as? StudentActivity)?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
         initRecyclerView()
 

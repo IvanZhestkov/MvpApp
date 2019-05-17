@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.itis.android.mvpapp.R
+import com.itis.android.mvpapp.presentation.ui.student.StudentActivity
 import com.itis.android.mvpapp.presentation.ui.teacher.TeacherActivity
 import dagger.android.support.AndroidSupportInjection
 
@@ -45,6 +46,7 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
         baseActivity.setBackArrow(enableBackArrow)
 
         (baseActivity as? TeacherActivity)?.setBottomBarEnabled(true)
+        (baseActivity as? StudentActivity)?.setBottomBarEnabled(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
