@@ -14,11 +14,8 @@ import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.data.network.pojo.firebase.response.UserItem
 import com.itis.android.mvpapp.data.pojo.TaskSolutionItem
 import com.itis.android.mvpapp.presentation.model.UserSolutionModel
-import com.itis.android.mvpapp.presentation.util.extensions.extractInitParams
 import com.itis.android.mvpapp.presentation.util.extensions.hide
-import com.itis.android.mvpapp.presentation.util.extensions.putInitParams
 import com.itis.android.mvpapp.presentation.util.extensions.show
-import com.itis.android.mvpapp.router.initparams.TaskSolutionInitParams
 import kotlinx.android.synthetic.main.fragment_task_solution.*
 import javax.inject.Inject
 import javax.inject.Provider
@@ -122,7 +119,7 @@ class TaskSolutionFragment : BaseFragment(), TaskSolutionView, View.OnClickListe
                 presenter.downloadTaskSolution()
             }
             R.id.tv_task_solution_stud -> {
-                presenter.onCreateDialog()
+                presenter.openStudentProfileForTeacher()
             }
         }
     }

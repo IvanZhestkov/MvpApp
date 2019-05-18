@@ -27,6 +27,7 @@
     <string name="logout">Выйти</string>
     <string name="load">Загрузить</string>
     <string name="send">Отправить</string>
+    <string name="open_chat">Открыть чат</string>
 
     <!--Profile-->
     <string name="personal_info_title">Персональные данные</string>

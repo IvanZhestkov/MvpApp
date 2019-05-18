@@ -32,7 +32,7 @@ object Screens {
         }
     }
 
-    fun getProfileScreen(): ProfileScreen = ProfileScreen()
+    fun getProfileScreen(userId: String): ProfileScreen = ProfileScreen(userId)
 
     fun getGroupListScreen(): GroupsScreen = GroupsScreen()
 
@@ -55,7 +55,8 @@ object Screens {
 
     fun getStudentTasksListScreen(): StudentTasksScreen = StudentTasksScreen()
 
-    fun getStudentProfile() : com.itis.android.mvpapp.presentation.ui.student.profile.ProfileScreen = com.itis.android.mvpapp.presentation.ui.student.profile.ProfileScreen()
+    fun getStudentProfile(userId: String) : com.itis.android.mvpapp.presentation.ui.student.profile.ProfileScreen =
+        com.itis.android.mvpapp.presentation.ui.student.profile.ProfileScreen(userId)
 
     fun getStudentLoadTaskScreen(initParams: TaskModelInitParam) : LoadStudentTaskScreen = LoadStudentTaskScreen(initParams)
 }

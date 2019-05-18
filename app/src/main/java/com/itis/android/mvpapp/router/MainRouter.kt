@@ -11,7 +11,9 @@ import com.itis.android.mvpapp.router.initparams.GroupTaskInitParams
 import com.itis.android.mvpapp.router.initparams.TaskSolutionInitParams
 
 interface MainRouter {
-    fun openProfileScreen()
+    fun openProfileScreen(userId: String)
+
+    fun openProfileScreenForStudent(userId: String)
 
     fun openGroupListScreen()
 
@@ -31,7 +33,9 @@ interface MainRouter {
 
     fun goBack()
 
-    fun openStudentProfile()
+    fun openStudentProfile(userId: String)
+
+    fun openStudentProfileForTeacher(userId: String)
 
     fun openLoadStudentTaskScreen(taskModel: TaskModelInitParam)
 }

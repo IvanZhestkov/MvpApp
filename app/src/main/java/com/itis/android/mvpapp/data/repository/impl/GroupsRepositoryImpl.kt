@@ -19,10 +19,10 @@ class GroupsRepositoryImpl @Inject constructor() : GroupsRepository {
     @Inject
     lateinit var disciplinesRepository: DisciplinesRepository
 
-    override fun getGroupsSingle(): Single<List<GroupModel>> {
+    override fun getGroupsSingle(userId: String): Single<List<GroupModel>> {
         return Single.zip(
             tasksRepository.getTasks(),
-            disciplinesRepository.getDisciplinesSingle(),
+            disciplinesRepository.getDisciplinesSingle(userId),
             BiFunction<List<TaskModel>, List<TeacherDisciplineItem>, Pair<List<TaskModel>, List<TeacherDisciplineItem>>>
             { t1, t2 ->
                 Pair(t1, t2)

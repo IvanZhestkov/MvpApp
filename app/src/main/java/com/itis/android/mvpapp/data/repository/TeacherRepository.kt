@@ -7,7 +7,7 @@ import io.reactivex.Single
 
 interface TeacherRepository {
 
-    fun getTeacherInfoObservable(): Observable<TeacherInfoModel>
+    fun getTeacherInfoObservable(userId: String): Observable<TeacherInfoModel>
 
     fun getTeacherByUID(uid: String): Single<TeacherInfoItem>
 }

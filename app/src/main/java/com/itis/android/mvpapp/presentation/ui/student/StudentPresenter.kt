@@ -47,6 +47,6 @@ class StudentPresenter
     }
 
     fun onProfile() {
-        mainRouter.openStudentProfile()
+        mainRouter.openStudentProfile(firebaseAuth.currentUser?.uid.toString())
     }
 }

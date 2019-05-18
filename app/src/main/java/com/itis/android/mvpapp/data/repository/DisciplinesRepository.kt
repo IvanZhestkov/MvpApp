@@ -5,7 +5,7 @@ import io.reactivex.Single
 
 interface DisciplinesRepository {
 
-    fun getDisciplinesSingle(): Single<List<TeacherDisciplineItem>>
+    fun getDisciplinesSingle(userId: String): Single<List<TeacherDisciplineItem>>
 
     fun getDisciplineById(id: String): Single<TeacherDisciplineItem>
 

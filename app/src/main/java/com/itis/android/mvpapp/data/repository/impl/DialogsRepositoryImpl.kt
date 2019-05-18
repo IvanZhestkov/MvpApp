@@ -95,7 +95,7 @@ class DialogsRepositoryImpl @Inject constructor() : DialogsRepository {
                         snapshot.children.forEach { ds ->
                             val item = ds.getValue(CreateDialogItem::class.java)
                             when (child) {
-                                "PROFESSOR" -> {
+                                "professor_id" -> {
                                     if (item?.student_id == studentId) {
                                         items.add(ds.key.orEmpty())
                                     }

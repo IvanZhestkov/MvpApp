@@ -1,6 +1,7 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.groups
 
 import com.arellomobile.mvp.InjectViewState
+import com.google.firebase.auth.FirebaseAuth
 import com.itis.android.mvpapp.data.repository.GroupsRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.rx.transformer.PresentationSingleTransformer
@@ -18,6 +19,8 @@ class GroupsPresenter
     @Inject
     lateinit var groupsRepository: GroupsRepository
 
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -30,7 +33,7 @@ class GroupsPresenter
 
     private fun update() {
         groupsRepository
-                .getGroupsSingle()
+                .getGroupsSingle(firebaseAuth.currentUser?.uid.toString())
                 .compose(PresentationSingleTransformer())
                 .doOnSubscribe {
                     viewState.showProgress()

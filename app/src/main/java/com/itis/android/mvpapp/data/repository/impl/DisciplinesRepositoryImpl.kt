@@ -24,12 +24,12 @@ class DisciplinesRepositoryImpl @Inject constructor() : DisciplinesRepository {
     @Inject
     lateinit var context: Context
 
-    override fun getDisciplinesSingle(): Single<List<TeacherDisciplineItem>> {
+    override fun getDisciplinesSingle(userId: String): Single<List<TeacherDisciplineItem>> {
         val ref = firebaseDB.getReference("courses")
 
         val subject = AsyncSubject.create<Pair<String, List<TeacherDisciplineItem>>>()
 
-        ref.orderByChild("professor_id").equalTo(firebaseAuth.currentUser?.uid)
+        ref.orderByChild("professor_id").equalTo(userId)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(error: DatabaseError) {
                         subject.onNext(Pair(error.message, emptyList()))

@@ -14,15 +14,24 @@ import ru.terrakok.cicerone.Router
 
 class MainRouterImpl : MainRouter, Router() {
 
-    override fun openStudentProfile() {
-        newRootScreen(Screens.getStudentProfile())
+    override fun openStudentProfile(userId: String) {
+        newRootScreen(Screens.getStudentProfile(userId))
     }
+
+    override fun openStudentProfileForTeacher(userId: String) {
+        navigateTo(Screens.getStudentProfile(userId))
+    }
+
     override fun openTaskListScreen() {
         newRootScreen(Screens.getStudentTasksListScreen())
     }
 
-    override fun openProfileScreen() {
-        newRootScreen(Screens.getProfileScreen())
+    override fun openProfileScreen(userId: String) {
+        newRootScreen(Screens.getProfileScreen(userId))
+    }
+
+    override fun openProfileScreenForStudent(userId: String) {
+        navigateTo(Screens.getProfileScreen(userId))
     }
 
     override fun openGroupListScreen() {

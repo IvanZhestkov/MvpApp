@@ -1,6 +1,7 @@
 package com.itis.android.mvpapp.presentation.ui.student.tasks
 
 import com.arellomobile.mvp.InjectViewState
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.itis.android.mvpapp.data.repository.GroupsRepository
 import com.itis.android.mvpapp.data.repository.StudentRepository
@@ -20,6 +21,9 @@ class StudentTasksPresenter @Inject constructor() : BasePresenter<StudentTasksVi
     lateinit var router: MainRouter
 
     @Inject
+    lateinit var firebaseAuth: FirebaseAuth
+
+    @Inject
     lateinit var tasksRepository: TasksRepository
 
     @Inject
@@ -28,7 +32,7 @@ class StudentTasksPresenter @Inject constructor() : BasePresenter<StudentTasksVi
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        studentRepository.getGroupByUID()
+        studentRepository.getGroupByUID(firebaseAuth.currentUser?.uid.orEmpty())
             .subscribe { it ->
                 tasksRepository.getTasksForStudent(it)
                     .subscribe { it ->

@@ -1,15 +1,21 @@
 package com.itis.android.mvpapp.presentation.ui.student.profile
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.adapter.DisciplineAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.presentation.model.StudentInfoModel
 import com.itis.android.mvpapp.presentation.ui.auth.AuthActivity
+import com.itis.android.mvpapp.presentation.util.extensions.hide
+import com.itis.android.mvpapp.presentation.util.extensions.show
 import kotlinx.android.synthetic.main.fragment_student_profile.*
 import kotlinx.android.synthetic.main.layout_progress_error.*
 import javax.inject.Inject
@@ -18,7 +24,13 @@ import javax.inject.Provider
 class ProfileFragment : BaseFragment(), ProfileView {
 
     companion object {
-        fun getInstance() = ProfileFragment()
+        private const val KEY_USER_ID = "KEY_USER_ID"
+
+        fun getInstance(userId: String) = ProfileFragment().also {
+            it.arguments = Bundle().apply {
+                putString(KEY_USER_ID, userId)
+            }
+        }
     }
 
     override val mainContentLayout: Int
@@ -44,7 +56,9 @@ class ProfileFragment : BaseFragment(), ProfileView {
 
     @ProvidePresenter
     fun providePresenter(): ProfilePresenter {
-        return presenterProvider.get()
+        return presenterProvider.get().apply {
+            init(arguments?.getString(KEY_USER_ID).toString())
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,8 +67,17 @@ class ProfileFragment : BaseFragment(), ProfileView {
         initActionViews()
     }
 
+    override fun showUserPhoto(url: String) {
+        Glide.with(baseActivity)
+                .load(url)
+                .apply(RequestOptions()
+                        .placeholder(ColorDrawable(Color.BLACK))
+                        .error(ColorDrawable(Color.RED))
+                        .centerCrop())
+                .into(civ_profile)
+    }
+
     override fun showProfile(studentInfoModel: StudentInfoModel) {
-        //createList()
         tv_name.text = getString(
             R.string.test_name,
             studentInfoModel.firstName, studentInfoModel.lastName, studentInfoModel.middleName
@@ -66,13 +89,28 @@ class ProfileFragment : BaseFragment(), ProfileView {
         tv_average_ball.text = studentInfoModel.averageScore
     }
 
-    private fun initActionViews() {
-        btn_logout.setOnClickListener {
-            presenter.onLogout()
-            val intent = Intent(baseActivity, AuthActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            startActivity(intent)
-        }
+    override fun showButtonLogout() {
+        btn_logout.show()
+    }
+
+    override fun hideButtonLogout() {
+        btn_logout.hide()
+    }
+
+    override fun showButtonChat() {
+        btn_open_chat.show()
+    }
+
+    override fun hideButtonChat() {
+        btn_open_chat.hide()
+    }
+
+    override fun showBackArrow() {
+        baseActivity.setBackArrow(true)
+    }
+
+    override fun hideBackArrow() {
+        baseActivity.setBackArrow(false)
     }
 
     override fun showProgress() {
@@ -92,5 +130,17 @@ class ProfileFragment : BaseFragment(), ProfileView {
 
     override fun hideRetry() {
         progress_error.visibility = View.GONE
+    }
+
+    private fun initActionViews() {
+        btn_logout.setOnClickListener {
+            presenter.onLogout()
+            val intent = Intent(baseActivity, AuthActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
+        }
+        btn_open_chat.setOnClickListener {
+            presenter.onCreateDialog()
+        }
     }
 }

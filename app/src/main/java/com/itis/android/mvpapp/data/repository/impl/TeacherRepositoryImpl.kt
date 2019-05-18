@@ -33,14 +33,14 @@ class TeacherRepositoryImpl @Inject constructor() : TeacherRepository {
     @Inject
     lateinit var disciplinesRepository: DisciplinesRepository
 
-    override fun getTeacherInfoObservable(): Observable<TeacherInfoModel> {
+    override fun getTeacherInfoObservable(userId: String): Observable<TeacherInfoModel> {
         return Single.zip(
-            getTeacherInfo(),
-            disciplinesRepository.getDisciplinesSingle(),
-            BiFunction<TeacherInfoItem, List<TeacherDisciplineItem>, TeacherInfoModel>
-            { t1, t2 ->
-                TeacherInfoModelMapper.map(t1, t2)
-            }).toObservable()
+                getTeacherInfo(userId),
+                disciplinesRepository.getDisciplinesSingle(userId),
+                BiFunction<TeacherInfoItem, List<TeacherDisciplineItem>, TeacherInfoModel>
+                { t1, t2 ->
+                    TeacherInfoModelMapper.map(t1, t2)
+                }).toObservable()
     }
 
     override fun getTeacherByUID(uid: String): Single<TeacherInfoItem> {
@@ -49,23 +49,23 @@ class TeacherRepositoryImpl @Inject constructor() : TeacherRepository {
         val subject = AsyncSubject.create<Pair<String, TeacherInfoItem>>()
 
         ref.child(uid)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val user = dataSnapshot.getValue(TeacherInfoItem::class.java)
-                    subject.onNext(
-                        Pair(
-                            "", user
-                                ?: throw IllegalArgumentException("firebase user is null")
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val user = dataSnapshot.getValue(TeacherInfoItem::class.java)
+                        subject.onNext(
+                                Pair(
+                                        "", user
+                                        ?: throw IllegalArgumentException("firebase user is null")
+                                )
                         )
-                    )
-                    subject.onComplete()
-                }
+                        subject.onComplete()
+                    }
 
-                override fun onCancelled(error: DatabaseError) {
-                    subject.onNext(Pair(error.message, TeacherInfoItem()))
-                    subject.onComplete()
-                }
-            })
+                    override fun onCancelled(error: DatabaseError) {
+                        subject.onNext(Pair(error.message, TeacherInfoItem()))
+                        subject.onComplete()
+                    }
+                })
 
         return Single.just(isOnline(context)).flatMap { isConnected ->
             if (isConnected) {
@@ -81,29 +81,29 @@ class TeacherRepositoryImpl @Inject constructor() : TeacherRepository {
         }
     }
 
-    private fun getTeacherInfo(): Single<TeacherInfoItem> {
+    private fun getTeacherInfo(userId: String): Single<TeacherInfoItem> {
         val ref = firebaseDB.getReference("users").also { it.keepSynced(true) }
 
         val subject = AsyncSubject.create<Pair<String, TeacherInfoItem>>()
 
-        firebaseAuth.currentUser?.uid.let { ref.child(it.toString()) }
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val user = dataSnapshot.getValue(TeacherInfoItem::class.java)
-                    subject.onNext(
-                        Pair(
-                            "", user
-                                ?: throw IllegalArgumentException("firebase user is null")
+        ref.child(userId)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val user = dataSnapshot.getValue(TeacherInfoItem::class.java)
+                        subject.onNext(
+                                Pair(
+                                        "", user
+                                        ?: throw IllegalArgumentException("firebase user is null")
+                                )
                         )
-                    )
-                    subject.onComplete()
-                }
+                        subject.onComplete()
+                    }
 
-                override fun onCancelled(error: DatabaseError) {
-                    subject.onNext(Pair(error.message, TeacherInfoItem()))
-                    subject.onComplete()
-                }
-            })
+                    override fun onCancelled(error: DatabaseError) {
+                        subject.onNext(Pair(error.message, TeacherInfoItem()))
+                        subject.onComplete()
+                    }
+                })
 
         return Single.just(isOnline(context)).flatMap { isConnected ->
             if (isConnected) {

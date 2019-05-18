@@ -124,16 +124,7 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
                 }
     }
 
-    fun onCreateDialog() {
-        dialogsRepository
-                .createDialog(userSolution?.solution?.userId.orEmpty())
-                .compose(PresentationObservableTransformer())
-                .subscribe({ dialogId ->
-                    router.openDialogScreen(dialogId, getUsername(userSolution))
-                }, {
-                    it.printStackTrace()
-                })
-                .disposeWhenDestroy()
-
+    fun openStudentProfileForTeacher() {
+        router.openStudentProfileForTeacher(userSolution?.solution?.userId.orEmpty())
     }
 }

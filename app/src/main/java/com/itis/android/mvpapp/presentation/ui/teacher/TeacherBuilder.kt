@@ -46,4 +46,7 @@ abstract class TeacherBuilder {
 
     @ContributesAndroidInjector(modules = [DialogModule::class])
     abstract fun buildDialogFragment(): DialogFragment
+
+    @ContributesAndroidInjector(modules = [com.itis.android.mvpapp.presentation.ui.student.profile.ProfileModule::class])
+    abstract fun buildStudentProfileFragment(): com.itis.android.mvpapp.presentation.ui.student.profile.ProfileFragment
 }

@@ -57,8 +57,8 @@ inline fun View.showIf(condition: () -> Boolean): View {
 }
 
 fun View.hide(): View {
-    if (visibility != View.INVISIBLE) {
-        visibility = View.INVISIBLE
+    if (visibility != View.GONE) {
+        visibility = View.GONE
     }
     return this
 }

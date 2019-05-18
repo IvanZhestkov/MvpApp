@@ -34,17 +34,7 @@ class LoadStudentTaskPresenter
             }.disposeWhenDestroy()
     }
 
-    fun onCreateDialog(professorId: String) {
-        dialogsRepository
-            .createDialog(professorId)
-            .compose(PresentationObservableTransformer())
-            .subscribe({ dialogId ->
-                router.openDialogScreen(dialogId, professorName!!)
-            }, {
-                it.printStackTrace()
-            })
-            .disposeWhenDestroy()
-
+    fun openProfileForStudent(professorId: String) {
+        router.openProfileScreenForStudent(professorId)
     }
-
 }

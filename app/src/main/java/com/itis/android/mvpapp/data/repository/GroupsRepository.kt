@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface GroupsRepository {
 
-    fun getGroupsSingle(): Single<List<GroupModel>>
+    fun getGroupsSingle(userId: String): Single<List<GroupModel>>
 }

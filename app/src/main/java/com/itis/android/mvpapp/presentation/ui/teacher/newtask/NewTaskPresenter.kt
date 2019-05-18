@@ -1,6 +1,7 @@
 package com.itis.android.mvpapp.presentation.ui.teacher.newtask
 
 import com.arellomobile.mvp.InjectViewState
+import com.google.firebase.auth.FirebaseAuth
 import com.itis.android.mvpapp.data.repository.DisciplinesRepository
 import com.itis.android.mvpapp.data.repository.TasksRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
@@ -17,6 +18,9 @@ class NewTaskPresenter @Inject constructor() : BasePresenter<NewTaskView>() {
 
     @Inject
     lateinit var disciplinesRepository: DisciplinesRepository
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     @Inject
     lateinit var tasksRepository: TasksRepository
@@ -44,7 +48,7 @@ class NewTaskPresenter @Inject constructor() : BasePresenter<NewTaskView>() {
 
     private fun getDisciplines() {
         disciplinesRepository
-                .getDisciplinesSingle()
+                .getDisciplinesSingle(firebaseAuth.currentUser?.uid.toString())
                 .compose(PresentationSingleTransformer())
                 .doOnSubscribe {
                     viewState.showProgress()

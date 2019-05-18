@@ -6,9 +6,9 @@ import io.reactivex.Single
 
 interface StudentRepository {
 
-    fun getStudentInfoObservable(): Observable<StudentInfoModel>
+    fun getStudentInfoObservable(userId: String): Observable<StudentInfoModel>
 
-    fun getGroupByUID() : Single<String>
+    fun getGroupByUID(userId: String) : Single<String>
 
-    fun getAverageScoreByUID(): Single<Long>
+    fun getAverageScoreByUID(userId: String): Single<Long>
 }

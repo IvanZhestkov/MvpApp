@@ -23,6 +23,9 @@ abstract class StudentBuilder {
     @ContributesAndroidInjector(modules = [ProfileModule::class])
     abstract fun buildProfileFragment(): ProfileFragment
 
+    @ContributesAndroidInjector(modules = [com.itis.android.mvpapp.presentation.ui.teacher.profile.ProfileModule::class])
+    abstract fun buildTeacherProfileFragment(): com.itis.android.mvpapp.presentation.ui.teacher.profile.ProfileFragment
+
     @ContributesAndroidInjector(modules = [LoadStudentTaskModule::class])
     abstract fun buildLoadStudentTaskFragment(): LoadStudentTaskFragment
 

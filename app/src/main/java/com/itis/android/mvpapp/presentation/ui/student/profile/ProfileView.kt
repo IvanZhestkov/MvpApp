@@ -8,7 +8,28 @@ import com.itis.android.mvpapp.presentation.model.StudentInfoModel
 interface ProfileView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showUserPhoto(url: String)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
     fun showProfile(studentInfoModel: StudentInfoModel)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showButtonLogout()
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun hideButtonLogout()
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showButtonChat()
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun hideButtonChat()
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showBackArrow()
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun hideBackArrow()
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showProgress()

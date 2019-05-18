@@ -11,8 +11,6 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.google.firebase.storage.FirebaseStorage
 import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.presentation.base.BaseFragment
-import com.itis.android.mvpapp.presentation.model.TaskModel
-import com.itis.android.mvpapp.presentation.util.extensions.extractInitParams
 import com.itis.android.mvpapp.presentation.util.extensions.putInitParams
 import kotlinx.android.synthetic.main.fragment_student_task.*
 import javax.inject.Inject
@@ -77,7 +75,7 @@ class LoadStudentTaskFragment : BaseFragment(), LoadStudentTaskView {
             }.addOnFailureListener {
             }
         }
-        tv_teacher_name.setOnClickListener { presenter.onCreateDialog(taskModelInitParam!!.professorId!!) }
+        tv_teacher_name.setOnClickListener { presenter.openProfileForStudent(taskModelInitParam!!.professorId!!) }
     }
 
     override fun setAllData() {

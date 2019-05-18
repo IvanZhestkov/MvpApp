@@ -15,7 +15,19 @@ import com.itis.android.mvpapp.presentation.adapter.DisciplineAdapter
 import com.itis.android.mvpapp.presentation.base.BaseFragment
 import com.itis.android.mvpapp.presentation.model.TeacherInfoModel
 import com.itis.android.mvpapp.presentation.ui.auth.AuthActivity
+import com.itis.android.mvpapp.presentation.util.extensions.hide
+import com.itis.android.mvpapp.presentation.util.extensions.show
+import kotlinx.android.synthetic.main.fragment_student_profile.*
 import kotlinx.android.synthetic.main.fragment_teacher_profile.*
+import kotlinx.android.synthetic.main.fragment_teacher_profile.btn_logout
+import kotlinx.android.synthetic.main.fragment_teacher_profile.btn_open_chat
+import kotlinx.android.synthetic.main.fragment_teacher_profile.civ_profile
+import kotlinx.android.synthetic.main.fragment_teacher_profile.progress
+import kotlinx.android.synthetic.main.fragment_teacher_profile.progress_error
+import kotlinx.android.synthetic.main.fragment_teacher_profile.tv_birthday
+import kotlinx.android.synthetic.main.fragment_teacher_profile.tv_email
+import kotlinx.android.synthetic.main.fragment_teacher_profile.tv_name
+import kotlinx.android.synthetic.main.fragment_teacher_profile.tv_phone
 import kotlinx.android.synthetic.main.layout_progress_error.*
 import javax.inject.Inject
 import javax.inject.Provider
@@ -23,7 +35,13 @@ import javax.inject.Provider
 class ProfileFragment : BaseFragment(), ProfileView {
 
     companion object {
-        fun getInstance() = ProfileFragment()
+        private const val KEY_USER_ID = "KEY_USER_ID"
+
+        fun getInstance(userId: String) = ProfileFragment().also {
+            it.arguments = Bundle().apply {
+                putString(KEY_USER_ID, userId)
+            }
+        }
     }
 
     override val mainContentLayout: Int
@@ -49,7 +67,9 @@ class ProfileFragment : BaseFragment(), ProfileView {
 
     @ProvidePresenter
     fun providePresenter(): ProfilePresenter {
-        return presenterProvider.get()
+        return presenterProvider.get().apply {
+            init(arguments?.getString(KEY_USER_ID).toString())
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,6 +99,30 @@ class ProfileFragment : BaseFragment(), ProfileView {
         tv_phone.text = teacherInfoModel.phone
 
         adapter.items = teacherInfoModel.disciplines.toMutableList()
+    }
+
+    override fun showButtonLogout() {
+        btn_logout.show()
+    }
+
+    override fun hideButtonLogout() {
+        btn_logout.hide()
+    }
+
+    override fun showButtonChat() {
+        btn_open_chat.show()
+    }
+
+    override fun hideButtonChat() {
+        btn_open_chat.hide()
+    }
+
+    override fun showBackArrow() {
+        baseActivity.setBackArrow(true)
+    }
+
+    override fun hideBackArrow() {
+        baseActivity.setBackArrow(false)
     }
 
     override fun showProgress() {
@@ -112,6 +156,9 @@ class ProfileFragment : BaseFragment(), ProfileView {
             val intent = Intent(baseActivity, AuthActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
+        }
+        btn_open_chat.setOnClickListener {
+            presenter.onCreateDialog()
         }
     }
 }

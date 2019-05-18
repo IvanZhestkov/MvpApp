@@ -43,6 +43,6 @@ class TeacherPresenter
     }
 
     fun onProfile() {
-        mainRouter.openProfileScreen()
+        mainRouter.openProfileScreen(firebaseAuth.currentUser?.uid.toString())
     }
 }
