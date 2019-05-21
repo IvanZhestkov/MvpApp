@@ -104,7 +104,7 @@ class GroupTaskFragment : BaseFragment(), GroupTaskView {
         val request = DownloadManager.Request(downloadUri)
 
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-        request.setDestinationInExternalFilesDir(baseActivity, Environment.DIRECTORY_DOWNLOADS, fileName)
+        request.setDestinationInExternalFilesDir(baseActivity, Environment.DIRECTORY_DOWNLOADS, fileName + fileExtension)
 
         downloadManager.enqueue(request)
     }

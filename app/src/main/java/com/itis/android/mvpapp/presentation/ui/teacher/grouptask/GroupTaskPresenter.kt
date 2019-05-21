@@ -73,7 +73,6 @@ class GroupTaskPresenter
     }
 
     fun openTaskSolutionScreen(userSolution: UserSolutionModel) {
-        //groupTaskRouter.openTaskSolutionScreen(TaskSolutionInitParams(userSolution, task?.expiration_date))
         groupTaskRouter.openTaskSolutionScreen2(userSolution.user, userSolution.solution, task?.expiration_date)
     }
 
@@ -86,6 +85,7 @@ class GroupTaskPresenter
                     viewState.downloadFile(task?.filePath.toString(), ".pdf", it.toString())
                 }
                 ?.addOnFailureListener {
+                    viewState.showErrorDialog("Ошибка скачивания. Задание не доступно для скачивания!")
                 }
     }
 }

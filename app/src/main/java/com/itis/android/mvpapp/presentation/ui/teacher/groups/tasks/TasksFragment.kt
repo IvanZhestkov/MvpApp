@@ -14,6 +14,9 @@ import javax.inject.Provider
 import android.support.v7.widget.DividerItemDecoration
 import com.itis.android.mvpapp.presentation.model.GroupModel
 import com.itis.android.mvpapp.presentation.model.TaskModel
+import kotlinx.android.synthetic.main.fragment_student_tasks.rv_tasks
+import kotlinx.android.synthetic.main.fragment_student_tasks.text_no_available_tasks
+import kotlinx.android.synthetic.main.fragment_teacher_tasks.*
 import java.lang.IllegalArgumentException
 
 class TasksFragment : BaseFragment(), TasksView {

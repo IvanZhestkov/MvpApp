@@ -82,12 +82,21 @@
             android:textAppearance="@style/Text.Medium.Primary"/>
 
     <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/student_account"
+            android:id="@+id/student_account1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/d16"
             android:text="RBagautdinov@stud.kpfu.ru "
             android:textAppearance="@style/Text.Medium.Primary"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/student_account2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/d16"
+        android:text="IVJestkov@stud.kpfu.ru "
+        android:textAppearance="@style/Text.Medium.Primary"/>
 
 </LinearLayout>

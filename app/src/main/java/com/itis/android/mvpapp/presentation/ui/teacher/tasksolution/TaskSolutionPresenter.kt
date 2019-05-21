@@ -8,7 +8,6 @@ import com.itis.android.mvpapp.R
 import com.itis.android.mvpapp.data.repository.TaskSolutionRepository
 import com.itis.android.mvpapp.presentation.base.BasePresenter
 import com.itis.android.mvpapp.presentation.model.UserSolutionModel
-import com.itis.android.mvpapp.presentation.rx.transformer.PresentationObservableTransformer
 import com.itis.android.mvpapp.router.MainRouter
 import java.text.SimpleDateFormat
 import java.util.*
@@ -64,7 +63,7 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
     private fun addSolutionComment(comment: String) {
         val solution = userSolution?.solution
         solution?.commentary = comment
-        solution?.let { taskSolutionRepository.addSolutionCommnet(it) }
+        solution?.let { taskSolutionRepository.addSolutionComment(it) }
     }
 
     private fun updateSolutionStatus(status: String) {

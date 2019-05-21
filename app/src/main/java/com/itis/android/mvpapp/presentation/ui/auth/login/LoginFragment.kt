@@ -58,9 +58,13 @@ class LoginFragment : BaseFragment(), LoginView {
             edt_email.setText(professor_account2.text)
             edt_password.setText("makpfu123")
         }
-        student_account.setOnClickListener {
-            edt_email.setText(student_account.text)
+        student_account1.setOnClickListener {
+            edt_email.setText(student_account1.text)
             edt_password.setText("rbkpfu123")
+        }
+        student_account2.setOnClickListener {
+            edt_email.setText(student_account2.text)
+            edt_password.setText("ijkpfu123")
         }
     }
 

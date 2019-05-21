@@ -22,8 +22,8 @@ class GroupsPresenter
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
 
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
+    override fun attachView(view: GroupsView?) {
+        super.attachView(view)
         update()
     }
 
