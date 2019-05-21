@@ -93,9 +93,6 @@ class TaskSolutionPresenter @Inject constructor() : BasePresenter<TaskSolutionVi
         val dateTask = formatter.parse(taskDeadline)
         val dateSolution = Date(solutionUploadingDate * 1000)
 
-        Log.d("dateTask TAG", taskDeadline)
-        Log.d("dateSolution TAG", formatter.format(dateSolution))
-
         return dateSolution.after(dateTask) && taskDeadline != formatter.format(dateSolution)
     }
 
